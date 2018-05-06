@@ -71,7 +71,7 @@
 
 % resumo em português
 \begin{resumo}
- Segundo a \citet[3.1-3.2]{NBR6028:2003}, o resumo deve ressaltar o
+ Segundo, o resumo deve ressaltar o
  objetivo, o método, os resultados e as conclusões do documento. A ordem e a extensão
  destes itens dependem do tipo de resumo (informativo ou indicativo) e do
  tratamento que cada item recebe no documento original. O resumo deve ser
@@ -136,7 +136,7 @@
 Este capítulo trata da técnica de algoritmos genéticos (do inglês \textit{genetic algorithms}, ou GA). São apresentados os conceitos de população, geração, cromossomos, genes, \textit{crossover} e mutação.
 
 \section{Algoritmos Evolucionários}
-\label{sec:que}
+
 Na área de inteligência artificial, algoritmos evolucionários usam modelos computacionais dos processos naturais de evolução como uma ferramenta para resolver problemas de otimização. Apesar de haver uma grande variedade de modelos computacionais propostos, todos eles têm em comum o conceito de simulação da evolução das espécies através de seleção, mutação e reprodução, processos estes que dependem do desempenho dos indivíduos desta espécie dentro do seu ambiente \cite{linden:2008}.
 
 Os algoritmos evolucionários funcionam mantendo uma população de estruturas, denominadas de indivíduos, cada um representando uma solução para o problema. Cada indivíduo recebe uma avaliação, que é uma qualificação de sua qualidade como solução do problema em questão. Esta avaliação é calculada utilizando uma função de avaliação (FA ou \textit{fitness function}). Com base nesta avaliação são aplicados operadores que simulam conceitos da biologia, como reprodução e mutação, de forma a simular a sobrevivência do mais apto \cite{linden:2008}.
@@ -155,14 +155,14 @@ Algoritmos genéticos (\textit{Genetic algorithms}, ou GA) são um ramo dos algo
 
 Como os algoritmos genéticos fazem parte do grupo de algoritmos evolucionários, eles possuem a mesma sequência de passos: inicialização, avaliação, simulação e criação de uma nova geração. O diferencial do algoritmo genético é o uso de cromossomos para representar um indivíduo. O cromossomo é uma sequência de valores, ou genes, que representa a solução daquele indivíduo.
 
-Para a criação das novas gerações, são utilizadas funções com base nos cromossomos. Alguns exemplos de operadores são o \textit{crossover}, que visa juntar dois cromossomos pais para criação de cromossomos filhos que herdam características de seus pais, e o operador de mutação, que simula a possibilidade natural de uma mutação genética. O fluxo de um algoritmo genético pode ser visto na Figura~\ref{fig:GA_luxo}.
+Para a criação das novas gerações, são utilizadas funções com base nos cromossomos. Alguns exemplos de operadores são o \textit{crossover}, que visa juntar dois cromossomos pais para criação de cromossomos filhos que herdam características de seus pais, e o operador de mutação, que simula a possibilidade natural de uma mutação genética. O fluxo de um algoritmo genético pode ser visto na Figura~\ref{fig:GA_Fluxo}.
 
 \begin{figure}[ht]
 \centering
 \caption{\textbf{Fluxo básico de um algoritmo genético}}
 \includegraphics[width=0.5\textwidth]{imagens/GA_Fluxo.pdf}
 \source{Adaptado de \citet{linden:2008}}
-\label{fig:GA_luxo}
+\label{fig:GA_Fluxo}
 \end{figure}
 
 \subsection{Representação Cromossomial}
@@ -228,7 +228,7 @@ Para cada indivíduo a ser criado na nova população são selecionados dois ou 
 
 O método mais comum para seleção de pais é o da roleta viciada. Para a realização deste método, é atribuída uma probabilidade para cada indivíduo \(p_i = p_i-1 + \frac{a}{t}\), sendo \(a\) a avaliação daquele indivíduo e \(t\) a soma de todas as avaliações. Dessa forma, a soma de todas as probabilidades deverá ser 1 (ou 100\%). É sorteado então um número aleatório \(r\) entre 0 e 1 e selecionado o indivíduo onde \(p_i-1 < r < p_i\). Dessa forma, quanto maior a avaliação de um indivíduo, maior sua chance de ser selecionado \cite{linden:2008}. Um exemplo de uma distribuição de roleta viciada pode ser visto no Quadro~\ref{tab:Roleta}.
 
-\begin{table}[]
+\begin{table}
 \centering
 \caption{Exemplo de roleta viciada}
 \label{tab:Roleta}
@@ -293,7 +293,7 @@ Algoritmos Genéticos são uma poderosa ferramenta para otimização de problema
 
 % ------------------------------------------------------------------------------------------------------------------------
 \chapter{Análise e processamento de imagens digitais}
-\ref{chp:PDI}
+\label{chp:PDI}
 % ------------------------------------------------------------------------------------------------------------------------
 
 Este capítulo aborda o tema sobre processamento digital de imagens (PDI). Serão explicados os conceitos de imagem digital, pré-processamento e segmentação, tal como diversas técnicas para análise e manipulação de imagens.
@@ -509,9 +509,15 @@ Para a aplicação de filtros em imagens pode ser utilizado um processo denomina
 
 % TODO: Marta: Não está claro... explicar melhor
 
-Denotando os níveis de cinza da imagem sob a máscara por \(z_i=f(x,y)\), \(1\leq i\leq 9\), a resposta da máscara é \(R=w_1.z_1+w_2.z_2+...+w_9z_9 = \sum_{i=1}^{9}w_i.z_i\) em que \(w_i\) representa os coeficientes das máscaras. Um exemplo de aplicação de convolução pode ser visualizado na Figura X.
+Denotando os níveis de cinza da imagem sob a máscara por \(z_i=f(x,y)\), \(1\leq i\leq 9\), a resposta da máscara é \(R=w_1.z_1+w_2.z_2+...+w_9z_9 = \sum_{i=1}^{9}w_i.z_i\) em que \(w_i\) representa os coeficientes das máscaras. Um exemplo de aplicação de convolução pode ser visualizado na Figura~\ref{fig:PDI_Convolucao}, onde (a) representa a máscara \(w\) e (b) representa a imagem de origem. Em (c), (d) e (e) representam os passos da convolução para o pixel (2, 2).
 	
-% TODO: Figura
+\begin{figure}[ht]
+\centering
+\caption{\textbf{Exemplo do processo de convolução}}
+\includegraphics[width=0.5\textwidth]{imagens/PDI_Convolucao.pdf}
+\sourceAuthor
+\label{fig:PDI_Convolucao}
+\end{figure}
 
 \subsection{Filtros passa-baixas}
 
@@ -582,7 +588,7 @@ Os filtros passa-altas atenuam ou eliminam os componentes de baixa-frequência, 
 
 O operador de Sobel foi proposto por \citet{sobel:1968}. Ele é composto por duas máscaras que aproximam a magnitude do gradiente com as diferenças dos níveis de cinza da imagem. Os dois gradientes representam, respectivamente, as variações de intensidade no eixo horizontal (\(G_x\)) e vertical (\(G_y\)). Ao efetuar operações de convolução dessas máscaras com a imagem, as variações de intensidade dos níveis de cinza em cada eixo são detectadas. O resultado final da convolução é dado por \(\sqrt[]{{G_x}^2 + {G_y}^2}\). Este valor resultante deve então ser aplicado a um limiar, identificando se o ponto é ou não a borda \cite{pedrini:2008}. Um exemplo da aplicação de Sobel pode ser visto na Figura~\ref{fig:PDI_Sobel} com um limiar de 40.
 
-\begin{table}[]
+\begin{table}
 \centering
 \caption{Máscaras do operador de Sobel}
 \label{tab:Sobel}
@@ -866,9 +872,7 @@ Primeira iteração:
 Segunda iteração:
 \(v(C) \wedge (~ edge(C) \vee (v(O) \vee v(N) \vee (v(S) \vee v(L))))\)
 
-Para um ponto ser removido, o resultado das expressões lógicas devem ser verdadeiros. Para compreenNestas expressões lógicas, \(edge()\) e \(v()\) representam funções definidas anteriormente, e C, O, N, S e L representam os vizinhos da imagem conforme definido na Figura~\ref{PDI_Holt_1}.
-
-O algoritmo utiliza duas funções que são definidas por:
+Para um ponto ser removido, o resultado das expressões lógicas devem ser verdadeiros. Nas expressões, os termos \(C\), \(O\), \(N\), \(S\) e \(L\) representam os vizinhos da imagem conforme definido na Figura~\ref{fig:PDI_Holt_1}. Já \(edge()\) e \(v()\) representam funções definidas por:
 \begin{enumerate}
 \item \(v()\): Retorna verdadeiro se o valor do ponto for o mesmo valor do objeto (valor preto) e falso se o valor do ponto for igual ao valor do plano de fundo (valor branco)
 \item \(edge()\):Retorna verdadeiro se o valor processado estiver na borda do objeto e falso se não estiver
@@ -959,7 +963,7 @@ Para validação do processo de segmentação, foi utilizada uma foto de satéli
 \label{fig:TrCo_Matias_Crescimento_1}
 \end{figure}
 
-\begin{table}[]
+\begin{table}
 \centering
 \caption{Resultados da segmentação}
 \label{tab:TrCo_Matias_1}
@@ -1529,19 +1533,26 @@ to find multiple thresholds for complex image analysis
 
 Neste trabalho é proposto um sistema de aprendizado de máquina utilizando algoritmos genéticos com técnicas de processamento digital de imagens para segmentação de imagens, focando na segmentação de fotos de rostos. De forma semelhante aos trabalhos apresentados anteriormente, os GAs serão utilizados para evoluir os parâmetros das técnicas de processamento de imagem. No entanto, o principal objetivo deste trabalho é conseguir que o GA selecione também quais técnicas de PDI e em qual sequência os mesmos serão executados para obter o melhor resultado do processo de segmentação.
 
-% TODO: Colocar uma figura explicando o VISNode
-Este trabalho se baseia no \textit{software} VISNode \cite{visnode}, uma ferramenta para execução de técnicas de PDI em formato de grafo. Ele possui dezenas de algoritmos de PDI implementados que serão utilizados neste trabalho. Cada nodo possui entradas e saídas, sendo que estas podem ser conectadas entre si, garantindo uma maior flexibilidade no sequenciamento e execução dos algoritmos.
+Este trabalho se baseia no \textit{software} VISNode \cite{visnode:2018}, uma ferramenta para execução de técnicas de PDI em formato de grafo. Ele possui dezenas de algoritmos de PDI implementados que serão utilizados neste trabalho. Cada nodo possui entradas e saídas, sendo que estas podem ser conectadas entre si, garantindo uma maior flexibilidade no sequenciamento e execução dos algoritmos. Um exemplodo de um projeto do VISNode com 7 nodos (processos) de PDI pode ser visto na Figura~\ref{fig:PRO_Visnode}.
+
+\begin{figure}[ht]
+\centering
+\caption{\textbf{Demonstração de um processo feito no VISNode}}
+\includegraphics[width=0.6\textwidth]{imagens/PRO_Visnode.PNG}
+\source{\citet{fasseg:2018}}
+\label{fig:PRO_Visnode}
+\end{figure}
 
 % TODO: Figura com Sobel -> Snakes e outra com Média -> Threshold
 No GA proposto, cada indivíduo representará um grafo de processos de PDI, permitindo a parametrização estática (valor fixo para o parâmetro) ou dinâmica (vindo de outro nodo do grafo) de cada algoritmo. Como exemplo de possíveis indivíduos do GA, considere a Figura X. Em (a), o indivíduo representa a execução da detecção de bordas de Sobel, seguida de uma limiarização e a execução do algoritmo de \textit{Snakes} para preenchimento das regiões. Em (b), está representado o cromossomo que obtém a média dos tons de cinza da imagem e utiliza isso como limiar para o processo de \textit{thresholding}. Em (c), a imagem ainda colorida está sendo dividida em três imagens tons de cinza baseadas nos seus canais RGB, é efetuado um limiar fixo em cada uma delas, para então se unir os conjuntos gerados.
 
-Para avaliação dos indivíduos do GA e validação do trabalho, está sendo utilizada a base de rostos segmentados FASSEG \cite{fasseg}. Esta base possui 70 fotos de rostos normalizados (com posição e iluminação semelhantes) e as imagens já segmentadas delineando o rosto, olhos, cabelo, boca e nariz em cores diferentes. Exemplos de imagens de entrada e segmentadas podem ser vistos na Figura ~\ref{fig:FASSEG}. Neste trabalho o objetivo principal é que seja possível segmentar de forma satisfatória o contorno do rosto, ou seja, sem o fundo e sem os cabelos, mas contendo olhos e boca.
+Para avaliação dos indivíduos do GA e validação do trabalho, está sendo utilizada a base de rostos segmentados FASSEG \cite{fasseg:2018}. Esta base possui 70 fotos de rostos normalizados (com posição e iluminação semelhantes) e as imagens já segmentadas delineando o rosto, olhos, cabelo, boca e nariz em cores diferentes. Exemplos de imagens de entrada e segmentadas podem ser vistos na Figura ~\ref{fig:FASSEG}. Neste trabalho o objetivo principal é que seja possível segmentar de forma satisfatória o contorno do rosto, ou seja, sem o fundo e sem os cabelos, mas contendo olhos e boca.
 
 \begin{figure}[ht]
 \centering
 \caption{\textbf{Exemplo de imagens do FASSEG}}
 \includegraphics[width=0.6\textwidth]{imagens/FASSEG.png}
-\source{\citet{fasseg}}
+\source{\citet{fasseg:2018}}
 \label{fig:FASSEG}
 \end{figure}
 
@@ -1565,11 +1576,11 @@ Para construção do algoritmo genético serão usados os indicados pela literat
 
 No início do desenvolvimento deste trabalho, foi construído um protótipo para avaliar a viabilidade da proposta. O intuito deste teste era implementar um GA para evolução de técnicas de PDI e seus parâmetros para realizar a segmentação de uma única imagem (\textit{overfitting}).
 
-Para o teste, foi selecionada uma imagem de um rosto da base de imagens FASSEG \cite{fasseg}. Para avaliação da imagem, foi realizada a comparação pixel a pixel da imagem de saída do GA com o gabarito disponível na base.
+Para o teste, foi selecionada uma imagem de um rosto da base de imagens FASSEG \cite{fasseg:2018}. Para avaliação da imagem, foi realizada a comparação pixel a pixel da imagem de saída do GA com o gabarito disponível na base.
 
 Nesta fase, o cromossomo era composto de 42 genes, divididos em 7 grupos de 6 genes. O primeiro gene de cada grupo indicava qual técnica de PDI deveria ser utilizada, e os outros 5 genes possuem parâmetros para a execução do algoritmo. O GA poderia escolher entre sete algoritmos de PDI diferentes, demonstrados na Tabela~\ref{tab:AlgoritmosTeste1}.
 
-\begin{table}[]
+\begin{table}
 \centering
 \caption{Algoritmos utilizados}
 \label{tab:AlgoritmosTeste1}
