@@ -10,10 +10,9 @@
 \usepackage{graphicx}			% Inclusão de gráficos
 \usepackage{amsmath}
 \usepackage{listings}
-\usepackage[labelfont=bf,textfont=md]{caption}
-\usepackage{lipsum}				% para geração de dummy text
+\usepackage[font=footnotesize,labelfont=bf,textfont=bf]{caption}
 \usepackage[alf]{abntex2cite}	% Citações padrão ABNT
-
+%\captionsetup[figure]{font=small}
 % ---
 \titulo{O USO DE ALGORITMOS GENÉTICOS PARA SEGMENTAÇÃO AUTOMÁTICA DE IMAGENS}
 \autor{NÍCOLAS POHREN}
@@ -60,6 +59,9 @@
 % ----
 \begin{document}
 
+% 'arial' ou 'times'
+%\fontemonografia{times}
+
 % Retira espaço extra obsoleto entre as frases.
 \frenchspacing 
 
@@ -71,15 +73,7 @@
 
 % resumo em português
 \begin{resumo}
- Segundo, o resumo deve ressaltar o
- objetivo, o método, os resultados e as conclusões do documento. A ordem e a extensão
- destes itens dependem do tipo de resumo (informativo ou indicativo) e do
- tratamento que cada item recebe no documento original. O resumo deve ser
- precedido da referência do documento, com exceção do resumo inserido no
- próprio documento. (\ldots) As palavras-chave devem figurar logo abaixo do
- resumo, antecedidas da expressão Palavras-chave:, separadas entre si por
- ponto e finalizadas também por ponto.
-
+A segmentação automática de imagens vem se tornando cada vez mais utilizada em diversas áreas como Medicina e Agronomia. Cada vez mais o método tradicional de segmentação automática, que se baseia no uso de técnicas de processamento digital de imagens, vem perdendo lugar para o uso de algoritmos baseados em redes neurais. Isso devido a sua capacidade de trabalhar com imagens pouco homogêneas. No entanto, as redes neurais acabam se tornando uma espécie de caixa-preta, onde, muitas vezes, não é possível que um ser humano interprete como o sistema chegou ao seu resultado. Neste trabalho é proposto um sistema que utiliza algoritmos genéticos para treinar o sequenciamento e a parametrização de técnicas de processamento digital de imagens. Dessa forma, espera-se demonstrar a possibilidade do sistema funcionar com imagens não homogêneas, permitindo a análise do sistema evoluído por um ser humano. Para tanto, serão realizados experimentos comparando o sistema proposto com outros semelhantes que utilizam redes neurais quanto a sua assertividade e tempo de processamento, além de validar com profissionais relacionados com a área de PDI se o sistema gerou uma saída que pode ser compreendida por seres humanos.
  \vspace{\onelineskip}
     
  \noindent
@@ -129,6 +123,25 @@
 \chapter{Introdução}
 % ------------------------------------------------------------------------------------------------------------------------
 
+Os avanços em métodos de aquisição de imagens, no poder computacional de hardware e na melhoria nas tecnologias, vêm tornando a análise automática de imagens uma técnica utilizada na resolução de diversos problemas. Destaca-se o uso da análise de imagens nas áreas da Medicina, Biologia, Sensoriamento Remoto, Meteorologia, Automação Industrial, Engenharia, Geologia e Agronomia \cite{queiroz:2007}.  
+
+Um problema comum de análise de imagens é a segmentação destas. O processamento para segmentação de imagens visa identificar e separar a imagem em diferentes regiões relevantes para o processamento em questão. Como exemplo é possível citar a segmentação de órgãos, como pulmões, em um exame de tomografia computadorizada \cite{ronnau:2015}.
+
+Uma forma de realizar a análise das imagens se dá pela execução de uma sequência de algoritmos de processamento digital de imagens (PDI) \cite{gonzalez:2012}. Esses algoritmos podem ser orquestrados e parametrizados pelo criador do sistema, ou de forma empírica pelo usuário. Mais recentemente, outra forma utilizada para a resolução de problemas de segmentação e classificação de imagens é a aplicação de redes neurais (RN) simples ou convolucionais \cite{noh:2015}, onde um sistema de aprendizado de máquina é treinado para executar a tarefa especificada. Esse treinamento é efetuado de forma supervisionada, necessitando de uma base previamente anotada, o que é um recurso de construção bastante custoso.
+
+A técnica de RN vem ganhando visibilidade no mundo acadêmico. Isso se deve a diversos fatores. O uso de RN permite que um único sistema seja treinado para solucionar diversos problemas. Também é possível que o treinamento supervisionado da RN seja realizado por um especialista no assunto em questão e que não necessite de conhecimento do sistema e da tecnologia utilizada. Além disso, o seu resultado normalmente é superior quando as imagens não são homogêneas, ou seja, não se enquadram perfeitamente na situação prevista pelo sistema \cite{pal:1999}.
+
+No entanto, sistemas baseados em redes neurais oneram em tempo de processamento em relação aos sistemas baseados em PDI \cite{huang:1992}, o que pode ser um problema para sistemas de monitoramento em tempo real ou avaliação de uma grande quantidade de imagens. Embora existam tentativas anteriores de analisar e compreender a saída de uma RN \cite{zeiler:2014}, isso não é possível em todas as soluções que utilizam RN. Dessa forma, arede neural acaba se tornando uma caixa-preta, de forma que geralmente não é possível a um ser humano interpretar como ela está chegando ao resultado de forma que ele possa aprender com o sistema e reproduzir os resultados.
+
+Em outras soluções desenvolvidas para problemas específicos são utilizadas técnicas de PDI pré-selecionadas e algoritmos genéticos (AG) \cite{holland:1992} para o treinamento dos seus parâmetros. Pode-se citar o software que segmenta elementos em fotos de satélite \cite{costa:2010} ou a comparação da evolução dos parâmetros em métodos de segmentação baseados em quad-trees, thresholding e crescimento de regiões \cite{matias:2007}. Entretanto, todos os trabalhos utilizam o AG apenas para ajustar os parâmetros dos algoritmos de PDI, sem tentar utilizar o AG para mudar o algoritmo a ser utilizado ou a sequência de passos para obter o resultado.
+
+Propõe-se, neste trabalho, um sistema que seja capaz de utilizar algoritmos genéticos tanto para parametrizar quanto para sequenciar técnicas de PDI de acordo com a imagem. Acredita-se que isso permitirá a obtenção de resultados de qualidade semelhante a de redes neurais, porém, com uma tempo de processamento inferior . Esta abordagem também permitirá o estudo por parte de um ser humano para interpretar a sequência de passos utilizada, de forma a aprender e refinar o processamento.
+
+Prévio a escrita deste projeto, foi desenvolvido um ambiente de manipulação de técnicas de PDI denominado VISNode \cite{visnode:2018}. Este permite a utilização e parametrização de processos de PDI em formato de grafo, onde os processos não são executados necessariamente em sequência, e parâmetros podem ser transferidos entre processos, ou nodos. A ferramenta permite a execução dos grafos de processos, denominados projetos, via uma application programming interface (API) utilizando como entrada um conjunto de imagens, assim como a visualização destes projetos em uma interface gráfica.
+
+Com base neste ambiente, o sistema proposto terá como saída um projeto da ferramenta VISNode. Assim, será possível visualizar facilmente os processos que estão sendo utilizados, em que sequência e com quais parâmetros, pela interface do sistema.
+
+
 % ------------------------------------------------------------------------------------------------------------------------
 \chapter{Algoritmos Genéticos}
 % ------------------------------------------------------------------------------------------------------------------------
@@ -159,7 +172,7 @@ Para a criação das novas gerações, são utilizadas funções com base nos cr
 
 \begin{figure}[ht]
 \centering
-\caption{\textbf{Fluxo básico de um algoritmo genético}}
+\caption{Fluxo básico de um algoritmo genético}
 \includegraphics[width=0.5\textwidth]{imagens/GA_Fluxo.pdf}
 \source{Adaptado de \citet{linden:2008}}
 \label{fig:GA_Fluxo}
@@ -177,7 +190,7 @@ Um cromossomo para o algoritmo genético é apenas uma sequência de valores ind
 
 \begin{figure}[ht]
 \centering
-\caption{\textbf{Todas as variações possíveis de um cromossomo cujos bits 0, 1 e 2 representam o estado das cores vermelho, azul e verde respectivamente}}
+\caption{Todas as variações possíveis de um cromossomo cujos bits 0, 1 e 2 representam o estado das cores vermelho, azul e verde respectivamente}
 \includegraphics[width=0.8\textwidth]{imagens/GA_Cromossomo_RGB.pdf}
 \sourceAuthor	
 \label{fig:GA_Cromossomo_RGB}
@@ -255,7 +268,7 @@ A técnica de \textit{crossover} mais simples é o \textit{crossover} de um pont
 
 \begin{figure}[ht]
 \centering
-\caption{\textbf{Exemplo de um \textit{crossover} de um ponto. a) Os dois pais utilizados para a operação de \textit{crossover}; b) O ponto de corte selecionado aleatoriamente; c) Os dois filhos gerados pelo operador de \textit{crossover}}}
+\caption{Exemplo de um \textit{crossover} de um ponto. a) Os dois pais utilizados para a operação de \textit{crossover}; b) O ponto de corte selecionado aleatoriamente; c) Os dois filhos gerados pelo operador de \textit{crossover}}
 \includegraphics[width=0.7\textwidth]{imagens/GA_Crossover_de_um_ponto.pdf}
 \source{Adaptado de \citet{linden:2008}}
 \label{fig:GA_Crossover_de_um_ponto}
@@ -267,7 +280,7 @@ Existe outra forma de operação de \textit{crossover} que possibilita a preserv
 
 \begin{figure}[ht]
 \centering
-\caption{\textbf{Exemplo de \textit{crossover} uniforme. a) Par de pais selecionados para o \textit{crossover}; b) Seleção aleatória binária para cada gene; b) Construção do par de filhos utilizando o par de pais e o conjunto binário que define de qual pai o gene de cada filho virá}}
+\caption{Exemplo de \textit{crossover} uniforme. a) Par de pais selecionados para o \textit{crossover}; b) Seleção aleatória binária para cada gene; b) Construção do par de filhos utilizando o par de pais e o conjunto binário que define de qual pai o gene de cada filho virá}
 \includegraphics[width=0.7\textwidth]{imagens/GA_Crossover_Uniforme.pdf}
 \source{Adaptado de \citet{linden:2008}}
 \label{fig:GA_Crossover_Uniforme}
@@ -277,7 +290,7 @@ Outro operador utilizado na criação de uma nova geração é o operador de mut
 
 \begin{figure}[ht]
 \centering
-\caption{\textbf{Exemplo de um operador de mutação em um cromossomo de cinco bits}}
+\caption{Exemplo de um operador de mutação em um cromossomo de cinco bits}
 \includegraphics[width=0.4\textwidth]{imagens/GA_Mutacao.pdf}
 \source{Adaptado de \citet{linden:2008}}
 \label{fig:GA_Mutacao}
@@ -289,7 +302,12 @@ Normalmente os operadores de \textit{crossover} e mutação não são executados
 
 Seria necessário então que a probabilidade do operador de \textit{crossover} fosse caindo com o decorrer do algoritmo e que a probabilidade do operador de mutação fosse concomitantemente aumentando. Para tal, são utilizadas diversas técnicas de interpolação, como a linear, quadrática e descontínua \cite{linden:2008}.
 
-Algoritmos Genéticos são uma poderosa ferramenta para otimização de problemas. O GA pode ser utilizado em um problema com parâmetros pré-definidos e depois descartado, como é o caso do uso de GAs para otimizar o problema do caixeiro viajante \cite{grefenstette:1985}. Ou ainda o GA pode ser utilizado para evoluir um modelo que será reaproveitado em outras entradas, como é o caso da criação de uma árvore de decisão \textit{data mining} utilizando GAs \cite{carvalho:2004}. Neste trabalho, a saída do GA será um modelo reutilizável composto por técnicas de análise e processamento de imagens digitais, descritas no capítulo~\ref{chp:PDI}, para segmentação de imagens.
+\section{Considerações}
+
+Este capítulo apresentou a técnica de algoritmos genéticos como uma poderosa ferramenta para a otimização de problemas. Foram demonstrados os seus principais conceitos, como população, geração, \textit{fitness}, indivíduo, gene e cromossomo, tal como as técnicas utilizadas, entre elas a mutação, \textit{crossover} de um ponto e \textit{crossover} uniforme.
+
+No próximo capítulo serão apresentadas técnicas de processamento digital de imagens. O uso destas técnicas para segmentação de imagens será considerado como um problema de otimização global, o qual será resolvido utilizando algoritmos genéticos.
+
 
 % ------------------------------------------------------------------------------------------------------------------------
 \chapter{Análise e processamento de imagens digitais}
@@ -310,7 +328,7 @@ Segundo \citet{pedrini:2008}, um sistema de processamento digital de imagens é 
 
 \begin{figure}[ht]
 \centering
-\caption{\textbf{Etapas do processamento digital de imagens}}
+\caption{Etapas do processamento digital de imagens}
 \includegraphics[width=0.6\textwidth]{imagens/PDI_Etapas_PDI.pdf}
 \source{Adaptado de \citet{pedrini:2008}}
 \label{fig:PDI_Etapas_PDI}
@@ -360,7 +378,7 @@ O histograma de uma imagem fornece uma indicação de sua qualidade quanto ao n�
 
 \begin{figure}[ht]
 \centering
-\caption{\textbf{Demonstração da relação entre a imagem original e o histograma}}
+\caption{Demonstração da relação entre a imagem original e o histograma}
 \includegraphics[width=0.6\textwidth]{imagens/PDI_Histograma_2.pdf}
 \sourceAuthor
 \label{fig:PDI_Histograma_2}
@@ -386,7 +404,7 @@ Quando a limiarização possui apenas um limiar ela é denominada binarização,
 
 \begin{figure}[ht]
 \centering
-\caption{\textbf{ Imagem original (a), histograma da imagem original (b) e resultado da limiarização com limiar de 203}}
+\caption{ Imagem original (a), histograma da imagem original (b) e resultado da limiarização com limiar de 203}
 \includegraphics[width=0.9\textwidth]{imagens/PDI_Limiarizacao.pdf}
 \sourceAuthor
 \label{fig:PDI_Limiarizacao}
@@ -396,7 +414,7 @@ A seleção correta do valor de limiar é crucial para que o processo de segment
 
 \begin{figure}[ht]
 \centering
-\caption{\textbf{Demonstração de diferentes limiares. (a) 100 (b) 150 (c) 200 (d) 230}}
+\caption{Demonstração de diferentes limiares. (a) 100 (b) 150 (c) 200 (d) 230}
 \includegraphics[width=0.4\textwidth]{imagens/PDI_Limiarizacao_2.pdf}
 \sourceAuthor
 \label{fig:PDI_Limiarizacao_2}
@@ -416,7 +434,7 @@ para x = 0 ate M - 1 faca
 
 \begin{figure}[ht]
 \centering
-\caption{\textbf{a) Imagem original; b) Imagem transformada com a=1 e b=100; c) Imagem com a=1 e b=-100; d) Imagem transformada com a=1.5 e b=0; e) Imagem transformada com a=0.5 e b=0; f) Imagem transformada com a=1.4 e b=50}}
+\caption{a) Imagem original; b) Imagem transformada com a=1 e b=100; c) Imagem com a=1 e b=-100; d) Imagem transformada com a=1.5 e b=0; e) Imagem transformada com a=0.5 e b=0; f) Imagem transformada com a=1.4 e b=50}
 \includegraphics[width=0.5\textwidth]{imagens/PDI_Brilho_e_Contraste.pdf}
 \sourceAuthor
 \label{fig:PDI_Brilho_e_Contraste}
@@ -426,11 +444,15 @@ Outra função linear comum é a transformação inversa, que produz o negativo 
 
 \begin{figure}[ht]
 \centering
-\caption{\textbf{Demonstração de inversão. a) Imagem original; b) Imagem invertida}}
+\caption{Demonstração de inversão. a) Imagem original; b) Imagem invertida}
 \includegraphics[width=0.5\textwidth]{imagens/PDI_Inversao.pdf}
 \sourceAuthor
 \label{fig:PDI_Inversao}
 \end{figure}
+
+\section{Conversão para tons de cinza}
+
+% TODO: Escrever
 
 \section{Morfologia Matemática}
 
@@ -440,8 +462,8 @@ A morfologia matemática utiliza a teoria de conjuntos para representar a forma 
 
 \begin{figure}[ht]
 \centering
-\caption{\textbf{Demonstração do conjunto (b) que representa a imagem binária (a)}}
-\includegraphics[width=0.5\textwidth]{imagens/PDI_Conjunto.pdf}
+\caption{Demonstração do conjunto (b) que representa a imagem binária (a)}
+\includegraphics[width=0.8\textwidth]{imagens/PDI_Conjunto.pdf}
 \source{adaptado de \citet{pedrini:2008}, pg. 328}
 \label{fig:PDI_Conjunto}
 \end{figure}
@@ -458,17 +480,17 @@ Na Figura~\ref{fig:PDI_Dilatacao_1} está demonstrado a aplicação da dilataç�
 
 \begin{figure}[ht]
 \centering
-\caption{\textbf{Demonstração do processo de dilatação}}
+\caption{Demonstração do processo de dilatação}
 \includegraphics[width=0.5\textwidth]{imagens/PDI_Dilatacao_1.pdf}
 \sourceAuthor
 \label{fig:PDI_Dilatacao_1}
 \end{figure}
 
-O resultado do processo do dilatação é muito dependente do elemento estruturante utilizado. Na Figura~\ref{fig:PDI_Dilatacao_2} é possível ver o efeito de dois elementos estruturantes diferentes sendo aplicados sobre a mesma imagem de origem da Figura~\ref{fig:PDI_Dilatacao_1} (a).
+O resultado do processo de dilatação é dependente do elemento estruturante utilizado. Na Figura~\ref{fig:PDI_Dilatacao_2} é possível ver o efeito de dois elementos estruturantes diferentes sendo aplicados sobre a mesma imagem de origem da Figura~\ref{fig:PDI_Dilatacao_1} (a).
 
 \begin{figure}[ht]
 \centering
-\caption{\textbf{Elementos estruturantes na dilatação}}
+\caption{Elementos estruturantes na dilatação}
 \includegraphics[width=0.8\textwidth]{imagens/PDI_Dilatacao_2.pdf}
 \sourceAuthor
 \label{fig:PDI_Dilatacao_2}
@@ -480,7 +502,7 @@ De acordo com esta equação, o resultado da erosão pode ser calculado como o c
 
 \begin{figure}[ht]
 \centering
-\caption{\textbf{Demonstração do processo de erosão}}
+\caption{Demonstração do processo de erosão}
 \includegraphics[width=0.5\textwidth]{imagens/PDI_Erosao_1.pdf}
 \sourceAuthor
 \label{fig:PDI_Erosao_1}
@@ -495,7 +517,7 @@ Na Figura~\ref{fig:PDI_Abertura_Fechamento_1} é possível visualizar o efeito d
 
 \begin{figure}[ht]
 \centering
-\caption{\textbf{Demonstração de abertura e fechamento}}
+\caption{Demonstração de abertura e fechamento}
 \includegraphics[width=0.5\textwidth]{imagens/PDI_Abertura_Fechamento_1.pdf}
 \sourceAuthor
 \label{fig:PDI_Abertura_Fechamento_1}
@@ -507,13 +529,11 @@ Conforme \citet{conci:2003}, o uso de filtros em imagens objetiva melhorar a qua
 	
 Para a aplicação de filtros em imagens pode ser utilizado um processo denominado convolução. Conforme \cite{pedrini:2008}, a convolução é um processo que envolve a aplicação de uma máscara quadrada \(w\) de tamanho \(n\) por \(n\). Cada posição da máscara possui um valor numérico denominado peso ou coeficiente. Cada pixel \(f(x,y)\) da imagem é substituído por um novo valor, que depende do valor dos pixels vizinhos e dos pesos da máscara. Os coeficientes da máscara são multiplicados pela intensidade dos vizinhos correspondentes e então somados, resultando no valor do pixel central.
 
-% TODO: Marta: Não está claro... explicar melhor
-
 Denotando os níveis de cinza da imagem sob a máscara por \(z_i=f(x,y)\), \(1\leq i\leq 9\), a resposta da máscara é \(R=w_1.z_1+w_2.z_2+...+w_9z_9 = \sum_{i=1}^{9}w_i.z_i\) em que \(w_i\) representa os coeficientes das máscaras. Um exemplo de aplicação de convolução pode ser visualizado na Figura~\ref{fig:PDI_Convolucao}, onde (a) representa a máscara \(w\) e (b) representa a imagem de origem. Em (c), (d) e (e) representam os passos da convolução para o pixel (2, 2).
 	
 \begin{figure}[ht]
 \centering
-\caption{\textbf{Exemplo do processo de convolução}}
+\caption{Exemplo do processo de convolução}
 \includegraphics[width=0.5\textwidth]{imagens/PDI_Convolucao.pdf}
 \sourceAuthor
 \label{fig:PDI_Convolucao}
@@ -529,7 +549,7 @@ Um dos filtros passa-baixa mais simples é o filtro da média, em que cada pixel
 
 \begin{figure}[ht]
 \centering
-\caption{\textbf{Exemplo de máscaras de convoulção de média}}
+\caption{Exemplo de máscaras de convoulção de média}
 \includegraphics[width=0.5\textwidth]{imagens/PDI_Mascara_Media.pdf}
 \source{adaptado de \citet{pedrini:2008}, pg. 328}
 \label{fig:PDI_Mascara_Media}
@@ -543,7 +563,7 @@ Seus resultados são geralmente melhores que o filtro da média. Isso ocorre dev
 
 \begin{figure}[ht]
 \centering
-\caption{\textbf{ Demonstração dos filtros de média e mediana}}
+\caption{ Demonstração dos filtros de média e mediana}
 \includegraphics[width=0.6\textwidth]{imagens/PDI_Media_Mediana.pdf}
 \sourceAuthor
 \label{fig:PDI_Media_Mediana}
@@ -555,7 +575,7 @@ Segundo \citet{conci:2003}, o filtro de Gauss ou Gaussiano é o filtro linear pa
 
 \begin{figure}[ht]
 \centering
-\caption{\textbf{Demonstração do Filtro de Gauss}}
+\caption{Demonstração do Filtro de Gauss}
 \includegraphics[width=0.7\textwidth]{imagens/PDI_Gauss.pdf}
 \sourceAuthor
 \label{fig:PDI_Gauss}
@@ -603,7 +623,7 @@ O operador de Sobel foi proposto por \citet{sobel:1968}. Ele é composto por dua
 
 \begin{figure}[ht]
 \centering
-\caption{\textbf{Demonstração do Filtro de Sobel}}
+\caption{Demonstração do Filtro de Sobel}
 \includegraphics[width=0.6\textwidth]{imagens/PDI_Sobel.pdf}
 \sourceAuthor
 \label{fig:PDI_Sobel}
@@ -615,7 +635,7 @@ O detector de bordas de Canny é mais complexo, mas geralmente superior aos dema
 
 \begin{figure}[ht]
 \centering
-\caption{\textbf{Demonstração do Filtro de Canny}}
+\caption{Demonstração do Filtro de Canny}
 \includegraphics[width=0.6\textwidth]{imagens/PDI_Canny.pdf}
 \sourceAuthor
 \label{fig:PDI_Canny}
@@ -679,11 +699,9 @@ O fato de os valores de x e y serem inteiros (pois representam as coordenadas da
 
 \subsection{Rotação}
 
-A rotação utilizando um ângulo  relativo à origem consiste em encontrar, para cada pixel \((x_o,y_o)\) um outro pixel \((x_d,y_d)\) sobre uma circunferência centrada na origem que passa pelos dois pontos com ângulo \(\theta=p \hat{o} q\). A rotação 2D na forma matricial em coordenadas homogêneas é definida pela equação
+A rotação utilizando um ângulo  relativo à origem consiste em encontrar, para cada pixel \((x_o,y_o)\) um outro pixel \((x_d,y_d)\) sobre uma circunferência centrada na origem que passa pelos dois pontos com ângulo \(\theta=p \hat{o} q\). 
 
-% TODO: Marta: Com esta matriz tu mostra a rotação somente em um sentido.... deves complementar
-
-% TODO: Marta: Depende, existem máscaras diferentes para cada eixo
+A rotação da imagem sobre o eixo Z na forma matricial em coordenadas homogêneas é definida pela equação
 
 \[
 \begin{bmatrix}
@@ -703,6 +721,48 @@ y_o\\
 1
 \end{bmatrix}
 \]
+
+A rotação da imagem sobre o eixo X na forma matricial em coordenadas homogêneas é definida pela equação
+\[
+\begin{bmatrix}
+x_d\\ 
+y_d\\ 
+1
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 & 0 & 0\\ 
+0 & \cos{\alpha } & \sin{\alpha }\\ 
+0 & -\sin{\alpha } & \cos{\alpha }
+\end{bmatrix}
+\begin{bmatrix}
+x_o\\ 
+y_o\\ 
+1
+\end{bmatrix}
+\]
+
+A rotação da imagem sobre o eixo Y na forma matricial em coordenadas homogêneas é definida pela equação
+
+\[
+\begin{bmatrix}
+x_d\\ 
+y_d\\ 
+1
+\end{bmatrix}
+=
+\begin{bmatrix}
+\cos{\beta} & 0 & -\sin{\beta}\\ 
+0 & 1 & 0 \\
+\sin{\theta} & 0 & \cos{\theta} 
+\end{bmatrix}
+\begin{bmatrix}
+x_o\\ 
+y_o\\ 
+1
+\end{bmatrix}
+\]
+
 
 \subsection{Espelhamento}
 
@@ -750,7 +810,7 @@ Na Figura~\ref{fig:PDI_Transformacoes_Geometricas} é possível visualizar o efe
 
 \begin{figure}[ht]
 \centering
-\caption{\textbf{Exemplo de transformações geométricas}}
+\caption{Exemplo de transformações geométricas}
 \includegraphics[width=0.5\textwidth]{imagens/PDI_Transformacoes_Geometricas.pdf}
 \sourceAuthor
 \label{fig:PDI_Transformacoes_Geometricas}
@@ -790,7 +850,7 @@ Segundo \citet{pedrini:2008} o algoritmo de \textit{watershed} ou divisor de ág
 
 \subsection{Afinamento de Bordas}
 
-Conforme \citet{guilherme:2007} o processo de afinamento de bordas ou esqueletização consiste na remoção de pixels redundantes da imagem para criação do seu esqueleto. O esqueleto de uma imagem é a representação básica das formas contidas na imagem, de forma que todos pixels são necessários. Os algoritmos de esqueletização sempre recebem como entrada uma imagem binarizada.
+Conforme \citet{guilherme:2007} o processo de afinamento de bordas ou esqueletização consiste na remoção de pixels redundantes da imagem para a criação do seu esqueleto. O esqueleto de uma imagem é a representação básica das formas contidas na imagem, de forma que todos pixels são necessários. Os algoritmos de esqueletização sempre recebem como entrada uma imagem binarizada.
 
 Uma das características mais importantes que define um bom algoritmo de esqueletização é a preservação das características das formas da imagem original. Estas características englobam posição, orientação, tamanho e conectividade \cite{guilherme:2007}.
 
@@ -800,7 +860,7 @@ O algoritmo de Stentiford foi proposto por \citet{stentiford:1983}, e adota uma 
 
 \begin{figure}[ht]
 \centering
-\caption{\textbf{Máscaras utilizadas pelo algoritmo de Stentiford}}
+\caption{Máscaras utilizadas pelo algoritmo de Stentiford}
 \includegraphics[width=0.8\textwidth]{imagens/PDI_Stentiford_1.PNG}
 \source{\citet[pg.13]{guilherme:2007}}
 \label{fig:PDI_Stentiford_1}
@@ -808,13 +868,15 @@ O algoritmo de Stentiford foi proposto por \citet{stentiford:1983}, e adota uma 
 
 Na Figura~\ref{fig:PDI_Stentiford_1} são demonstradas as máscaras utilizadas pelo algoritmo, onde os círculos brancos representam pixels de valor zero, os círculos pretos representam os pixels de valor 1 e os X representam os pixels com valores irrelevantes. Cada máscara percorre a imagem em uma determinada ordem: M1 da esquerda para a direita, de cima para baixo; M2 da esquerda para a direita, de baixo para cima; M3 da direita para a esquerda, de baixo para cima; e M4 da direita para a esquerda, de cima para baixo.
 
-\subsubsection{Zang Suen}
+% TODO: Marta: E faz o que com isso???
+
+\subsubsection{Zhang Suen}
 
 O algoritmo de Zhang Suen \cite{zhang:1984} tem como base a comparação do pixel em processamento com seus 8 vizinhos. A exclusão de pixel por parte do algoritmo somente é realizada mediante a quatro regras. Estas regras têm como objetivo obter a exclusão segura dos pixels, garantindo, desta forma, que áreas interligadas não percam a conectividade e que a eliminação ocorrerá nas bordas do objeto \cite{guilherme:2007}.
 
 \begin{figure}[ht]
 \centering
-\caption{\textbf{Representa máscaras utilizadas pelo algoritmo de Zhang Suen}}
+\caption{Representa máscaras utilizadas pelo algoritmo de Zhang Suen}
 \includegraphics[width=0.3\textwidth]{imagens/PDI_Zhang_Suen_1.PNG}
 \source{\citet[pg.15]{guilherme:2007}}
 \label{fig:PDI_Zhang_Suen_1}
@@ -832,7 +894,7 @@ Segundo \citet{guilherme:2007}, para que um pixel seja marcado para exclusão el
 
 \begin{figure}[ht]
 \centering
-\caption{\textbf{Pixels P2 ou P8 ou P4 devem ser um pixel branco}}
+\caption{Pixels P2 ou P8 ou P4 devem ser um pixel branco}
 \includegraphics[width=0.3\textwidth]{imagens/PDI_Zhang_Suen_2.PNG}
 \source{\citet[pg.16]{guilherme:2007}}
 \label{fig:PDI_Zhang_Suen_2}
@@ -840,7 +902,7 @@ Segundo \citet{guilherme:2007}, para que um pixel seja marcado para exclusão el
 
 \begin{figure}[ht]
 \centering
-\caption{\textbf{Pixels P2 ou P8 ou P4 devem ser um pixel branco}}
+\caption{Pixels P2 ou P8 ou P4 devem ser um pixel branco}
 \includegraphics[width=0.3\textwidth]{imagens/PDI_Zhang_Suen_3.PNG}
 \source{\citet[pg.16]{guilherme:2007}}
 \label{fig:PDI_Zhang_Suen_3}
@@ -848,7 +910,7 @@ Segundo \citet{guilherme:2007}, para que um pixel seja marcado para exclusão el
 
 \begin{figure}[ht]
 \centering
-\caption{\textbf{Pixels P2 ou P4 ou P6 devem ser um pixel branco}}
+\caption{Pixels P2 ou P4 ou P6 devem ser um pixel branco}
 \includegraphics[width=0.3\textwidth]{imagens/PDI_Zhang_Suen_4.PNG}
 \source{\citet[pg.16]{guilherme:2007}}
 \label{fig:PDI_Zhang_Suen_4}
@@ -856,7 +918,7 @@ Segundo \citet{guilherme:2007}, para que um pixel seja marcado para exclusão el
 
 \begin{figure}[ht]
 \centering
-\caption{\textbf{Pixels P8 ou P6 ou P4 devem ser um pixel branco}}
+\caption{Pixels P8 ou P6 ou P4 devem ser um pixel branco}
 \includegraphics[width=0.4\textwidth]{imagens/PDI_Zhang_Suen_5.PNG}
 \source{\citet[pg.17]{guilherme:2007}}
 \label{fig:PDI_Zhang_Suen_5}
@@ -866,11 +928,12 @@ Segundo \citet{guilherme:2007}, para que um pixel seja marcado para exclusão el
 
 O algoritmo de Holt \cite{holt:1987} utiliza uma vizinhança 3 x 3 para a análise dos pixels a serem removidos. O formato da matriz permite que seja feita uma análise do pixel central e seus vizinhos. Segundo \citet{guilherme:2007}, o algoritmo de Holt é composto por duas expressões lógicas, onde uma é aplicada na primeira iteração do algoritmo e a outra na segunda iteração.
 
+
 Primeira iteração: 
-\(v(C) \wedge (~ edge(C) \vee (v(L) \vee v(S) \vee (v(N) \vee v(O))))\)
+\(v(C) \wedge (\sim edge(C) \vee (v(L) \wedge v(S) \wedge (v(N) \vee v(O))))\)
 
 Segunda iteração:
-\(v(C) \wedge (~ edge(C) \vee (v(O) \vee v(N) \vee (v(S) \vee v(L))))\)
+\(v(C) \wedge (\sim edge(C) \vee (v(O) \wedge v(N) \wedge (v(S) \vee v(L))))\)
 
 Para um ponto ser removido, o resultado das expressões lógicas devem ser verdadeiros. Nas expressões, os termos \(C\), \(O\), \(N\), \(S\) e \(L\) representam os vizinhos da imagem conforme definido na Figura~\ref{fig:PDI_Holt_1}. Já \(edge()\) e \(v()\) representam funções definidas por:
 \begin{enumerate}
@@ -883,7 +946,7 @@ Para um ponto ser removido, o resultado das expressões lógicas devem ser verda
 
 \begin{figure}[ht]
 \centering
-\caption{\textbf{Janela utilizada para a análise dos pixels vizinhos no algoritmo de Holt}}
+\caption{Janela utilizada para a análise dos pixels vizinhos no algoritmo de Holt}
 \includegraphics[width=0.3\textwidth]{imagens/PDI_Holt_1.PNG}
 \source{\citet[pg.21]{guilherme:2007}}
 \label{fig:PDI_Holt_1}
@@ -902,7 +965,7 @@ A tese desenvolvida por \citet{matias:2007} aplica algoritmos genéticos com dif
 
 Todos os métodos visam minimizar uma função objetivo (entropia, segmentação excedente, entre outras) ou maximizar tal função (pixels corretamente agrupados). Para avaliação dos resultados, foram geradas várias imagens que utilizam o GA no algoritmo de segmentação e outras imagens geradas com o mesmo algoritmo, mas sem utilizar o GA. 
 
-O método mais simples trabalhado por \citet{matias:2007} é a segmentação utilizando o limiar (\textit{Treshold}). O objetivo dos AGs, neste tipo de algoritmo, é gerar de forma automática uma imagem segmentada por atribuição de um \textit{treshold}. A função de avaliação utilizada para este algoritmo foi a entropia.
+O método mais simples trabalhado por \citet{matias:2007} é a segmentação utilizando o limiar (\textit{threshold}). O objetivo dos AGs, neste tipo de algoritmo, é gerar de forma automática uma imagem segmentada por atribuição de um \textit{threshold}. A função de avaliação utilizada para este algoritmo foi a entropia.
 % TODO: explicar o que ser entropia
 
 Para a segmentação baseada em limiar a representação cromossômica foi utilizado um cromossomo de 8 genes binários, representando o valor do \textit{threshold} entre 0 e 255. 
@@ -911,7 +974,7 @@ Uma imagem utilizada para testes foi uma foto de 256x256 pixels denominada Lena.
 
 \begin{figure}[ht]
 \centering
-\caption{\textbf{Resultado de limiarização na imagem Lena}}
+\caption{Resultado de limiarização na imagem Lena}
 \includegraphics[width=0.7\textwidth]{imagens/TrCo_Matias_Limiar_1.PNG}
 \source{\citet[Ppg.71]{matias:2007}}
 \label{fig:TrCo_Matias_Limiar_1}
@@ -921,7 +984,7 @@ Também foram realizados os mesmos testes utilizando uma foto de satélite do Ri
 
 \begin{figure}[ht]
 \centering
-\caption{\textbf{Resultado de limiarização na imagem Rio Solimões}}
+\caption{Resultado de limiarização na imagem Rio Solimões}
 \includegraphics[width=0.7\textwidth]{imagens/TrCo_Matias_Limiar_2.PNG}
 \source{\citet[pg.72]{matias:2007}}
 \label{fig:TrCo_Matias_Limiar_2}
@@ -931,7 +994,7 @@ Outro método implementado pela teste foi o método de segmentação por quadran
 
 \begin{figure}[ht]
 \centering
-\caption{\textbf{Cromossomo binário onde L corresponde a cada nível da quadtree}}
+\caption{Cromossomo binário onde L corresponde a cada nível da quadtree}
 \includegraphics[width=0.8\textwidth]{imagens/TrCo_Matias_Cromossomo_1.PNG}
 \source{\citet[pg.54]{matias:2007}}
 \label{fig:TrCo_Matias_Cromossomo_1}
@@ -941,7 +1004,7 @@ Para validação da técnica de segmentação por \textit{quadtrees} foi utiliza
 
 \begin{figure}[ht]
 \centering
-\caption{\textbf{Comparação da segmentação via \textit{quadtree}}}
+\caption{Comparação da segmentação via \textit{quadtree}}
 \includegraphics[width=0.6\textwidth]{imagens/TrCo_Matias_Quadtree_1.PNG}
 \source{\citet[pg.68]{matias:2007}}
 \label{fig:TrCo_Matias_Quadtree_1}
@@ -957,7 +1020,7 @@ Para validação do processo de segmentação, foi utilizada uma foto de satéli
 
 \begin{figure}[ht]
 \centering
-\caption{\textbf{Comparação da segmentação via crescimento de regiões}}
+\caption{Comparação da segmentação via crescimento de regiões}
 \includegraphics[width=0.6\textwidth]{imagens/TrCo_Matias_Crescimento_1.PNG}
 \source{\citet[pg.68]{matias:2007}}
 \label{fig:TrCo_Matias_Crescimento_1}
@@ -979,567 +1042,51 @@ Dessa maneira, \citet{matias:2007} verificou que o uso do GA com uma função ob
 
 \section{A multilevel automatic thresholding method based on a genetic algorithm for a fast image segmentation}
 
-% TODO: Resumir
+Neste trabalho, \citet{hammouche:2008} propõem uma técnica de \textit{thresholding} multinível para a segmentação de imagens beasdo no uso de algoritmos genéticos para determinar os limiares apropriados. Segundo os autores, o uso de GAs tem várias vantagens sobre métodos de otimização tradicionais, particularmente a capacidade de encontrar a solução ótima global, prevenindo que o algoritmo fique preso em soluções localmente ótimas. Ademais, algoritmos genéticos podem ter uma grande redução no tempo de processamento com implementações paralelas. A técnica de \textit{thresholding} genética proposta é baseada em um GA padrão. Ele permite a determinação do número de limiares assim como o valor de cada um. 
 
-\begin{comment}
+Antes de realizar a busca dos limiares utilizando o GA, o tamanho do histograma da imagem é reduzido de forma a acelerar a convergência do GA. A redução do histograma é feita utilizando a técnica de \textit{wavelet transform} \cite{kim:2003}. O histograma é reduzido para dois sinais. O primeiro é o sinal de tendência, ou sinal de aproximação, enquando o segundo é o sinal de detalhe.
 
-In this paper, we propose a fast multilevel thresholding
-technique based on a GA able to determinate the appropriate
-number of thresholds, as well as appropriate threshold
-values, by optimizing ATC proposed by Yen et al. The proposed
-GA uses a new string representation of the chromo164
-K. Hammouche et al. / Computer Vision and Image Understanding 109 (2008) 163–175
-some, which is different from those previously mentioned.
-It is combined with a wavelet transform-based technique
-in order to reduce the time computation. This proposed
-method can be considered as similar to the multilevel thresholding
-method presented by Kim et al. [9], except that the
-proposed GA is used to search for the optimal thresholds.
-The using of GAs has many advantages over traditional
-searching techniques [30]. Particularly, GA-based methods
-are global searching techniques capable, most often, to prevent
-from trapping into locally optimal solutions. Another
-advantage is that the GA-based methods can become faster
-through parallel implementations.
+No GA proposto, o cromossomo é codificado como uma String binária \(A\) com o mesmo comprimento do histograma reduzido \(L^r\), se forma que \(A = a_0, a_1, ... a_{L^r-1}\), onde o gene \(a_i\) possui o valor 0 ou 1, representando se o índice é um pico ou um vale no histograma, respectivamente. A posição \(i\) onde \(a_i = 0\) indica o valor onde existirá um \textit{threshold}. Dessa forma, o número de \textit{bits} 0 no cromossomo indica o número de limiares.
 
-Suppose that an image I having N pixels with L grey levels
-L = {0, 1,...,L  1} is to be classified into k classes
-(C1,C2,...,Ck) with the set of thresholds T = {t1,t2,
-...,tk1}. For convenience, we assume two other thresholds
-t0 = 0 and tk = L  1. The histogram of the image is
-indicated by h(i), i = 0,...,L  1, where h(i) represents
-the number of pixels with the grey level i.
-The proposed genetic thresholding technique is based on
-a standard GA. It allows the determination of the number
-of thresholds as well as appropriate threshold values. The
-major steps of this method are summarized in Algorithm 1.
+Para permitir a solução ótima do número de \textit{thresholds} e seus valores, a função objetiva é calculada usando a função de custo ACT proposta por \citet{yen:1995}. Esta função avalia a entropia de cada classe criada, levando em consideração o número de limiares utilizados. Com este método, é garantida a segmentação boa da imagem utilizando um número tão pequeno quanto possível de limiares.
 
-Algorithm 1. Main steps of the proposed thresholding
-technique
-1. Compute the histogram of the image.
-2. Reduce the length of the histogram.
-3. Generate an initial population.
-4. Store the best string A* with the best fitness in a separate
-location.
-5. Apply the learning strategy to improve the fitness
-value of A*.
-6. Generate the next population by performing selection,
-crossover and mutation operations.
-7. Compare the best string A of the current population
-with A*. If A has a better fitness value than A*, then
-replace A* with A.
-8. Go to step 3 if the desired number of generations is
-not reached.
-9. Expand the best thresholds.
-10. Refine the expanded thresholds
+A população do algoritmo genético é inicializada com uma população gerada aleatóriamente de individuos. Para a avaliação do GA, o indivíduo com a melhor função objetivo em cada geração é copiada para uma posição isolada da população de forma a armazenar a melhor solução atual. Então, antes de começar a próxima geração, a melhor solução pode melhorar a sua avaliação realizando diversas pequenas modificações em seus genes. Esta simples técnica pode economizar diversas várias gerações de aprimoramento e não afeta o comportamento geral do GA.
 
-2.1. Reduction of the histogram length
-Before searching for thresholds through the GA, the
-length of the histogram must be reduced in order to acceler
-ate the convergence of the GA. The histogram reduction is
-performed by using the wavelet transform technique [9].
-The original histogram is decomposed into two signals at
-the next lower level. One signal is the trend signal, or the
-approximation signal, while the other signal is the detail signal.
-At the lower level, the trend signal gives the reduced
-dimension version of the original histogram, which still contains
-the overall characteristics of the original histogram.
-The wavelet transform at a level r (r 2 Z) is performed
-with decimation operation by 2r after the convolution of
-the histogram h(i) with the wavelet function W(t) and scaling
-function U(t).
-hr
+A população corrente evolui para a próxima geração utilizando as três técnicas padrões de GAs: seleção, \textit{crossover} e mutação. Para a seleção, é utilizada a técnica da roleta viciada. Para o \textit{crossover}, é utilizado o método de ponto único. Também é utilizada a mutação tradicional. Após o \textit{crossover} e mutação, o novo gene pode conter uma sequência de vários \textit{bits} 0 seguidos, o que não é desejável. Para evitar essa sitação, é realizado um ajuste no cromossomo de forma que apenas o primeiro zero sucessivo é mantido, trocando os subsequentes pelo valor 1.
 
-where hr
-(j) is the trend of the original histogram and hr
-is the detail of the original histogram at the rth level. Each
-trend signal at level r is decomposed into two reduced
-dimension signals at level r + 1, i.e.:
-hr
-Hence, for a level r, the length of the reduced histogram
-hr
-(j) is denoted Lr
-, such that Lr = L/2r
-.
-2.2. String representation
-In the proposed thresholding GA, the chromosome is
-encoded as a binary string A of the same size Lr of the
-reduced histogram, such that A  a0; a1; ... ; ar
-L1 , where
-the character ai is equal to 0 or 1. ai indicates the peak or
-the valley of the histogram. If ai = 0, then (i,hr
-(i)) is a valley,
-else it is a peak. The position i for which ai = 0 indicates
-the value of a threshold. Hence, the number of
-zero-bits occurred in A indicates the number of thresholds.
-Example . Let Lr = 16 and consider the following string:
-A = 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1.
-The number of thresholds is equal to 3, since A contains
-three zero-bits. The three thresholds are then t1 = 2, t2 = 6
-and t3 = 10, respectively. They correspond to the positions
-of zero-bits in the string.
-2.3. Fitness computation
-To allow determining the optimal number of thresholds
-as well as the optimal thresholds values, the fitness of a
-string is computed using the cost function ACT proposed
-by Yen et al. [27].
-Let Pi, mi and m be the probability of the class Ci, the
-mean grey level of the class Ci and the total mean grey level
-of the image, respectively:
-where pj = hr
-(j)/N is the normalized probability at level j.
-Let r2
-W, r2
-B and r2
-T be the within-class variance, the
-between-class variance and the total class variance, respectively.
-They are given by the following expressions:
+Para a validação dos resultados, foram utilizadas algumas imagens comumente utilizadas para validação de técnicas de processamento de imagens: \textit{Lena}, \textit{Blood}, \textit{Peppers}, \textit{House}, \textit{Airplane}, \textit{Lac}, \textit{Boats} e \textit{Bridge}. Na Figura X estão demonstradas as figuras utilizadas tal como o resultado da segmentação das imagens. Os resultados obtidos provam a robustez do método proposto, no aspecto de acurácia na segmentação. Uma comparação dos resultados da imagem Lena podem ser vistos na Tabela~\ref{tab:TrCo_Bammouche_Resultados}.
 
-Here Disk(k) represents the within-class variance 
-r2
-The first term of F(k) measures the cost incurred by the
-discrepancy between the thresholded image and the original
-image. The second term measures the cost resulted
-from the number of bits used to represent the thresholded
-image. In this equation, q is a positive weighting constant.
-The (k  1) number of thresholds is determined by counting
-the number of zero-bits in the string and the threshold
-values are determined by the positions occupied by these
-zero-bits in the string. The function F(k) has a unique minimum,
-which is an important advantage. The optimum
-class number k* and the (k*  1) best thresholds can be
-determined by the following equation:
+\begin{table}[]
+\centering
+\caption{Comparação do métoodo proposto com outros métodos semelhantes}
+\label{tab:TrCo_Bammouche_Resultados}
+\begin{tabular}{llllll}
+\hline
+\textit{\textbf{Método}} & \textit{\textbf{Número de classes}} & \textit{\textbf{Valores dos limiares}} & \textit{\textbf{Função objetivo}} & \textit{\textbf{Uniformidade}} & \textit{\textbf{Tempo de CPU (ms)}} \\ \hline
+ES-Otsu                  & 5                                   & 47-84-119-164                          & 10,8040                           & 0,97877                        & 601.766                             \\
+ES-Kapur                 & 4                                   & 60-109-160                             & 11,0013                           & 0,97159                        & 50.281                              \\
+GA-Otsu                  & 5                                   & 46-80-113-162                          & 10,8252                           & 0,97805                        & 578                                 \\
+GA-Kapur                 & 4                                   & 59-107-159                             & 10,9798                           & 0,97177                        & 1.118                               \\
+Iterative-Otsu           & 5                                   & 47-83-118-163                          & 10,8090                           & 0,97874                        & 360                                 \\
+Iterative-Kapur          & 4                                   & 60-108-159                             & 10,9952                           & 0,97160                        & 1516                                \\
+Método proposto          & 5                                   & 46-83-119-164                          & 10,8040                           & 0,97875                        & 32                                  \\ \hline
+                         &                                     &                                        &                                   &                                &                                     \\ \hline
+\end{tabular}
+\end{table}
 
-2.4. Population initialization
-The genetic algorithm starts with a randomly generated
-population of solutions. The initial population is of fixed
-size P: A1, A2, ..., AP. For each string i in the population
-(i = 1, 2,...,P), Lr bits (0 or 1) are randomly generated.
-2.5. Learning strategy
-In the proposed GA, the best string with the best fitness
-value in each generation is copied to an isolated place in
-order to record the current best solution. Then, before
-starting the next generation, the best string can improve
-its fitness value by looking at the neighbouring values.
-Let the best string of the current population be
-T = {t1,t2,...,tk1}, it has a very high probability to
-improve its fitness value by ranging (t1 to t1  1, t1 + 1),
-(t2 to t2  1, t2 + 1), ..., (tk1 to tk1  1, tk1 + 1). As it
-was proved in [14], this simple movement may save many
-generations. This learning strategy does not affect the
-behaviour of the GA and can accelerate the movement
-towards the optimal thresholds.
-2.6. Genetic operations
-The current population evolves to the next population
-of the same size using three standard genetic operations:
-selection, crossover and mutation. The evolution process
-is iterated until a specified number of generations is
-reached.
-
-2.6.1. Selection
-Selection is a process which mimics the natural survival
-of the fittest creatures. Each string has a fitness value
-obtained by evaluating the fitness function. The probability
-of each string to be selected is proportional to its fitness
-value. In this paper, the tournament selection procedure
-is performed as follows: two strings A0 and A00 of the current
-population are randomly selected and the string with
-the best fitness value is chosen to belong to the mating
-pool. This procedure is repeated, until filling a mating pool
-of the same size P that the population.
-2.6.2. Crossover
-The crossover operator chooses two strings A0 and A00 of
-the current population. Single crossover is applied as follows:
-generate a random integer number q within
-[0,Lr
-1] and create two offspring by swapping all the characters
-of A0 and A00 after position q. The crossover is performed
-with the crossover probability Pc. A random
-number can be generated within [0, 1], associated with each
-pair of strings selected in the mating pool. If the random
-value is less than Pc, then the crossover is performed, otherwise
-no crossover is performed.
-2.6.3. Mutation
-Mutation is an occasional alteration of a character with
-a low probability Pm. The proposed mutation is performed
-in two steps. First, a standard mutation is used in the following
-way: for each string produced by crossover operation,
-a random value is generated within [0, 1]. If the
-random number is less than Pm, then a character at a random
-position is chosen and its value is altered (i.e. one
-changes 0 to 1, or 1 to 0).
-However, the crossover and standard mutation operators
-can create strings with several successive zero-bits. In this situation,
-several thresholds with successive values appear. To
-overcome this undesirable situation, a solution consists in
-keeping, among successive zero-bits, only the first one, and
-in mutating the remaining successive zero-bits.
-Example . Let Lr = 16 and consider the following string:
-A = 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1.
-The number of thresholds is equal to 10, since A contains
-10 characters with zero value. The values of the 10
-thresholds are, respectively, t1 = 2, t2 = 3, t3 = 6, t4 = 7,
-t5 = 8, t6 = 10, t7 = 11, t8 = 12, t9 = 13 and t10 = 14. They
-form three threshold series with successive values: (t1,t2),
-(t3,t4,t5) and (t6,t7,t8,t9,t10). By applying the proposed
-mutation, A becomes A = 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1,
-1, 1 and the number of thresholds is reduced to 3. The corresponding
-threshold values are t1 = 2, t2 = 6 and t3 = 10,
-respectively.
-2.7. Expansion of the best thresholds
-Because of the reduced dimension of the histogram, the
-threshold values ti determined by the GA are at lower level,
-
-i.e. ti 2 [0 L]. Thus, the thresholds determined by the GA
-must be expanded in the original space. In this case, each
-threshold ti is multiplied by a factor 2r
-, as follows [9]:
-2.8. Refinement of the expanded thresholds
-Since a GA is a stochastic technique, the expanded
-threshold values change at each run of the algorithm and
-are generally located in a range around the desired optimal
-threshold values. In these conditions, a refinement procedure
-can be added to obtain stable and more accurate
-threshold values. The refinement procedure that we have
-used is described by Algorithm 2 where only very few iterations
-are needed before convergence.
-Algorithm 2. Refinement procedure
-1. Compute the mean grey level mi(s) of the class Ci,
-i = 1, 2, ..., k  1 where s denotes the time of
-iteration.
-2. Update the value of ti(s) according to the following
-equation:
-2 :
-3. Repeat steps 1 and 2 until the iteration converges, i.e.
-ti(s + 1) = ti(s) i = 1, 2, ..., k  1.
-3. Experimental results and comparison with other methods
-In this section, we will evaluate the performance of the
-proposed multilevel thresholding method using a GA.
-Some experiments with a synthetic histogram and real
-images are presented to illustrate the key features of the
-proposed method in the determination of the number of
-thresholds and its efficiency for thresholding computation.
-Comparisons are performed with results provided by other
-multilevel thresholding methods.
-Eight well-known images named Lena, Blood, Peppers,
-House, Airplane, Lac, Boats and Bridge with 256 grey levels
-are used. The seven first images have a size (256 · 256),
-while the Bridge image is (512 · 512). These images are
-
-gathered in Figs. 2 and 3 shows their respective histograms.
-We add an artificial histogram in order to objectively show
-the accuracy of the proposed approach in the determination
-of the appropriate number of thresholds and the computation
-of threshold values. The artificial histogram is
-constructed with k = 5 distributions (cf. Fig. 1(a)). Each
-distribution is assumed to be Gaussian. The probability
-distribution is described below:
-The probability distribution is plotted in Fig. 2(a),
-where:
-The proposed multilevel thresholding technique using a
-GA is implemented with the following parameters:
-Pc = 0.9, Pm = 0.001. The size P of the population depends
-on the length of the chromosome and on the resolution
-level r used in the wavelet transform. In all our experiments,
-P is expressed in function of the resolution level r
-as 300/2r and the GA is executed for a maximum of
-Ng = 100 generations. The wavelet transform is performed
-with ‘db1’ wavelet. Additional results are presented in
-order to investigate the influence of the resolution level r.
-The choice of the constant q in the objective function is
-crucial. After several simulations using a large set of test
-images, we have found that q must depend on the resolution
-level r. It is fixed to 0.5 · 2r for all test images expect
-for the Bridge image where it is fixed to 2r
-.
-Table 1 shows the number of thresholds, the threshold
-values and the CPU time achieved by the proposed
-method, when the level r of the transform wavelet varies
-from 0 to 3. r = 0 corresponds to the original space of
-the histogram (without reduction). Our experiments are
-performed on a Pentium IV-2.8 GHz PC with 256 Mb
-RAM. Without the reduction of the length of the histogram,
-the length of the chromosome can be large and the
-population size P must be large, in order to cover the space
-of search solutions. Consequently, the computation time of
-the GA increases. The reduction in the length of the histogram
-enables reducing the computation time, while the
-number of thresholds and the threshold values are not
-really affected by this reduction. It can be pointed out that
-the computation time is not affected by the number of
-classes.
-For the artificial histogram, the proposed multilevel
-thresholding technique using a GA with P = 38 and r = 3
-
-converges to k* = 5, with the four thresholds T* = (65–
-120–174–215). The corresponding thresholds are displayed
-in Fig. 1(b). The results of the proposed method are consistent
-with the number of classes in the artificial histogram
-and the corresponding threshold values are located on
-the valleys of the histogram.
-Fig. 4 shows the threshold position on the histograms
-for the test images of Fig. 2, and the corresponding thresholded
-images are displayed in Fig. 5. For Lena, Peppers,
-House, Airplane, Lac, Boats and Bridge images, almost all
-important components are preserved in the thresholded
-images, since the homogeneous regions are well apparent
-and their outlines are very clear. While for Blood image,
-the modes of the histogram are not well apparent, however,
-the visual inspection of the thresholded image shows that
-the pixel classes are quite well separated, since the major
-regions (blood cells, blood plasma, cell nuclei and cell
-membrane) are well delimited (Fig. 5(b)).
-3.1. Comparison with other multilevel thresholding methods
-In this sub-section, some experimental results from different
-multilevel thresholding methods will be examined
-and compared with the proposed method, over the eight
-real images and the artificial histogram. All methods use
-the cost function F(k) to decide whether the number of
-thresholds has reached the optimal value or not. The smaller
-the value of F(k), better is the segmentation [4,27,28].
-The quality of thresholded images can also be evaluated
-through the uniformity measure, which is widely mentioned
-in the literature [3,12,14]:
-where: (k  1) is the number of thresholds,
-Rj is the segmented region j,
-fi is the grey level of pixel I,
-mj is the mean of the grey levels of those pixels in segmented
-region j,
-N is the number of total pixels in the given image,
-fmax is the maximal grey level of the pixels in the given
-image,
-fmin is the minimal grey level of the pixels in the given
-image.
-The value of the uniformity measure is between 0 and 1. A
-higher value of uniformity means that the quality of the
-thresholded image is better.
-3.1.1. Multilevel thresholding methods used for comparison
-Two multilevel thresholding techniques based on a GA
-and an iterative scheme are introduced and compared with
-the proposed method. In order to make an objective comparison,
-the results through the exhaustive search method
-are also presented.
-
-3.1.1.1. Multilevel thresholding method using a genetic
-algorithm. The optimal thresholding can be performed
-through a search of the thresholds optimizing an objective
-function G(k), using a genetic algorithm [14–16]. This
-genetic algorithm, which is based on a standard GA, starts
-with a randomly generated population of solutions. The
-initial population is of fixed size P: T1, T2, ..., TP. Each
-solution is coded as a binary string T, such that T = t1,
-t2, ..., tk1, where ti „ tj for i „ j and ti is a log2L-bit character,
-having a value within [0,L  1], i.e. ai indicates the
-value of the ith threshold. Then the current population
-evolves to the next population of the same size, using three
-genetic operations: selection, crossover and mutation. The
-evolution process is iterated until a near-optimal solution is
-obtained or a specified number of generations is reached.
-The steps of the method are summarized in Algorithm 3.
-Algorithm 3. Steps of the GA
-1. Generate an initial population.
-2. Store the best string T* with the best fitness in a separate
-location.
-3. Apply a learning strategy to improve the fitness
-value of T* (see Section 2.5; process used only in
-[5]).
-4. Generate the next population by performing selection,
-crossover and mutation operations.
-5. Compare the best string T of the current population
-with T*. If T has a better fitness value than T*, then
-replace T* with T.
-6. Go to step 3 if the desired number of generations is
-not reached.
-
-3.1.1.2. Iterative scheme for multilevel thresholding. Another
-fast multilevel thresholding method was proposed in
-[12,13], where the thresholds, optimizing an objective
-function G(k), are searched by using an iterative
-scheme.
-First, the technique starts with (k  1) initial thresholds.
-Then, these thresholds are iteratively adjusted to
-improve the value of the objective function G(k). This
-improvement process stops when the value of the objective
-function G(k) is not increased between two consecutive
-iterations. The details of this iterative scheme are
-presented in Algorithm 4.
-Algorithm 4. Iterative scheme for multilevel thresholding
-1. Start with a set of (k  1) thresholds T = {t1,t2,...,
-tk1} (for example, ti = i
-*L/(k  1)). For convenience,
-two other thresholds t0 = 0 and tk = L  1 are
-assumed.
-2. Compute the value of the objective function G(k) by
-using the current T = {t0,t2,...,tk}.
-3. Set i = 1.
-Table 1
-Number of thresholds, threshold values and time computation achieved by the proposed method
-Contents Original space, P = 300 Level 1 space, P = 150 Level 2 space, P = 75 Level 3 space, P = 38
-k* T* CPU time (ms) k* T* CPU time (ms) k* T* CPU time (ms) k* T* CPU time (ms)
-Artificial histogram 5 66 1100 5 66 300 5 66 80 5 65 32
-120 120 120 120
-174 174 174 174
-215 215 215 215
-Lena 5 47 1100 5 47 300 5 47 80 5 47 32
-84 83 83 83
-119 119 119 119
-164 164 164 164
-Blood 4 80 1100 4 76 300 4 76 80 4 76 32
-130 130 130 130
-172 177 177 177
-Peppers 4 62 1100 4 61 300 4 60 80 4 61 32
-116 115 115 115
-160 159 159 159
-House 3 96 1100 3 96 300 3 96 80 3 96 32
-155 155 155 155
-Airplane 3 117 1100 3 110 300 3 111 80 3 110 32
-175 170 171 170
-Lac 4 80 1100 4 79 300 4 79 80 4 79 32
-140 139 139 138
-193 192 192 192
-Boats 4 59 1100 4 58 300 4 57 80 4 58 32
-111 109 107 109
-151 150 149 150
-Bridge 8 49 1100 8 46 300 8 46 80 8 46 32
-75 71 71 71
-98 94 94 94
-122 118 118 118
-148 144 144 144
-176 173 173 173
-210 208 208 208
-4. Consider the part of grey level histogram on the subrange
-[ti ti+1]; one can find the optimal threshold t*
-between ti and ti+1 by using the objective function
-G(2) (i.e. in the case of bi-level thresholding). Replace
-ti with t*.
-5. Set i = i + 1. Go to step 4 until i > k  1.
-6. Compute the value of the objective function G(k) by
-using the current T = {t0,t2,...,tk}.
-7. If G(k) is increased, go to step 3; otherwise, stop.
-3.1.1.3. Automatic determination of the threshold number.
-The above GA technique and iterative scheme still leave
-a problem, which is the determination of the number of
-thresholds for a given image. In order to compare the performances
-of two above techniques with the proposed
-method, the threshold number must be determined automatically.
-In practice, the multilevel thresholding methods
-are generally applied by varying the number of thresholds;
-then the optimal threshold number, which optimizes a cost
-function, is determined. Here, the algorithm described in
-Algorithm 5 is used.
-
-holding methods based on Otsu’s and Kapur’s functions is
-very expensive when the exhaustive search is applied. For
-(k  1) thresholds, the complexity is O(L(k1)), which
-grows exponentially with the number of thresholds. However,
-in practice, it is proved that the computation time
-of Otsu’s function is faster than that of Kapur’s function.
-In each iteration of the iterative scheme, the histogram is
-looped three times. The computation complexity of the global
-iterative scheme then becomes (k  1)Ni3L, where Ni is
-the number of iterations, which is generally less than 100.
-We generally agree that the computational time of GAs
-is reduced only to the computational time of the fitness,
-because the computation of the selection, crossover and
-mutation operations is much faster than that of fitness.
-For the same reason, the computation of the learning strategy
-can be ignored.
-In GA-Otsu and GA-Kapur, each chromosome of
-length 8(k  1) is scanned once to determine the threshold
-values. The histogram with length L is the looped one in
-order to compute their fitness. So the complexity of GAOtsu
-and GA-Kapur is O((k  1)*Ng*P [8*(k  1) + L]),
-where Ng = P = 100.
-For the proposed method, the wavelet and the refinement
-procedures are of lower complexity than the GA.
-Hence only the complexity of the GA is taken into account.
-As each chromosome of length L
-2r is scanned once to extract
-the threshold values and as the reduced histogram with
-length L
-2r is the looped one in order to compute their fitness,
-the proposed method complexity becomes equal to
-O Ng  P  L
-2r1
-  , where Ng = 100 and P = 300/2r
-.
-A simple calculation shows that the proposed method
-has a complexity lower than those of other methods.
-Higher speed is due to the reduction of the histogram.
-On the other hand, the iterative GA-Otsu and GA-Kapur
-methods can be applied several times to determine the
-number of thresholds. Furthermore, the iterative methods
-need some iterations to converge, while for the GA-Otsu
-Table 8
-Comparison of performances for Lac image
-Method Class number K* Threshold values T* Objective function F Uniformity U CPU time (ms)
-ES-Otsu 4 80–140–193 10.7422 0.97343 10,031
-ES-Kapur 5 72–112–155–194 10.7947 0.97867 2,941,000
-GA-Otsu 4 80–140–193 10.7422 0.97343 421
-GA-Kapur 5 72–113–158–194 10.7856 0.97874 1594
-Iterative-Otsu 4 79–138–191 10.7506 0.97336 312
-Iterative-Kapur 5 69–109–152–191 10.8289 0.97840 1813
-Proposed method 4 79–138–192 10.7466 0.97339 32
-Table 9
-Comparison of performances for Boats image
-Method Class number K* Threshold values T* Objective function F Uniformity U CPU time (ms)
-ES-Otsu 4 59–111–151 10.2018 0.9747 8031
-ES-Kapur 5 56–103–144–190 10.8262 0.97580 2,214,016
-GA-Otsu 4 59–111–151 10.2018 0.97479 406
-GA-Kapur 2 116 13.1157 0.95191 563
-Iterative-Otsu 4 59–110–150 10.2041 0.97478 265
-Iterative-Kapur 2 115 13.0477 0.95245 828
-Proposed method 4 58–109–150 10.2054 0.97476 32
-Table 10
-Comparison of performances for Bridge image
-Method Class number K* Threshold values T* Objective function F Uniformity U CPU time (ms)
-ES-Otsu — — — — —
-ES-Kapur — — — — —
-GA-Otsu 8 47–73–96–119–143–171–207 17.1226 0.98376 1141
-GA-Kapur 8 25–60–91–122–150–183–214 17.6771 0.98147 3000
-Iterative-Otsu 8 47–73–97–121–147–175–208 17.0829 0.98392 563
-Iterative-Kapur 8 34–63–93–123–154–186–219 17.6919 0.98141 3000
-Proposed method 8 46–71–94–118–144–173–208 17.1005 0.98385 32
-Table 11
-Computational complexity
-Complexity Parameter values
-Exhaustive search O(L(k1))
-GA technique O((k  1)*Ng*P*[8*(k  1) + L]) Ng = P = 100
-Iterative scheme O((k  1)Ni3L) Ni = 100
-Proposed method O Ng  P  L
-2r1
-  Ng  100; P  300
-2r
-174 K. Hammouche et al. / Computer Vision and Image Understanding 109 (2008) 163–175
-and GA-Kapur methods, the number of generations is
-higher than that of the proposed method. Let us note also
-that the computation time of the proposed method is independent
-from the number of classes, while other methods
-are linked to the number of classes: indeed, in the GA-Otsu
-and GA-Kapur methods, the size of the chromosome
-increases with the threshold number and, in the iterative
-methods, at each iteration, the number of the updates of
-the thresholds increases with the number of thresholds.
-The speed of the proposed method is clearly shown in
-Table 10, where the Bridge image is thresholded by a great
-number of thresholds. Hence, the proposed method is useful
-to find multiple thresholds for complex image analysis
-
-% FIM-Resumir
-\end{comment}
 % ------------------------------------------------------------------------------------------------------------------------
 \chapter{Proposta}
 % ------------------------------------------------------------------------------------------------------------------------
 
-Neste trabalho é proposto um sistema de aprendizado de máquina utilizando algoritmos genéticos com técnicas de processamento digital de imagens para segmentação de imagens, focando na segmentação de fotos de rostos. De forma semelhante aos trabalhos apresentados anteriormente, os GAs serão utilizados para evoluir os parâmetros das técnicas de processamento de imagem. No entanto, o principal objetivo deste trabalho é conseguir que o GA selecione também quais técnicas de PDI e em qual sequência os mesmos serão executados para obter o melhor resultado do processo de segmentação.
+Neste trabalho é proposto um sistema de aprendizado de máquina utilizando algoritmos genéticos com técnicas de processamento digital de imagens para segmentação de imagens, focando na segmentação de fotos de rostos. De forma semelhante aos trabalhos apresentados como correlatos, os GAs serão utilizados para evoluir os parâmetros das técnicas de processamento de imagem. No entanto, o principal objetivo deste trabalho é conseguir que o GA selecione também quais técnicas de PDI e em qual sequência os mesmos serão executados para obter o melhor resultado do processo de segmentação.
 
 Este trabalho se baseia no \textit{software} VISNode \cite{visnode:2018}, uma ferramenta para execução de técnicas de PDI em formato de grafo. Ele possui dezenas de algoritmos de PDI implementados que serão utilizados neste trabalho. Cada nodo possui entradas e saídas, sendo que estas podem ser conectadas entre si, garantindo uma maior flexibilidade no sequenciamento e execução dos algoritmos. Um exemplodo de um projeto do VISNode com 7 nodos (processos) de PDI pode ser visto na Figura~\ref{fig:PRO_Visnode}.
 
 \begin{figure}[ht]
 \centering
-\caption{\textbf{Demonstração de um processo feito no VISNode}}
-\includegraphics[width=0.6\textwidth]{imagens/PRO_Visnode.PNG}
-\source{\citet{fasseg:2018}}
+\caption{Demonstração de um processo feito no VISNode}
+\includegraphics[width=0.8\textwidth]{imagens/PRO_Visnode.PNG}
+\sourceAuthor
 \label{fig:PRO_Visnode}
 \end{figure}
 
@@ -1550,7 +1097,7 @@ Para avaliação dos indivíduos do GA e validação do trabalho, está sendo ut
 
 \begin{figure}[ht]
 \centering
-\caption{\textbf{Exemplo de imagens do FASSEG}}
+\caption{Exemplo de imagens do FASSEG}
 \includegraphics[width=0.6\textwidth]{imagens/FASSEG.png}
 \source{\citet{fasseg:2018}}
 \label{fig:FASSEG}
@@ -1560,7 +1107,7 @@ O método para validação das imagens é uma simples comparação pixel a pixel
 
 \section{Representação cromossomial}
 
-Uma das partes mais importantes do trabalho é a definição da representação cromossomial dos grafos. Em um único cromossomo deve se rpossível codificar um conjunto de nodos, cada nodo possuindo um processo a ser executado (categórico), e 0-N parâmetros numéricos. Além disso, deve ser possível codificar no cromossomo as conexões entre os nodos do grafo.
+Uma das partes mais importantes do trabalho é a definição da representação cromossomial dos grafos. Em um único cromossomo deve ser possível codificar um conjunto de nodos, cada nodo possuindo um processo a ser executado (categórico), e 0-N parâmetros numéricos. Além disso, deve ser possível codificar no cromossomo as conexões entre os nodos do grafo.
 
 \section{Processos de PDI}
 
@@ -1574,11 +1121,13 @@ Para construção do algoritmo genético serão usados os indicados pela literat
 \chapter{Desenvolvimento}
 % ------------------------------------------------------------------------------------------------------------------------
 
+\section{Teste 1}
+
 No início do desenvolvimento deste trabalho, foi construído um protótipo para avaliar a viabilidade da proposta. O intuito deste teste era implementar um GA para evolução de técnicas de PDI e seus parâmetros para realizar a segmentação de uma única imagem (\textit{overfitting}).
 
 Para o teste, foi selecionada uma imagem de um rosto da base de imagens FASSEG \cite{fasseg:2018}. Para avaliação da imagem, foi realizada a comparação pixel a pixel da imagem de saída do GA com o gabarito disponível na base.
 
-Nesta fase, o cromossomo era composto de 42 genes, divididos em 7 grupos de 6 genes. O primeiro gene de cada grupo indicava qual técnica de PDI deveria ser utilizada, e os outros 5 genes possuem parâmetros para a execução do algoritmo. O GA poderia escolher entre sete algoritmos de PDI diferentes, demonstrados na Tabela~\ref{tab:AlgoritmosTeste1}.
+Nesta fase, o cromossomo era composto de 21 genes, divididos em 7 grupos de 3 genes. O primeiro gene de cada grupo indicava qual técnica de PDI deveria ser utilizada, e os outros 2 genes possuem parâmetros para a execução do algoritmo. O GA poderia escolher entre sete algoritmos de PDI diferentes, demonstrados na Tabela~\ref{tab:AlgoritmosTeste1}.
 
 \begin{table}
 \centering
@@ -1593,20 +1142,70 @@ Inversão de cores            &                                                 
 Ajuste de brilho             & {[}1{]} Brilho, -255 -255                                                              \\ 
 Ajuste de contraste          & {[}1{]} Contraste, 0 - 3                                                               \\ 
 Filtor de mediana            &                                                                                        \\ 
-Filtro gaussiano             & \begin{tabular}[c]{@{}l@{}}{[}1{]} Sigma, 0 - 3;\\ {[}2{]} Máscara, 3 - 1\end{tabular} \\ \hline
+Filtro gaussiano             & \begin{tabular}[c]{@{}l@{}}{[}1{]} Sigma, 0 - 3;\\ {[}2{]} Máscara, 3 - 11\end{tabular} \\ \hline
 \end{tabular}
 \end{table}
 
-Para execução do GA, foi utilizado uma população de tamanho 150, e o mesmo foi executado por 100 gerações. Ao final da execução, a melhor solução encontrada possui uma avaliação de 0,9692, ou seja, 96,92\% de assertividade com o gabarito. O resultado final do algoritmo pode ser visto na Figura~\ref{fig:DES_Primeiro_Teste}.
+Para a execução do GA, foi utilizada uma população de tamanho 150, e o mesmo foi executado por 100 gerações. Ao final da execução, a melhor solução encontrada possui uma avaliação de 0,9692, ou seja, 96,92\% de assertividade com o gabarito. O resultado final do algoritmo pode ser visto na Figura~\ref{fig:DES_Primeiro_Teste}.
 
 \begin{figure}[ht]
 \centering
-\caption{\textbf{Resultado do primeiro teste}}
+\caption{Resultado do primeiro teste}
 \includegraphics[width=0.6\textwidth]{imagens/DES_Primeiro_Teste.pdf}
 \sourceAuthor
 \label{fig:DES_Primeiro_Teste}
 \end{figure}
 
+Foi identificada uma rápida convergência para o resultado final, devido a simplicidade do problema e ao pequeno espaço de possíveis soluções. Na primeira geração, completamente aleatória, já estava presente o cromossomo com 96,92\% de assertividade, que foi o sobrevivente até o final da 100ª geração. Ao decorrer do processo, os seus genes foram se espalhando pela população, e não houve melhoria devida a mutação.
+
+\section{Teste 2}
+
+O segundo teste foi focado em adicionar mais processos para tentar melhorar o percentual de assertividade do GA. Foram adicionados 15 algoritmos aos 7 já adicionados no primeiro teste. Além disso, existe a possibilidade do processo ser um processo de terminação, o que possibilita um número variável de processos em cada gene. Os novos 16 processos adicionados estão na Tabela~\ref{tab:AlgoritmosTeste2}.
+
+%TODO: Preencher
+\begin{table}
+\centering
+\caption{Algoritmos utilizados}
+\label{tab:AlgoritmosTeste2}
+\begin{tabular}{ll}
+\hline
+\textit{\textbf{Algoritmo}}  & \textit{\textbf{Parâmetros}}                                                           \\ \hline
+Tons de cinza ponderados     & \begin{tabular}[c]{@{}l@{}}{[}1{]} Peso R, 0 - 1;\\ {[}2{]} Peso G, 0 - 1\\ {[}2{]} Peso B, 0 - 1\end{tabular} \\ 
+Erosão                       &                                                                                        \\ 
+Dilatação                    &                                                                                        \\ 
+Abertura                     &                                                                                        \\ 
+Fechamento                   &                                                                                        \\ 
+Sobel                        &                                                                                        \\ 
+Roberts                      &                                                                                        \\ 
+Robinson                     &                                                                                        \\ 
+Prewitt                      &                                                                                        \\ 
+Canny                        &                                                                                        \\ 
+Snake                        &                                                                                        \\ 
+Stentiford                   &                                                                                        \\ 
+Zhang Suen                   &                                                                                        \\ 
+Holt                         &                                                                                        \\ 
+Desfoque com média           &                                                                                        \\  \hline
+\end{tabular}
+\end{table}
+
+Cada cromossomo foi incrementado para um tamanho de 36 genes, (9 grupos de 4), permitindo a execução de até 9 processos em sequência. Também foi alterado o processo de seleção com relação ao primeiro teste, realizando a técnica da roleta viciada inversa para que os melhores indivíduos de cada geração tenham uma chance de sobreviver até a próxima geração. O tamanho da população foi incrementado para 300, devido ao aumento do espaço de soluções possíveis.
+
+O teste agora foi executado em três imagens da base FASSEG ao invés de apenas uma, com o objetivo de tentar encontrar uma solução mais genérica para o problema da segmentação. Após a execução do algoritmo por 100 gerações, o melhor resultado da segmentação foi de 65,23\% (Média de assertividade entre as três imagens). O exemplo da saída do algoritmo esta na Figura~\ref{fig:DES_Segundo_Teste}.
+
+\begin{figure}[ht]
+\centering
+\caption{Resultado do segundo teste}
+\includegraphics[width=0.6\textwidth]{imagens/DES_Segundo_Teste.pdf}
+\sourceAuthor
+\label{fig:DES_Segundo_Teste}
+\end{figure}
+
+Com esse teste foi possível verificar alguns problemas com a abordagem atual:
+\begin{itemize}
+    \item Todos os indivíduos bem sucedidos usam o \textit{thresholding}, o que não é ideal;
+    \item Está se perdendo muita diversidade genética sem obter melhorias nos melhores indivíduos;
+    \item Alguns indivíduos tiveram um percentual extremamente baixo (0,4\%), o que, na verdade, significa que ele gerou algo semelhante ao negativo da melhor solução.
+\end{itemize}
 
 % ---
 % Finaliza a parte no bookmark do PDF, para que se inicie o bookmark na raiz
@@ -1617,10 +1216,8 @@ Para execução do GA, foi utilizado uma população de tamanho 150, e o mesmo f
 % ---
 % Conclusão
 % ---
-\chapter*[Conclusão]{Conclusão}
+\chapter{Conclusão}
 \addcontentsline{toc}{chapter}{Conclusão}
-
-\lipsum[31-33]
 
 % ----------------------------------------------------------
 % ELEMENTOS PÓS-TEXTUAIS
@@ -1641,3 +1238,4 @@ Para execução do GA, foi utilizado uma população de tamanho 150, e o mesmo f
 \printindex
 
 \end{document}
+d
