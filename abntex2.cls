@@ -209,6 +209,9 @@
 
 % ---
 % Fontes padroes de part, chapter, section, subsection e subsubsection
+
+\newcommand{\ABNTEXchapterfontnobold}{\rmfamily\selectfont}
+
 \newcommand{\ABNTEXchapterfont}{\rmfamily\fontseries{b}\selectfont}
 \newcommand{\ABNTEXchapterfontsize}{\normalsize}
 
@@ -303,8 +306,8 @@
 % ---
 % Estilos de caption
 \captiondelim{\space--\space}
-\captionnamefont{\LARGE}
-\captiontitlefont{\LARGE}
+\captionnamefont{\ABNTEXfontereduzida}
+\captiontitlefont{\ABNTEXfontereduzida}
 % ---
 
 % -----
@@ -402,9 +405,8 @@
 % -----
 % Cabecalho padrao
 \makepagestyle{abntheadings}
-\makeevenhead{abntheadings}{\ABNTEXfontereduzida\thepage}{}{\ABNTEXfontereduzida\textit\leftmark}
-\makeoddhead{abntheadings}{\ABNTEXfontereduzida\textit\rightmark}{}{\ABNTEXfontereduzida\thepage}
-\makeheadrule{abntheadings}{\textwidth}{\normalrulethickness}
+\makeevenhead{abntheadings}{\ABNTEXfontereduzida\thepage}{}{}
+\makeoddhead{abntheadings}{}{}{\ABNTEXfontereduzida\thepage}
 
 % Cabecalho do inicio do capitulo
 \makepagestyle{abntchapfirst}
@@ -431,6 +433,7 @@
   \ifthenelse{\equal{\ABNTEXisarticle}{true}}{%
     \pagestyle{plain}%
   }{%else  
+   \pagestyle{abntheadings}%
   }  
   \nouppercaseheads%
   \bookmarksetup{startatroot}% 
@@ -761,20 +764,20 @@
 \newcommand{\imprimircapa}{%
   \begin{capa}%
     \center
-    {\ABNTEXchapterfont\large\imprimirinstituicao}
+    {\ABNTEXchapterfontnobold\imprimirinstituicao}
     
     \vspace*{\fill}
     
     %\vspace*{1cm}
-    {\ABNTEXchapterfont\large\imprimirautor}
+    {\ABNTEXchapterfontnobold\imprimirautor}
 
     \vspace*{\fill}
-    {\ABNTEXchapterfont\large\imprimirtitulo}
+    {\ABNTEXchapterfont\imprimirtitulo}
     \vspace*{\fill}
     
-    {\large\imprimirlocal}
+    {\imprimirlocal}
     \par
-    {\large\imprimirdata}
+    {\imprimirdata}
     
     \vspace*{1cm}
   \end{capa}
@@ -798,10 +801,10 @@
   \begin{center}
 
     %\vspace*{1cm}
-    {\ABNTEXchapterfont\large\imprimirautor}
+    {\ABNTEXchapterfontnobold\imprimirautor}
 
     \vspace*{\fill}\vspace*{\fill}
-    {\ABNTEXchapterfont\Large\imprimirtitulo}
+    {\ABNTEXchapterfont\imprimirtitulo}
     \vspace*{\fill}
 
     \abntex@ifnotempty{\imprimirpreambulo}{%
@@ -814,15 +817,15 @@
     }%
 
     
-    {\large\imprimirorientadorRotulo~\imprimirorientador\par}
+    {\imprimirorientadorRotulo~\imprimirorientador\par}
     \abntex@ifnotempty{\imprimircoorientador}{%
-       {\large\imprimircoorientadorRotulo~\imprimircoorientador}%
+       {\imprimircoorientadorRotulo~\imprimircoorientador}%
     }%
     \vspace*{\fill}
 
-    {\large\imprimirlocal}
+    {\imprimirlocal}
     \par
-    {\large\imprimirdata}
+    {\imprimirdata}
     \vspace*{1cm}
 
   \end{center}
@@ -852,10 +855,9 @@
 \newcommand{\imprimiragradecimento}[1]{%
   \begin{agradecimentos}%
     \center
-    \vspace*{\fill}
-
-    {\center\chaptitlefont\agradecimentosname}
+    {\center\ABNTEXchapterfont\agradecimentosname}
     
+    \vspace*{\fill}
     \hspace{.45\textwidth}
     \begin{minipage}{.5\textwidth}
   	   \SingleSpacing
@@ -868,7 +870,7 @@
 \newcommand{\source}[1]{%
 \footnotesize
 
-Fonte: {#1}
+\textbf{Fonte: {#1}}
 }
 
 \newcommand{\sourceAuthor}{\source{elaborado pelo autor}}

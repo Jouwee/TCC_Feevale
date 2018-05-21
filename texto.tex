@@ -101,17 +101,17 @@ A segmentação automática de imagens vem se tornando cada vez mais utilizada e
 \cleardoublepage
 % ---
 \begin{siglas}
-  \item[Fig.] Area of the $i^{th}$ component
-  \item[456] Isto é um número
-  \item[123] Isto é outro número
-  \item[lauro cesar] este é o meu nome
+  \item[API] \textit{Application programming interface}
+  \item[CMYK] \textit{Cyan, Magenta, Yellow, Black}
+  \item[FA] Função de avaliação
+  \item[GA] \textit{Genetic Algorithm}
+  \item[HSI] \textit{Hue, Saturation, Intensity}
+  \item[PDI] Processamento digital de imagens
+  \item[RGB] \textit{Red, Green, Blue}
 \end{siglas}
 % ---
 \begin{simbolos}
   \item[$ \Gamma $] Letra grega Gama
-  \item[$ \Lambda $] Lambda
-  \item[$ \zeta $] Letra grega minúscula zeta
-  \item[$ \in $] Pertence
 \end{simbolos}
 % ---
 % ---
@@ -129,18 +129,21 @@ Um problema comum de análise de imagens é a segmentação destas. O processame
 
 Uma forma de realizar a análise das imagens se dá pela execução de uma sequência de algoritmos de processamento digital de imagens (PDI) \cite{gonzalez:2012}. Esses algoritmos podem ser orquestrados e parametrizados pelo criador do sistema, ou de forma empírica pelo usuário. Mais recentemente, outra forma utilizada para a resolução de problemas de segmentação e classificação de imagens é a aplicação de redes neurais (RN) simples ou convolucionais \cite{noh:2015}, onde um sistema de aprendizado de máquina é treinado para executar a tarefa especificada. Esse treinamento é efetuado de forma supervisionada, necessitando de uma base previamente anotada, o que é um recurso de construção bastante custoso.
 
-A técnica de RN vem ganhando visibilidade no mundo acadêmico. Isso se deve a diversos fatores. O uso de RN permite que um único sistema seja treinado para solucionar diversos problemas. Também é possível que o treinamento supervisionado da RN seja realizado por um especialista no assunto em questão e que não necessite de conhecimento do sistema e da tecnologia utilizada. Além disso, o seu resultado normalmente é superior quando as imagens não são homogêneas, ou seja, não se enquadram perfeitamente na situação prevista pelo sistema \cite{pal:1999}.
+A técnica de RN vem ganhando visibilidade no mundo acadêmico. Isso se deve a diversos fatores. O uso de RN permite que um único sistema seja treinado para solucionar diversos problemas. Também é possível que o treinamento supervisionado da RN seja realizado por um especialista no assunto em questão e que não necessite de conhecimento do sistema e da tecnologia utilizada. Além disso, o seu resultado normalmente é superior quando as imagens não são homogêneas, ou seja, não se enquadram perfeitamente na situação prevista pelo sistema \cite{pal:1993}.
 
-No entanto, sistemas baseados em redes neurais oneram em tempo de processamento em relação aos sistemas baseados em PDI \cite{huang:1992}, o que pode ser um problema para sistemas de monitoramento em tempo real ou avaliação de uma grande quantidade de imagens. Embora existam tentativas anteriores de analisar e compreender a saída de uma RN \cite{zeiler:2014}, isso não é possível em todas as soluções que utilizam RN. Dessa forma, arede neural acaba se tornando uma caixa-preta, de forma que geralmente não é possível a um ser humano interpretar como ela está chegando ao resultado de forma que ele possa aprender com o sistema e reproduzir os resultados.
+No entanto, sistemas baseados em redes neurais oneram em tempo de processamento em relação aos sistemas baseados em PDI \cite{huang:1992}, o que pode ser um problema para sistemas de monitoramento em tempo real ou avaliação de uma grande quantidade de imagens.
 
-Em outras soluções desenvolvidas para problemas específicos são utilizadas técnicas de PDI pré-selecionadas e algoritmos genéticos (AG) \cite{holland:1992} para o treinamento dos seus parâmetros. Pode-se citar o software que segmenta elementos em fotos de satélite \cite{costa:2010} ou a comparação da evolução dos parâmetros em métodos de segmentação baseados em quad-trees, thresholding e crescimento de regiões \cite{matias:2007}. Entretanto, todos os trabalhos utilizam o AG apenas para ajustar os parâmetros dos algoritmos de PDI, sem tentar utilizar o AG para mudar o algoritmo a ser utilizado ou a sequência de passos para obter o resultado.
+Embora existam tentativas anteriores de analisar e compreender a saída de uma RN \cite{zeiler:2014}, isso não é possível em todas as soluções que utilizam RN. Dessa forma, arede neural acaba se tornando uma caixa-preta, de forma que geralmente não é possível a um ser humano interpretar como ela está chegando ao resultado de forma que ele possa aprender com o sistema e reproduzir os resultados.
+
+Em outras soluções desenvolvidas para problemas específicos são utilizadas técnicas de PDI pré-selecionadas e algoritmos genéticos \cite{holland:1992} para o treinamento dos seus parâmetros. Pode-se citar o software que segmenta elementos em fotos de satélite \cite{costa:2010} ou a comparação da evolução dos parâmetros em métodos de segmentação baseados em \textit{quadtrees}, \textit{thresholding} e crescimento de regiões \cite{matias:2007}. Entretanto, todos os trabalhos utilizam o AG apenas para ajustar os parâmetros dos algoritmos de PDI, sem tentar utilizar o AG para mudar o algoritmo a ser utilizado ou a sequência de passos para obter o resultado.
 
 Propõe-se, neste trabalho, um sistema que seja capaz de utilizar algoritmos genéticos tanto para parametrizar quanto para sequenciar técnicas de PDI de acordo com a imagem. Acredita-se que isso permitirá a obtenção de resultados de qualidade semelhante a de redes neurais, porém, com uma tempo de processamento inferior . Esta abordagem também permitirá o estudo por parte de um ser humano para interpretar a sequência de passos utilizada, de forma a aprender e refinar o processamento.
 
-Prévio a escrita deste projeto, foi desenvolvido um ambiente de manipulação de técnicas de PDI denominado VISNode \cite{visnode:2018}. Este permite a utilização e parametrização de processos de PDI em formato de grafo, onde os processos não são executados necessariamente em sequência, e parâmetros podem ser transferidos entre processos, ou nodos. A ferramenta permite a execução dos grafos de processos, denominados projetos, via uma application programming interface (API) utilizando como entrada um conjunto de imagens, assim como a visualização destes projetos em uma interface gráfica.
+Prévio a escrita deste projeto, foi desenvolvido um ambiente de manipulação de técnicas de PDI denominado VISNode \cite{visnode:2018}. Este permite a utilização e parametrização de processos de PDI em formato de grafo, onde os processos não são executados necessariamente em sequência, e parâmetros podem ser transferidos entre processos, ou nodos. A ferramenta permite a execução dos grafos de processos, denominados projetos, via uma \textit{application programming interface} (API) utilizando como entrada um conjunto de imagens, assim como a visualização destes projetos em uma interface gráfica.
 
 Com base neste ambiente, o sistema proposto terá como saída um projeto da ferramenta VISNode. Assim, será possível visualizar facilmente os processos que estão sendo utilizados, em que sequência e com quais parâmetros, pela interface do sistema.
 
+% TODO: No capiútlo X....
 
 % ------------------------------------------------------------------------------------------------------------------------
 \chapter{Algoritmos Genéticos}
@@ -164,7 +167,7 @@ Este processo é executado até que uma condição de terminação seja atingida
 
 \section{Algoritmos Genéticos}
 
-Algoritmos genéticos (\textit{Genetic algorithms}, ou GA) são um ramo dos algoritmos evolucionários que traz conceitos da biologia genética como genes e cromossomos para os algoritmos evolucionários. Isso permite a melhor simulação de um sistema evolucionário próximo ao que existe na natureza, obtendo resultados de alta qualidade para problemas de otimização.
+Algoritmos genéticos são um ramo dos algoritmos evolucionários que traz conceitos da biologia genética como genes e cromossomos para os algoritmos evolucionários. Isso permite a melhor simulação de um sistema evolucionário próximo ao que existe na natureza, obtendo resultados de alta qualidade para problemas de otimização.
 
 Como os algoritmos genéticos fazem parte do grupo de algoritmos evolucionários, eles possuem a mesma sequência de passos: inicialização, avaliação, simulação e criação de uma nova geração. O diferencial do algoritmo genético é o uso de cromossomos para representar um indivíduo. O cromossomo é uma sequência de valores, ou genes, que representa a solução daquele indivíduo.
 
@@ -314,7 +317,7 @@ No próximo capítulo serão apresentadas técnicas de processamento digital de 
 \label{chp:PDI}
 % ------------------------------------------------------------------------------------------------------------------------
 
-Este capítulo aborda o tema sobre processamento digital de imagens (PDI). Serão explicados os conceitos de imagem digital, pré-processamento e segmentação, tal como diversas técnicas para análise e manipulação de imagens.
+Este capítulo aborda o tema sobre processamento digital de imagens. Serão explicados os conceitos de imagem digital, pré-processamento e segmentação, tal como diversas técnicas para análise e manipulação de imagens.
 
 Segundo \citet{pedrini:2008}, o processamento digital de imagens consiste em um conjunto de técnicas para capturar, representar e transformar imagens com o auxílio do computador. O emprego dessas técnicas permite extrair e identificar informações das imagens e melhorar a qualidade visual de certos aspectos estruturais, facilitando a percepção humana e a interpretação automática por meio de máquinas. 
 
@@ -449,10 +452,6 @@ Outra função linear comum é a transformação inversa, que produz o negativo 
 \sourceAuthor
 \label{fig:PDI_Inversao}
 \end{figure}
-
-\section{Conversão para tons de cinza}
-
-% TODO: Escrever
 
 \section{Morfologia Matemática}
 
@@ -832,9 +831,7 @@ O predicado \(P\) a ser usado para agregar um pixel em uma das regiões verifica
 \textup{FALSO}, & \textup{caso contrário}
 \end{matrix}\right.\]
 
-em que \(f(r,s)\) representa o pixel semente e \(f(x,y)\) representa os pixels conectados ao pixel semente por vizinhança-8 \cite{pedrini:2008}. Qualquer pixel que satisfaça essa propriedade simultaneamente para ambas é (arbitrariamente) atribuído a região \(R_1\). Na Figura X é possível ver a aplicação de um crescimento de regiões em uma imagem de entrada utilizando os pixels semente delimitados em (a), com as regiões delimitadas utilizando \(T=4\) (b) e \(T=8\) (b).
-
-% TODO: Figura
+em que \(f(r,s)\) representa o pixel semente e \(f(x,y)\) representa os pixels conectados ao pixel semente por vizinhança-8 \cite{pedrini:2008}. Qualquer pixel que satisfaça essa propriedade simultaneamente para ambas é (arbitrariamente) atribuído a região \(R_1\). 
 
 \subsection{Divisão de Regiões}
 
@@ -845,8 +842,6 @@ Uma técnica comum de subdivisão da imagem em regiões homogêneas utiliza a re
 \subsection{\textit{Watershed}}
 
 Segundo \citet{pedrini:2008} o algoritmo de \textit{watershed} ou divisor de águas trata a imagem como se fosse uma superfície topográfica, onde as intensidades dos pixels correspondem a valores de altitude ou elevação. É efetuado então um processo chamado imersão onde os pontos de menor altitude (intensidade) passam a ser preenchidos de água, formando bacias. Quando duas bacias se encontram, uma linha de contenção é criada entre as bacias, definindo assim uma borda da imagem. O processo é executado até que toda a superfície tenha sido inundada.
-
-% TODO: Figura
 
 \subsection{Afinamento de Bordas}
 
@@ -919,7 +914,7 @@ Segundo \citet{guilherme:2007}, para que um pixel seja marcado para exclusão el
 \begin{figure}[ht]
 \centering
 \caption{Pixels P8 ou P6 ou P4 devem ser um pixel branco}
-\includegraphics[width=0.4\textwidth]{imagens/PDI_Zhang_Suen_5.PNG}
+\includegraphics[width=0.3\textwidth]{imagens/PDI_Zhang_Suen_5.PNG}
 \source{\citet[pg.17]{guilherme:2007}}
 \label{fig:PDI_Zhang_Suen_5}
 \end{figure}
@@ -951,6 +946,12 @@ Para um ponto ser removido, o resultado das expressões lógicas devem ser verda
 \source{\citet[pg.21]{guilherme:2007}}
 \label{fig:PDI_Holt_1}
 \end{figure}
+
+\section{Considerações}
+
+Este capítulo apresentou o tema de processamento digital de imagens. Foram apresentados os conceitos de imagem digital e as etapas de análise, como pré-processamento e segmentação. Além disso, foram apresentadas diversas técnicas de pré-processamento e segmentação, como \textit{thresholding}, detecção de bordas e morfologia matemática.
+
+No próximo capítulo serão apresentadas trabalhos que tentaram unir o uso de algoritmos genéticos com PDI para realizar a segmentação de imagens digitais. Nos trabalhos indicados, o GA foi utilizado apenas para parametrizar as técnicas de PDI para alcançar o objetico especificado.
 
 % ------------------------------------------------------------------------------------------------------------------------
 \chapter{Trabalhos Correlatos}
@@ -1062,15 +1063,14 @@ Para a validação dos resultados, foram utilizadas algumas imagens comumente ut
 \label{tab:TrCo_Bammouche_Resultados}
 \begin{tabular}{llllll}
 \hline
-\textit{\textbf{Método}} & \textit{\textbf{Número de classes}} & \textit{\textbf{Valores dos limiares}} & \textit{\textbf{Função objetivo}} & \textit{\textbf{Uniformidade}} & \textit{\textbf{Tempo de CPU (ms)}} \\ \hline
-ES-Otsu                  & 5                                   & 47-84-119-164                          & 10,8040                           & 0,97877                        & 601.766                             \\
-ES-Kapur                 & 4                                   & 60-109-160                             & 11,0013                           & 0,97159                        & 50.281                              \\
-GA-Otsu                  & 5                                   & 46-80-113-162                          & 10,8252                           & 0,97805                        & 578                                 \\
-GA-Kapur                 & 4                                   & 59-107-159                             & 10,9798                           & 0,97177                        & 1.118                               \\
-Iterative-Otsu           & 5                                   & 47-83-118-163                          & 10,8090                           & 0,97874                        & 360                                 \\
-Iterative-Kapur          & 4                                   & 60-108-159                             & 10,9952                           & 0,97160                        & 1516                                \\
-Método proposto          & 5                                   & 46-83-119-164                          & 10,8040                           & 0,97875                        & 32                                  \\ \hline
-                         &                                     &                                        &                                   &                                &                                     \\ \hline
+\textit{\textbf{\small{Método}}} & \textit{\textbf{\small{Classes}}} & \textit{\textbf{\small{Valores limiares}}} & \textit{\textbf{\small{FA}}} & \textit{\textbf{\small{Uniformidade}}} & \textit{\textbf{\small{Tempo (ms)}}} \\ \hline
+ES-Otsu                  & 5                                   & 47-84-119-164                          & 10,80                           & 0,97877                        & 601.766                             \\
+ES-Kapur                 & 4                                   & 60-109-160                             & 11,00                           & 0,97159                        & 50.281                              \\
+GA-Otsu                  & 5                                   & 46-80-113-162                          & 10,82                           & 0,97805                        & 578                                 \\
+GA-Kapur                 & 4                                   & 59-107-159                             & 10,97                           & 0,97177                        & 1.118                               \\
+Iterative-Otsu           & 5                                   & 47-83-118-163                          & 10,80                           & 0,97874                        & 360                                 \\
+Iterative-Kapur          & 4                                   & 60-108-159                             & 10,99                           & 0,97160                        & 1516                                \\
+Método proposto          & 5                                   & 46-83-119-164                          & 10,80                           & 0,97875                        & 32                                  \\ \hline
 \end{tabular}
 \end{table}
 
@@ -1090,8 +1090,13 @@ Este trabalho se baseia no \textit{software} VISNode \cite{visnode:2018}, uma fe
 \label{fig:PRO_Visnode}
 \end{figure}
 
-% TODO: Figura com Sobel -> Snakes e outra com Média -> Threshold
-No GA proposto, cada indivíduo representará um grafo de processos de PDI, permitindo a parametrização estática (valor fixo para o parâmetro) ou dinâmica (vindo de outro nodo do grafo) de cada algoritmo. Como exemplo de possíveis indivíduos do GA, considere a Figura X. Em (a), o indivíduo representa a execução da detecção de bordas de Sobel, seguida de uma limiarização e a execução do algoritmo de \textit{Snakes} para preenchimento das regiões. Em (b), está representado o cromossomo que obtém a média dos tons de cinza da imagem e utiliza isso como limiar para o processo de \textit{thresholding}. Em (c), a imagem ainda colorida está sendo dividida em três imagens tons de cinza baseadas nos seus canais RGB, é efetuado um limiar fixo em cada uma delas, para então se unir os conjuntos gerados.
+% TODO: Figura
+No GA proposto, cada indivíduo representará um grafo de processos de PDI, permitindo a parametrização estática (valor fixo para o parâmetro) ou dinâmica (vindo de outro nodo do grafo) de cada algoritmo. Como exemplo de possíveis indivíduos do GA, podemos citar:
+\begin{itemize}
+    \item execução da detecção de bordas de Sobel, seguida de uma limiarização e a execução do algoritmo de \textit{Snakes} para preenchimento das regiões;
+    \item obtém a média dos tons de cinza da imagem e utiliza isso como limiar para o processo de \textit{thresholding};
+    \item a imagem ainda colorida está sendo dividida em três imagens tons de cinza baseadas nos seus canais RGB, é efetuado um limiar fixo em cada uma delas, para então se unir os conjuntos gerados
+\end{itemize}
 
 Para avaliação dos indivíduos do GA e validação do trabalho, está sendo utilizada a base de rostos segmentados FASSEG \cite{fasseg:2018}. Esta base possui 70 fotos de rostos normalizados (com posição e iluminação semelhantes) e as imagens já segmentadas delineando o rosto, olhos, cabelo, boca e nariz em cores diferentes. Exemplos de imagens de entrada e segmentadas podem ser vistos na Figura ~\ref{fig:FASSEG}. Neste trabalho o objetivo principal é que seja possível segmentar de forma satisfatória o contorno do rosto, ou seja, sem o fundo e sem os cabelos, mas contendo olhos e boca.
 
@@ -1136,12 +1141,12 @@ Nesta fase, o cromossomo era composto de 21 genes, divididos em 7 grupos de 3 ge
 \begin{tabular}{ll}
 \hline
 \textit{\textbf{Algoritmo}}  & \textit{\textbf{Parâmetros}}                                                           \\ \hline
-Conversão para tons de cinza &                                                                                        \\ 
+Conversão para tons de cinza & -                                                                                      \\ 
 Limiarização                 & {[}1{]} Limiar, 0-255                                                                  \\ 
-Inversão de cores            &                                                                                        \\ 
+Inversão de cores            & -                                                                                      \\ 
 Ajuste de brilho             & {[}1{]} Brilho, -255 -255                                                              \\ 
 Ajuste de contraste          & {[}1{]} Contraste, 0 - 3                                                               \\ 
-Filtor de mediana            &                                                                                        \\ 
+Filtor de mediana            & -                                                                                      \\ 
 Filtro gaussiano             & \begin{tabular}[c]{@{}l@{}}{[}1{]} Sigma, 0 - 3;\\ {[}2{]} Máscara, 3 - 11\end{tabular} \\ \hline
 \end{tabular}
 \end{table}
@@ -1171,20 +1176,20 @@ O segundo teste foi focado em adicionar mais processos para tentar melhorar o pe
 \hline
 \textit{\textbf{Algoritmo}}  & \textit{\textbf{Parâmetros}}                                                           \\ \hline
 Tons de cinza ponderados     & \begin{tabular}[c]{@{}l@{}}{[}1{]} Peso R, 0 - 1;\\ {[}2{]} Peso G, 0 - 1\\ {[}2{]} Peso B, 0 - 1\end{tabular} \\ 
-Erosão                       &                                                                                        \\ 
-Dilatação                    &                                                                                        \\ 
-Abertura                     &                                                                                        \\ 
-Fechamento                   &                                                                                        \\ 
-Sobel                        &                                                                                        \\ 
-Roberts                      &                                                                                        \\ 
-Robinson                     &                                                                                        \\ 
-Prewitt                      &                                                                                        \\ 
-Canny                        &                                                                                        \\ 
-Snake                        &                                                                                        \\ 
-Stentiford                   &                                                                                        \\ 
-Zhang Suen                   &                                                                                        \\ 
-Holt                         &                                                                                        \\ 
-Desfoque com média           &                                                                                        \\  \hline
+Erosão                       & -                                                                                      \\ 
+Dilatação                    & -                                                                                      \\ 
+Abertura                     & -                                                                                      \\ 
+Fechamento                   & -                                                                                      \\ 
+Sobel                        & -                                                                                      \\ 
+Roberts                      & -                                                                                      \\ 
+Robinson                     & -                                                                                      \\ 
+Prewitt                      & -                                                                                      \\ 
+Canny                        & -                                                                                      \\ 
+Snake                        & -                                                                                      \\ 
+Stentiford                   & -                                                                                      \\ 
+Zhang Suen                   & -                                                                                      \\ 
+Holt                         & -                                                                                      \\ 
+Desfoque com média           & -                                                                                      \\  \hline
 \end{tabular}
 \end{table}
 
@@ -1206,6 +1211,12 @@ Com esse teste foi possível verificar alguns problemas com a abordagem atual:
     \item Está se perdendo muita diversidade genética sem obter melhorias nos melhores indivíduos;
     \item Alguns indivíduos tiveram um percentual extremamente baixo (0,4\%), o que, na verdade, significa que ele gerou algo semelhante ao negativo da melhor solução.
 \end{itemize}
+
+No primeiro problema, onde o único método bem sucedido é o \textit{thresholding}, foi identificado que soluções que utilizam métodos de detecção de bordas não tem um resultado bom pois não possuem um método para preenchimento da borda gerada. Para solucionar este problema, serão disponibilizados processos de preenchimento, como o \textit{Flood Fill}. Além disos, serão criados processos de segmentação baseados em regiões, aumentando o conjunto de soluções possíveis.
+
+Para solucionar o segundo problema, serão realizados testes sem utilizar valores fixos para a taxa de \textit{crossover} e mutação, ajustando os mesmos conforme a execução do algoritmo.
+
+O terceiro problema será resolvido considerando imagens que geraram o negativo do gabarito como soluções também muito boas. Isso será feito considerando que a função de avaliação \(a\) será \(a = 1 - a\) caso a mesma seja menor que 0,5.
 
 % ---
 % Finaliza a parte no bookmark do PDF, para que se inicie o bookmark na raiz
