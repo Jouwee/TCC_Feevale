@@ -77,7 +77,7 @@ A segmentação automática de imagens vem se tornando cada vez mais utilizada e
  \vspace{\onelineskip}
     
  \noindent
- \textbf{Palavras-chaves}: latex. abntex. editoração de texto.
+ \textbf{Palavras-chaves}: Segmentação de imagens; Processamento digital de imagens; Algoritmo Genético.
 \end{resumo}
 
 % resumo em inglês
@@ -121,6 +121,7 @@ A segmentação automática de imagens vem se tornando cada vez mais utilizada e
 \textual
 % ------------------------------------------------------------------------------------------------------------------------
 \chapter{Introdução}
+\label{chap:Introducao}
 % ------------------------------------------------------------------------------------------------------------------------
 
 Os avanços em métodos de aquisição de imagens, no poder computacional de hardware e na melhoria nas tecnologias, vêm tornando a análise automática de imagens uma técnica utilizada na resolução de diversos problemas. Destaca-se o uso da análise de imagens nas áreas da Medicina, Biologia, Sensoriamento Remoto, Meteorologia, Automação Industrial, Engenharia, Geologia e Agronomia \cite{queiroz:2007}.  
@@ -133,20 +134,22 @@ A técnica de RN vem ganhando visibilidade no mundo acadêmico. Isso se deve a d
 
 No entanto, sistemas baseados em redes neurais oneram em tempo de processamento em relação aos sistemas baseados em PDI \cite{huang:1992}, o que pode ser um problema para sistemas de monitoramento em tempo real ou avaliação de uma grande quantidade de imagens.
 
-Embora existam tentativas anteriores de analisar e compreender a saída de uma RN \cite{zeiler:2014}, isso não é possível em todas as soluções que utilizam RN. Dessa forma, arede neural acaba se tornando uma caixa-preta, de forma que geralmente não é possível a um ser humano interpretar como ela está chegando ao resultado de forma que ele possa aprender com o sistema e reproduzir os resultados.
+Embora existam tentativas anteriores de analisar e compreender a saída de uma RN \cite{zeiler:2014}, isso não é possível em todas as soluções que utilizam RN. Dessa forma, a rede neural acaba se tornando uma caixa-preta, de forma que geralmente não é possível a um ser humano interpretar como ela está chegando ao resultado de forma que ele possa aprender com o sistema e reproduzir os resultados.
 
 Em outras soluções desenvolvidas para problemas específicos são utilizadas técnicas de PDI pré-selecionadas e algoritmos genéticos \cite{holland:1992} para o treinamento dos seus parâmetros. Pode-se citar o software que segmenta elementos em fotos de satélite \cite{costa:2010} ou a comparação da evolução dos parâmetros em métodos de segmentação baseados em \textit{quadtrees}, \textit{thresholding} e crescimento de regiões \cite{matias:2007}. Entretanto, todos os trabalhos utilizam o AG apenas para ajustar os parâmetros dos algoritmos de PDI, sem tentar utilizar o AG para mudar o algoritmo a ser utilizado ou a sequência de passos para obter o resultado.
 
-Propõe-se, neste trabalho, um sistema que seja capaz de utilizar algoritmos genéticos tanto para parametrizar quanto para sequenciar técnicas de PDI de acordo com a imagem. Acredita-se que isso permitirá a obtenção de resultados de qualidade semelhante a de redes neurais, porém, com uma tempo de processamento inferior . Esta abordagem também permitirá o estudo por parte de um ser humano para interpretar a sequência de passos utilizada, de forma a aprender e refinar o processamento.
+Propõe-se, neste trabalho, um sistema que seja capaz de utilizar algoritmos genéticos tanto para parametrizar quanto para sequenciar técnicas de PDI de acordo com a imagem. Acredita-se que isso permitirá a obtenção de resultados de qualidade semelhante a de redes neurais, porém, com um tempo de processamento inferior. Esta abordagem também permitirá o estudo, por parte de um ser humano, para interpretar a sequência de passos utilizada, de forma a aprender e refinar o processamento.
 
 Prévio a escrita deste projeto, foi desenvolvido um ambiente de manipulação de técnicas de PDI denominado VISNode \cite{visnode:2018}. Este permite a utilização e parametrização de processos de PDI em formato de grafo, onde os processos não são executados necessariamente em sequência, e parâmetros podem ser transferidos entre processos, ou nodos. A ferramenta permite a execução dos grafos de processos, denominados projetos, via uma \textit{application programming interface} (API) utilizando como entrada um conjunto de imagens, assim como a visualização destes projetos em uma interface gráfica.
 
 Com base neste ambiente, o sistema proposto terá como saída um projeto da ferramenta VISNode. Assim, será possível visualizar facilmente os processos que estão sendo utilizados, em que sequência e com quais parâmetros, pela interface do sistema.
 
-% TODO: No capiútlo X....
+Este trabalho está dividido em \ref{chap:ultimo} capítulos. O Capítulo~\ref{chap:AlgoritmosGeneticos} trata sobre algoritmos genéticos, onde é apresentado o conceito geral de algoritmos evolucionários, e as operações que são realizadas neste tipo de algoritmo. No Capítulo~\ref{chap:PDI} são apresentados diversos algoritmos e técncias que podem ser utilizados para trabalhar com imagens digitais de forma a segmentar a mesma. No Capítulo~\ref{chap:TrabalhosCorrelatos} estão descritos trabalhos que se utilizam de algoritmos genéticos em conjunto com técnicas de PDI para a segmentação de imagens digitais. O Capítulo~\ref{chap:Proposta} especifica a proposta deste trabalho, e como o mesmo será desenvolvido.
+
 
 % ------------------------------------------------------------------------------------------------------------------------
 \chapter{Algoritmos Genéticos}
+\label{chap:AlgoritmosGeneticos}
 % ------------------------------------------------------------------------------------------------------------------------
 
 Este capítulo trata da técnica de algoritmos genéticos (do inglês \textit{genetic algorithms}, ou GA). São apresentados os conceitos de população, geração, cromossomos, genes, \textit{crossover} e mutação.
@@ -193,7 +196,7 @@ Um cromossomo para o algoritmo genético é apenas uma sequência de valores ind
 
 \begin{figure}[ht]
 \centering
-\caption{Todas as variações possíveis de um cromossomo cujos bits 0, 1 e 2 representam o estado das cores vermelho, azul e verde respectivamente}
+\caption{Exemplo de uma representação cromossomial binária RGB}
 \includegraphics[width=0.8\textwidth]{imagens/GA_Cromossomo_RGB.pdf}
 \sourceAuthor	
 \label{fig:GA_Cromossomo_RGB}
@@ -267,11 +270,11 @@ Os indivíduos com uma avaliação menor ainda devem ter chance de serem selecio
 
 Os operadores genéticos são funções aplicadas sobre um ou mais cromossomos para a geração de novos cromossomos. Os exemplos mais simples de operadores genéticos são o \textit{crossover} e a mutação. O operador de \textit{crossover} é o responsável por gerar um novo cromossomo baseado em dois cromossomos pais. O operador de mutação é aplicado em um cromossomo para que ele tenha uma pequena chance de sofrer uma mutação genética em algum gene. Existe mais de uma técnica de \textit{crossover} e mutação, ambas podem ser parametrizadas e podem ou não ser executadas.
 
-A técnica de \textit{crossover} mais simples é o \textit{crossover} de um ponto. No \textit{crossover} de um ponto são usados dois cromossomos pais para gerar dois cromossomos filhos. Para realizar um \textit{crossover} de um ponto, é selecionada uma posição aleatória do cromossomo, e ambos os cromossomos pais são cortados nesta posição. O primeiro filho é composto através da concatenação da parte esquerda do primeiro pai com a parte direita do segundo pai. O segundo filho é composto através da concatenação das partes que sobraram, ou seja, a metade esquerda do segundo pai com a metade à direita do primeiro pai \cite{linden:2008}. É possível ver, na Figura~\ref{fig:GA_Crossover_de_um_ponto}, um exemplo de \textit{crossover}  de um ponto sendo executado em um cromossomo de tamanho cinco com representação binária.
+A técnica de \textit{crossover} mais simples é o \textit{crossover} de um ponto. No \textit{crossover} de um ponto são usados dois cromossomos pais para gerar dois cromossomos filhos. Para realizar um \textit{crossover} de um ponto, é selecionada uma posição aleatória do cromossomo, e ambos os cromossomos pais são cortados nesta posição. O primeiro filho é composto através da concatenação da parte esquerda do primeiro pai com a parte direita do segundo pai. O segundo filho é composto através da concatenação das partes que sobraram, ou seja, a metade esquerda do segundo pai com a metade à direita do primeiro pai \cite{linden:2008}. É possível ver, na Figura~\ref{fig:GA_Crossover_de_um_ponto}, um exemplo de \textit{crossover}  de um ponto sendo executado com base em (a) dois pais, (b) um ponto de corte e (c) os dois filhos gerados, em um cromossomo de tamanho cinco com representação binária.
 
 \begin{figure}[ht]
 \centering
-\caption{Exemplo de um \textit{crossover} de um ponto. a) Os dois pais utilizados para a operação de \textit{crossover}; b) O ponto de corte selecionado aleatoriamente; c) Os dois filhos gerados pelo operador de \textit{crossover}}
+\caption{Exemplo de um \textit{crossover} de um ponto}
 \includegraphics[width=0.7\textwidth]{imagens/GA_Crossover_de_um_ponto.pdf}
 \source{Adaptado de \citet{linden:2008}}
 \label{fig:GA_Crossover_de_um_ponto}
@@ -279,11 +282,11 @@ A técnica de \textit{crossover} mais simples é o \textit{crossover} de um pont
 
 Um problema gerado por um \textit{crossover} de um ponto é que se a combinação de melhor resultado depende que, por exemplo, o primeiro e o último gene sejam 1 (denominado de esquema 1 * * * 1 para um cromossomo de 5 genes), essa combinação pode não ser preservada no \textit{crossover}. Isso se deve ao fato de que pelo menos uma das duas metades do cromossomo será trocada com outro indivíduo, e se o indivíduo não tiver essa combinação, então este esquema será perdido \cite{linden:2008}.
 
-Existe outra forma de operação de \textit{crossover} que possibilita a preservação de tais esquemas, chamada de \textit{crossover} uniforme. No \textit{crossover} uniforme, para cada gene é sorteado um número zero ou um. Se o valor for igual a um, o filho número um recebe o gene da posição corrente do primeiro pai e o segundo filho o gene corrente do segundo pai. Por outro lado, se o valor sorteado for zero, as atribuições serão invertidas: o primeiro filho recebe o gene da posição corrente do segundo pai e o segundo filho recebe o gene corrente do primeiro pai \cite{linden:2008}. Na Figura~\ref{fig:GA_Crossover_Uniforme} é possível ver o funcionamento do \textit{crossover} uniforme, com um cromossomo de cinco bits.
+Existe outra forma de operação de \textit{crossover} que possibilita a preservação de tais esquemas, chamada de \textit{crossover} uniforme. No \textit{crossover} uniforme, para cada gene é sorteado um número zero ou um. Se o valor for igual a um, o filho número um recebe o gene da posição corrente do primeiro pai e o segundo filho o gene corrente do segundo pai. Por outro lado, se o valor sorteado for zero, as atribuições serão invertidas: o primeiro filho recebe o gene da posição corrente do segundo pai e o segundo filho recebe o gene corrente do primeiro pai \cite{linden:2008}. Na Figura~\ref{fig:GA_Crossover_Uniforme} é possível ver o funcionamento do \textit{crossover} uniforme, com um cromossomo de cinco bits. Em (a) está representado o par de pais selecionados para o \textit{crossover}, em (b) é feita a seleção aleatória binária para cada gene para a construção do par de filhos (c).
 
 \begin{figure}[ht]
 \centering
-\caption{Exemplo de \textit{crossover} uniforme. a) Par de pais selecionados para o \textit{crossover}; b) Seleção aleatória binária para cada gene; b) Construção do par de filhos utilizando o par de pais e o conjunto binário que define de qual pai o gene de cada filho virá}
+\caption{Exemplo de \textit{crossover} uniforme}
 \includegraphics[width=0.7\textwidth]{imagens/GA_Crossover_Uniforme.pdf}
 \source{Adaptado de \citet{linden:2008}}
 \label{fig:GA_Crossover_Uniforme}
@@ -314,7 +317,7 @@ No próximo capítulo serão apresentadas técnicas de processamento digital de 
 
 % ------------------------------------------------------------------------------------------------------------------------
 \chapter{Análise e processamento de imagens digitais}
-\label{chp:PDI}
+\label{chap:PDI}
 % ------------------------------------------------------------------------------------------------------------------------
 
 Este capítulo aborda o tema sobre processamento digital de imagens. Serão explicados os conceitos de imagem digital, pré-processamento e segmentação, tal como diversas técnicas para análise e manipulação de imagens.
@@ -427,7 +430,7 @@ A seleção correta do valor de limiar é crucial para que o processo de segment
 
 Conforme \citet{pedrini:2008}, o brilho está associado à sensação visual de intensidade luminosa ou luminância de uma fonte. Em imagens digitais o brilho é diretamente relacionado ao valor do pixel de uma imagem. Já o contraste pode ser definido como uma medida de variação relativa da luminância, ou seja, da intensidade luminosa por unidade de área.
 
-Para realizar alterações no brilho ou contraste de um pixel da imagem, pode ser utilizada a transformação descrita pela função \(g(x,y)=a.f(x,y)+b\), tal que o parâmetro \(a\) controla a escala de níveis de cinza da imagem (contraste) e \(b\) ajusta seu brilho \cite{pedrini:2008}. O valor de \(f(x,y)\) é o valor atual do pixel na posição calculada e o valor de \(g(x,y)\) é o valor do pixel na nova imagem. Na Figura~\ref{fig:PDI_Brilho_e_Contraste} é possível ver a diferença causada pela aplicação da função com diferentes parâmetros para \(a\) e \(b\) \cite{pedrini:2008}. O algoritmo para aplicação do brilho e contraste pode ser vista no Algoritmo~\ref{alg:Brilho_Contraste}
+Para realizar alterações no brilho ou contraste de um pixel da imagem, pode ser utilizada a transformação descrita pela função \(g(x,y)=a.f(x,y)+b\), tal que o parâmetro \(a\) controla a escala de níveis de cinza da imagem (contraste) e \(b\) ajusta seu brilho \cite{pedrini:2008}. O valor de \(f(x,y)\) é o valor atual do pixel na posição calculada e o valor de \(g(x,y)\) é o valor do pixel na nova imagem. Na Figura~\ref{fig:PDI_Brilho_e_Contraste} é possível ver a diferença causada pela aplicação da função com diferentes parâmetros para \(a\) e \(b\) \cite{pedrini:2008} em uma imagem original (a). Os parâmetros são: (b) Imagem transformada com \(a=1\) e \(b=100\); (c) Imagem com \(a=1\) e \(b=-100\); (d) Imagem transformada com \(a=1.5\) e \(b=0\); (e) Imagem transformada com \(a=0.5\) e \(b=0\); (f) Imagem transformada com \(a=1.4\) e \(b=50\). O algoritmo para aplicação do brilho e contraste pode ser vista no Algoritmo~\ref{alg:Brilho_Contraste} 
 
 \begin{lstlisting}[caption={Algoritmo para aplicação de brilho e contraste}, label=alg:Brilho_Contraste, numbers=left]
 para x = 0 ate M - 1 faca
@@ -437,7 +440,7 @@ para x = 0 ate M - 1 faca
 
 \begin{figure}[ht]
 \centering
-\caption{a) Imagem original; b) Imagem transformada com a=1 e b=100; c) Imagem com a=1 e b=-100; d) Imagem transformada com a=1.5 e b=0; e) Imagem transformada com a=0.5 e b=0; f) Imagem transformada com a=1.4 e b=50}
+\caption{Exemplo de brilho e contraste}
 \includegraphics[width=0.5\textwidth]{imagens/PDI_Brilho_e_Contraste.pdf}
 \sourceAuthor
 \label{fig:PDI_Brilho_e_Contraste}
@@ -955,6 +958,7 @@ No próximo capítulo serão apresentadas trabalhos que tentaram unir o uso de a
 
 % ------------------------------------------------------------------------------------------------------------------------
 \chapter{Trabalhos Correlatos}
+\label{chap:TrabalhosCorrelatos}
 % ------------------------------------------------------------------------------------------------------------------------
 
 Neste capítulo serão apresentados trabalhos relacionados a área de pesquisa deste projeto.
@@ -964,7 +968,7 @@ Neste capítulo serão apresentados trabalhos relacionados a área de pesquisa d
 
 A tese desenvolvida por \citet{matias:2007} aplica algoritmos genéticos com diferentes funções de avaliação para evoluir a parametrização de três métodos de segmentação de imagens digitais, comparando seu resultado. Os algoritmos de segmentação analisados são \textit{quadtrees}, limiarização e crescimento de regiões.
 
-Todos os métodos visam minimizar uma função objetivo (entropia, segmentação excedente, entre outras) ou maximizar tal função (pixels corretamente agrupados). Para avaliação dos resultados, foram geradas várias imagens que utilizam o GA no algoritmo de segmentação e outras imagens geradas com o mesmo algoritmo, mas sem utilizar o GA. 
+Todos os métodos visam minimizar uma função objetivo (entropia, segmentação excedente, entre outras) ou maximizar tal função (pixels corretamente agrupados). Para a avaliação dos resultados, foram geradas várias imagens que utilizam o GA no algoritmo de segmentação e outras imagens geradas com o mesmo algoritmo, mas sem utilizar o GA. 
 
 O método mais simples trabalhado por \citet{matias:2007} é a segmentação utilizando o limiar (\textit{threshold}). O objetivo dos AGs, neste tipo de algoritmo, é gerar de forma automática uma imagem segmentada por atribuição de um \textit{threshold}. A função de avaliação utilizada para este algoritmo foi a entropia.
 % TODO: explicar o que ser entropia
@@ -1043,15 +1047,15 @@ Dessa maneira, \citet{matias:2007} verificou que o uso do GA com uma função ob
 
 \section{A multilevel automatic thresholding method based on a genetic algorithm for a fast image segmentation}
 
-Neste trabalho, \citet{hammouche:2008} propõem uma técnica de \textit{thresholding} multinível para a segmentação de imagens beasdo no uso de algoritmos genéticos para determinar os limiares apropriados. Segundo os autores, o uso de GAs tem várias vantagens sobre métodos de otimização tradicionais, particularmente a capacidade de encontrar a solução ótima global, prevenindo que o algoritmo fique preso em soluções localmente ótimas. Ademais, algoritmos genéticos podem ter uma grande redução no tempo de processamento com implementações paralelas. A técnica de \textit{thresholding} genética proposta é baseada em um GA padrão. Ele permite a determinação do número de limiares assim como o valor de cada um. 
+Neste trabalho, \citet{hammouche:2008} propõem uma técnica de \textit{thresholding} multinível para a segmentação de imagens baseada no uso de algoritmos genéticos para determinar os limiares apropriados. Segundo os autores, o uso de GAs tem várias vantagens sobre métodos de otimização tradicionais, particularmente a capacidade de encontrar a solução ótima global, prevenindo que o algoritmo fique preso em soluções localmente ótimas. Ademais, algoritmos genéticos podem ter uma grande redução no tempo de processamento com implementações paralelas. A técnica de \textit{thresholding} genética proposta é baseada em um GA padrão. Ele permite a determinação do número de limiares assim como o valor de cada um. 
 
 Antes de realizar a busca dos limiares utilizando o GA, o tamanho do histograma da imagem é reduzido de forma a acelerar a convergência do GA. A redução do histograma é feita utilizando a técnica de \textit{wavelet transform} \cite{kim:2003}. O histograma é reduzido para dois sinais. O primeiro é o sinal de tendência, ou sinal de aproximação, enquando o segundo é o sinal de detalhe.
 
-No GA proposto, o cromossomo é codificado como uma String binária \(A\) com o mesmo comprimento do histograma reduzido \(L^r\), se forma que \(A = a_0, a_1, ... a_{L^r-1}\), onde o gene \(a_i\) possui o valor 0 ou 1, representando se o índice é um pico ou um vale no histograma, respectivamente. A posição \(i\) onde \(a_i = 0\) indica o valor onde existirá um \textit{threshold}. Dessa forma, o número de \textit{bits} 0 no cromossomo indica o número de limiares.
+No GA proposto, o cromossomo é codificado como uma String binária \(A\) com o mesmo comprimento do histograma reduzido \(L^r\), de forma que \(A = a_0, a_1, ... a_{L^r-1}\), onde o gene \(a_i\) possui o valor 0 ou 1, representando se o índice é um pico ou um vale no histograma, respectivamente. A posição \(i\) onde \(a_i = 0\) indica o valor onde existirá um \textit{threshold}. Dessa forma, o número de \textit{bits} 0 no cromossomo indica o número de limiares.
 
 Para permitir a solução ótima do número de \textit{thresholds} e seus valores, a função objetiva é calculada usando a função de custo ACT proposta por \citet{yen:1995}. Esta função avalia a entropia de cada classe criada, levando em consideração o número de limiares utilizados. Com este método, é garantida a segmentação boa da imagem utilizando um número tão pequeno quanto possível de limiares.
 
-A população do algoritmo genético é inicializada com uma população gerada aleatóriamente de individuos. Para a avaliação do GA, o indivíduo com a melhor função objetivo em cada geração é copiada para uma posição isolada da população de forma a armazenar a melhor solução atual. Então, antes de começar a próxima geração, a melhor solução pode melhorar a sua avaliação realizando diversas pequenas modificações em seus genes. Esta simples técnica pode economizar diversas várias gerações de aprimoramento e não afeta o comportamento geral do GA.
+A população do algoritmo genético é inicializada com uma população de individuos gerada aleatóriamente. Para a avaliação do GA, o indivíduo com a melhor função objetivo em cada geração é copiada para uma posição isolada da população de forma a armazenar a melhor solução atual. Então, antes de começar a próxima geração, a melhor solução pode melhorar a sua avaliação realizando diversas pequenas modificações em seus genes. Esta simples técnica pode economizar diversas gerações de aprimoramento e não afeta o comportamento geral do GA.
 
 A população corrente evolui para a próxima geração utilizando as três técnicas padrões de GAs: seleção, \textit{crossover} e mutação. Para a seleção, é utilizada a técnica da roleta viciada. Para o \textit{crossover}, é utilizado o método de ponto único. Também é utilizada a mutação tradicional. Após o \textit{crossover} e mutação, o novo gene pode conter uma sequência de vários \textit{bits} 0 seguidos, o que não é desejável. Para evitar essa sitação, é realizado um ajuste no cromossomo de forma que apenas o primeiro zero sucessivo é mantido, trocando os subsequentes pelo valor 1.
 
@@ -1076,6 +1080,7 @@ Método proposto          & 5                                   & 46-83-119-164 
 
 % ------------------------------------------------------------------------------------------------------------------------
 \chapter{Proposta}
+\label{chap:Proposta}
 % ------------------------------------------------------------------------------------------------------------------------
 
 Neste trabalho é proposto um sistema de aprendizado de máquina utilizando algoritmos genéticos com técnicas de processamento digital de imagens para segmentação de imagens, focando na segmentação de fotos de rostos. De forma semelhante aos trabalhos apresentados como correlatos, os GAs serão utilizados para evoluir os parâmetros das técnicas de processamento de imagem. No entanto, o principal objetivo deste trabalho é conseguir que o GA selecione também quais técnicas de PDI e em qual sequência os mesmos serão executados para obter o melhor resultado do processo de segmentação.
@@ -1120,10 +1125,11 @@ Cada nodo do grafo representado por cada indivíduo possui um processo vinculado
 
 \section{Definição do GA}
 
-Para construção do algoritmo genético serão usados os indicados pela literatura, sendo eles mutação, \textit{crossover} e seleção por roleta viciada. Serão testadas algumas variações destes métodos, como \textit{crossover} de um ponto, dois pontos ou uniforme e roleta viciada normalizada, selecionando aqueles que trouxerem o melhor resultado. Também serão testadas variações dos parâmetros do GA, como taxa de mutação e taxa de \textit{crossover}, a fim de otimizar os resultados encontrados.
+Para a construção do algoritmo genético serão usados os operadores indicados pela literatura, sendo eles mutação, \textit{crossover} e seleção por roleta viciada. Serão testadas algumas variações destes métodos, como \textit{crossover} de um ponto, dois pontos ou uniforme e roleta viciada normalizada, selecionando aqueles que trouxerem o melhor resultado. Também serão testadas variações dos parâmetros do GA, como taxa de mutação e taxa de \textit{crossover}, a fim de otimizar os resultados encontrados.
 
 % ------------------------------------------------------------------------------------------------------------------------
 \chapter{Desenvolvimento}
+\label{chap:Desenvolvimento}
 % ------------------------------------------------------------------------------------------------------------------------
 
 \section{Teste 1}
@@ -1167,7 +1173,6 @@ Foi identificada uma rápida convergência para o resultado final, devido a simp
 
 O segundo teste foi focado em adicionar mais processos para tentar melhorar o percentual de assertividade do GA. Foram adicionados 15 algoritmos aos 7 já adicionados no primeiro teste. Além disso, existe a possibilidade do processo ser um processo de terminação, o que possibilita um número variável de processos em cada gene. Os novos 16 processos adicionados estão na Tabela~\ref{tab:AlgoritmosTeste2}.
 
-%TODO: Preencher
 \begin{table}
 \centering
 \caption{Algoritmos utilizados}
@@ -1212,7 +1217,7 @@ Com esse teste foi possível verificar alguns problemas com a abordagem atual:
     \item Alguns indivíduos tiveram um percentual extremamente baixo (0,4\%), o que, na verdade, significa que ele gerou algo semelhante ao negativo da melhor solução.
 \end{itemize}
 
-No primeiro problema, onde o único método bem sucedido é o \textit{thresholding}, foi identificado que soluções que utilizam métodos de detecção de bordas não tem um resultado bom pois não possuem um método para preenchimento da borda gerada. Para solucionar este problema, serão disponibilizados processos de preenchimento, como o \textit{Flood Fill}. Além disos, serão criados processos de segmentação baseados em regiões, aumentando o conjunto de soluções possíveis.
+No primeiro problema, onde o único método bem sucedido é o \textit{thresholding}, foi identificado que soluções que utilizam métodos de detecção de bordas não tem um resultado bom pois não possuem um método para preenchimento da borda gerada. Para solucionar este problema, serão disponibilizados processos de preenchimento, como o \textit{Flood Fill}. Além disso, serão criados processos de segmentação baseados em regiões, aumentando o conjunto de soluções possíveis.
 
 Para solucionar o segundo problema, serão realizados testes sem utilizar valores fixos para a taxa de \textit{crossover} e mutação, ajustando os mesmos conforme a execução do algoritmo.
 
@@ -1229,6 +1234,18 @@ O terceiro problema será resolvido considerando imagens que geraram o negativo 
 % ---
 \chapter{Conclusão}
 \addcontentsline{toc}{chapter}{Conclusão}
+\label{chap:Conclusao}
+\label{chap:ultimo}
+
+A segmentação de imagens digitais é uma das etapas mais importante do processo de análise e extração de características, e vem cada vez mais sendo automatizada para suas diversas aplicações. Existe um grande leque de possíveis soluções, algoritmos e técnicas para realizar a segmentação de imagens, cada uma com seus pontos fortes e fracos. Geralmente, estas técnicas são orquestradas pelo próprio criador do sistema automatizado, o que depende formente do seu conhecimento destes algoritmos e quais foram considerados para a solução.
+
+Uma forma de tirar esta responsabilidade do criador do sistema é utilizando redes neurais, técnicas de \textit{machine learning} que aprendem como realizar a segmentação utilizando uma base de treinamento de imagens pré-segmentadas. Uma desvantagem das redes neurais é seu tempo de processamento, geralmente maior que das soluções que utilizam apenas técnicas de PDI. Além disso, após uma RN ter aprendido a realizar a segmentação, não é possível que um ser humano facilmente analise a rede para aprender como segmentar melhor imagens no futuro.
+
+Dessa forma, o objetivo deste trabalho foi propor um sistema capaz de utilizar algoritmos genéticos em conjunto com técnicas de PDI, visando a criação de sistemas de segmentação automáticos baseados em treinamento, mas ainda permitindo a análise do seu resultado. Dessa forma, a pesquisa iniciou no Capítulo~\ref{chap:AlgoritmosGeneticos} abordando os conceitos e técnicas utilizados para desenvolver um algoritmo genético. No Capítulo~\ref{chap:PDI}, as técnicas de PDI utilizadas foram apresentadas.
+
+O detalhamento do sistema proposto e como ele será desenvolvido está descrito no Capítulo~\ref{chap:Proposta}, e os testes realizados com um protótipo estão descritos no Capítulo~\ref{chap:Desenvolvimento}. No estado atual do sistema, ele esta realizando o treinamento com base em três diferentes imagens da base de dados FASSEG, e a taxa de assertividade média após o treinamento é de 65,23\%.
+
+Ao decorrer do Trabalho de Conclusão II, espera-se finalizar o desenvolvimento do protótipo, utilizando todas as imagens da base de treinamento e teste. Para garantir uma assertividade maior com uma base deste tamanho, serão adicionados novos algoritmos de processamento de imagens ao repertório do GA. Também serão realizados testes com diferentes parametrizações do GA, tal como variações em seu cromossomo.
 
 % ----------------------------------------------------------
 % ELEMENTOS PÓS-TEXTUAIS
@@ -1239,7 +1256,7 @@ O terceiro problema será resolvido considerando imagens que geraram o negativo 
 % ----------------------------------------------------------
 % Referências bibliográficas
 % ----------------------------------------------------------
-\bibliography{abntex2-modelo-references}
+\bibliography{references}
 
 
 %---------------------------------------------------------------------
@@ -1249,4 +1266,3 @@ O terceiro problema será resolvido considerando imagens que geraram o negativo 
 \printindex
 
 \end{document}
-d
