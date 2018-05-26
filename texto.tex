@@ -158,9 +158,9 @@ Este capítulo trata da técnica de algoritmos genéticos (do inglês \textit{ge
 
 Na área de inteligência artificial, algoritmos evolucionários usam modelos computacionais dos processos naturais de evolução como uma ferramenta para resolver problemas de otimização. Apesar de haver uma grande variedade de modelos computacionais propostos, todos eles têm em comum o conceito de simulação da evolução das espécies através de seleção, mutação e reprodução, processos estes que dependem do desempenho dos indivíduos desta espécie dentro do seu ambiente \cite{linden:2008}.
 
-Os algoritmos evolucionários funcionam mantendo uma população de estruturas, denominadas de indivíduos, cada um representando uma solução para o problema. Cada indivíduo recebe uma avaliação, que é uma qualificação de sua qualidade como solução do problema em questão. Esta avaliação é calculada utilizando uma função de avaliação (FA ou \textit{fitness function}). Com base nesta avaliação são aplicados operadores que simulam conceitos da biologia, como reprodução e mutação, de forma a simular a sobrevivência do mais apto \cite{linden:2008}.
+Os algoritmos evolucionários funcionam mantendo uma população de estruturas, denominadas de indivíduos, cada um representando uma solução para o problema. Cada indivíduo recebe uma avaliação, que é uma qualificação de sua qualidade como solução do problema em questão. Esta qualificação é calculada utilizando uma função de avaliação (FA ou \textit{fitness function}). Com base nesta avaliação são aplicados operadores que simulam conceitos da biologia, como reprodução e mutação, de forma a simular a sobrevivência do mais apto \cite{linden:2008}.
 
-O primeiro passo para um algoritmo evolucionário é a criação da população inicial, chamado de primeira geração. O tamanho de uma população varia de acordo com o problema, mas é comum se utilizar populações de centenas ou milhares de indivíduos. Normalmente esta geração é completamente aleatória para garantir a máxima diversidade nos indivíduos \cite{linden:2008}.
+O primeiro passo para um algoritmo evolucionário é a criação da população inicial, chamada de primeira geração. O tamanho de uma população varia de acordo com o problema, mas é comum se utilizar populações de centenas ou milhares de indivíduos. Normalmente esta geração é completamente aleatória para garantir a máxima diversidade nos indivíduos \cite{linden:2008}.
 
 Após a criação da primeira geração, cada indivíduo é avaliado de acordo com a função de avaliação. A FA é utilizada para avaliar e sumarizar o quão próximo cada indivíduo está de alcançar o seu objetivo. A definição da função de avaliação é o passo mais importante para a criação de um algoritmo evolucionário, pois é ela quem dita o objetivo do algoritmo. Muitas vezes não é possível calcular diretamente a função de avaliação de um indivíduo, sendo necessária a realização de uma simulação para obter o seu valor \cite{linden:2008}.
 
@@ -223,7 +223,7 @@ GAs são técnicas de maximização, logo, a função de avaliação deve ser ta
 
 Um cuidado a ser tomado com a função de avaliação é o problema do super indivíduo. Este problema ocorre quando há um ou mais indivíduos cuja avaliação é muito superior àquela dos outros membros da população. Neste caso, este indivíduo será quase sempre escolhido pelo módulo de seleção, causando uma perda imediata da diversidade genética nas gerações subsequentes.
 
-Para solucionar este problema, é possível utilizar outras técnicas como a de normalização linear. A normalização de uma função de avaliação funciona atribuindo um valor constante \(k\) ao melhor cromossomo, \(k - c\) para o segundo indivíduo, \(k - 2c\) para o terceiro indivíduo, e assim sucessivamente, sendo \(k\) e \(c\) duas constantes definidas pelo criador do GA. Com a normalização, os indivíduos permanecerão na mesma ordem de avaliação, mas com um intervalo constante entre eles  \cite{linden:2008}. Um exemplo de normalização pode ser visto no Quadro~\ref{tab:Normalizacao_Avaliacao}, utilizando as constantes \(k = 10\) e \(c = 1\).
+Para solucionar este problema, é possível utilizar outras técnicas como a de normalização linear. A normalização de uma função de avaliação funciona atribuindo um valor constante \(k\) ao melhor cromossomo, \(k - c\) para o segundo indivíduo, \(k - 2c\) para o terceiro indivíduo, e assim sucessivamente, sendo \(k\) e \(c\) duas constantes definidas pelo criador do GA. Com a normalização, os indivíduos permanecerão na mesma ordem de avaliação, mas com um intervalo constante entre eles  \cite{linden:2008}. Um exemplo de normalização pode ser visto na Tabela~\ref{tab:Normalizacao_Avaliacao}, utilizando as constantes \(k = 10\) e \(c = 1\).
 
 \begin{table}[tbp]
 \centering
@@ -241,11 +241,11 @@ Para solucionar este problema, é possível utilizar outras técnicas como a de 
 
 \subsection{Seleção}
 
-O próximo passo é a criação de uma nova população para a próxima geração. A população da nova geração será criada com base nos indivíduos da população anterior e os operadores de \textit{crossover} e mutação. Normalmente a população da nova geração terá um tamanho idêntico a população anterior \cite{linden:2008}.
+O próximo passo é a criação de uma nova população para a próxima geração. A população da nova geração será criada com base nos indivíduos da população anterior e os operadores de \textit{crossover} e mutação. O mais comum é que a nova geração tenha um tamanho idêntico a geração anterior \cite{linden:2008}.
 
 Para cada indivíduo a ser criado na nova população são selecionados dois ou mais indivíduos da geração anterior com base em sua função de avaliação. Esses dois indivíduos servirão como pais do novo cromossomo. Com base nos operadores de \textit{crossover} e mutação, o novo indivíduo tipicamente possuirá várias características de seus pais. Novos pares de pais são selecionados para cada novo indivíduo, de forma que quanto maior a avaliação de um indivíduo, maior é sua chance de ser selecionado como pai \cite{linden:2008}. Também é possível utilizar métodos que usam mais de dois indivíduos como pais, o que não é tão análogo com a reprodução natural, mas algumas pesquisas indicam que o resultado é superior \cite{ting:2005} \cite{eiben:1994}.
 
-O método mais comum para seleção de pais é o da roleta viciada. Para a realização deste método, é atribuída uma probabilidade para cada indivíduo \(p_i = p_i-1 + \frac{a}{t}\), sendo \(a\) a avaliação daquele indivíduo e \(t\) a soma de todas as avaliações. Dessa forma, a soma de todas as probabilidades deverá ser 1 (ou 100\%). É sorteado então um número aleatório \(r\) entre 0 e 1 e selecionado o indivíduo onde \(p_i-1 < r < p_i\). Dessa forma, quanto maior a avaliação de um indivíduo, maior sua chance de ser selecionado \cite{linden:2008}. Um exemplo de uma distribuição de roleta viciada pode ser visto no Quadro~\ref{tab:Roleta}.
+O método mais comum para seleção de pais é o da roleta viciada. Para a realização deste método, é atribuída uma probabilidade para cada indivíduo \(p_i = p_i-1 + \frac{a}{t}\), sendo \(a\) a avaliação daquele indivíduo e \(t\) a soma de todas as avaliações. Dessa forma, a soma de todas as probabilidades deverá ser 1 (ou 100\%). É sorteado então um número aleatório \(r\) entre 0 e 1 e selecionado o indivíduo onde \(p_i-1 < r < p_i\). Dessa forma, quanto maior a avaliação de um indivíduo, maior sua chance de ser selecionado \cite{linden:2008}. Um exemplo de uma distribuição de roleta viciada pode ser visto na Tabela~\ref{tab:Roleta}.
 
 \begin{table}
 \centering
@@ -262,9 +262,9 @@ Total     & 62        & 100                   \\ \hline
 \end{tabular}
 \end{table}
 
-Ao final deste processo existirá uma nova população que é diferente da geração inicial. A chance de que a avaliação média desta geração seja maior ou pelo menos igual a média da geração anterior é superior a chance de ser inferior. Isso se deve ao fato de apenas os indivíduos mais aptos terem sido selecionados para a reprodução \cite{linden:2008}.
+Ao final deste processo existirá uma nova população que é diferente da geração inicial. É mais provável que a avaliação média desta nova população seja maior que a da população anterior. Isso se deve ao fato de apenas os indivíduos mais aptos terem sido selecionados para a reprodução \cite{linden:2008}.
 
-Os indivíduos com uma avaliação menor ainda devem ter chance de serem selecionados para reprodução, embora menor, o que garante uma diversidade genética maior entre a população. Uma maior diversidade genética é importante para garantir que um espectro maior de soluções sejam exploradas pelo algoritmo.
+Os indivíduos com uma avaliação menor ainda devem ter chance de serem selecionados para reprodução, embora menor, o que garante uma diversidade genética entre a população. Uma maior diversidade genética é importante para garantir que um espectro maior de soluções sejam exploradas pelo algoritmo.
 
 \subsection{Operadores Genéticos}
 
@@ -292,7 +292,7 @@ Existe outra forma de operação de \textit{crossover} que possibilita a preserv
 \label{fig:GA_Crossover_Uniforme}
 \end{figure}
 
-Outro operador utilizado na criação de uma nova geração é o operador de mutação. O objetivo do operador de mutação é incrementar a diversidade genética da população durante a execução do algoritmo, para explorar possibilidades que não foram concebidas na geração inicial e que não foram obtidas com o operador de \textit{crossover}. O operador de mutação opera em cada gene do cromossomo, e possui uma chance normalmente muito baixa (da ordem de 0,5\%) de alterar o valor do gene em questão. Para um gene binário, o operador de mutação inverterá o bit em questão, como demonstrado na Figura~\ref{fig:GA_Mutacao}, para genes numéricos ou categóricos, um novo valor totalmente aleatório será escolhido \cite{linden:2008}.
+Outro operador utilizado na criação de uma nova geração é o operador de mutação. O objetivo do operador de mutação é incrementar a diversidade genética da população durante a execução do algoritmo, para explorar possibilidades que não foram concebidas na geração inicial e que não foram obtidas com o operador de \textit{crossover}. O operador de mutação opera em cada gene do cromossomo, e possui uma chance normalmente muito baixa (da ordem de 0,5\%) de alterar o valor do gene em questão. Para um gene binário, o operador de mutação inverterá o \textit{bit} em questão, como demonstrado na Figura~\ref{fig:GA_Mutacao}, para genes numéricos ou categóricos, um novo valor totalmente aleatório será escolhido \cite{linden:2008}.
 
 \begin{figure}[ht]
 \centering
@@ -410,17 +410,17 @@ Quando a limiarização possui apenas um limiar ela é denominada binarização,
 
 \begin{figure}[ht]
 \centering
-\caption{ Imagem original (a), histograma da imagem original (b) e resultado da limiarização com limiar de 203}
+\caption{ Demonstração de \textit{thresholding}}
 \includegraphics[width=0.9\textwidth]{imagens/PDI_Limiarizacao.pdf}
 \sourceAuthor
 \label{fig:PDI_Limiarizacao}
 \end{figure}
 
-A seleção correta do valor de limiar é crucial para que o processo de segmentação baseado na limiarização produza bons resultados \cite{pedrini:2008}. O resultado do uso de diferentes valores para os limiares pode ser visto na Figura~\ref{fig:PDI_Limiarizacao_2}. Na prática, espera-se que o tipo de limiarização global descrita obtenha sucesso apenas em ambientes altamente controlados \cite{gonzalez:2012}.
+A seleção correta do valor de limiar é crucial para que o processo de segmentação baseado na limiarização produza bons resultados \cite{pedrini:2008}. O resultado do uso de diferentes valores para os limiares pode ser visto na Figura~\ref{fig:PDI_Limiarizacao_2}, utilizando os valores (a) 100, (b) 150, (c) 200, e (d) 230. Na prática, espera-se que o tipo de limiarização global descrita obtenha sucesso apenas em ambientes altamente controlados \cite{gonzalez:2012}.
 
 \begin{figure}[ht]
 \centering
-\caption{Demonstração de diferentes limiares. (a) 100 (b) 150 (c) 200 (d) 230}
+\caption{Demonstração de diferentes limiares}
 \includegraphics[width=0.4\textwidth]{imagens/PDI_Limiarizacao_2.pdf}
 \sourceAuthor
 \label{fig:PDI_Limiarizacao_2}
@@ -450,7 +450,7 @@ Outra função linear comum é a transformação inversa, que produz o negativo 
 
 \begin{figure}[ht]
 \centering
-\caption{Demonstração de inversão. a) Imagem original; b) Imagem invertida}
+\caption{Demonstração de inversão}
 \includegraphics[width=0.5\textwidth]{imagens/PDI_Inversao.pdf}
 \sourceAuthor
 \label{fig:PDI_Inversao}
@@ -464,7 +464,7 @@ A morfologia matemática utiliza a teoria de conjuntos para representar a forma 
 
 \begin{figure}[ht]
 \centering
-\caption{Demonstração do conjunto (b) que representa a imagem binária (a)}
+\caption{Demonstração do conjunto que representa a imagem binária}
 \includegraphics[width=0.8\textwidth]{imagens/PDI_Conjunto.pdf}
 \source{adaptado de \citet{pedrini:2008}, pg. 328}
 \label{fig:PDI_Conjunto}
