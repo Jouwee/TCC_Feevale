@@ -73,7 +73,7 @@
 
 % resumo em português
 \begin{resumo}
-% ## *************|
+% ## ************|
 A segmentação automática de imagens vem se tornando cada vez mais utilizada em diversas áreas como Medicina e Agronomia. Cada vez mais o método tradicional de segmentação automática, que se baseia no uso de técnicas de processamento digital de imagens, vem perdendo lugar para o uso de algoritmos baseados em redes neurais. Isso devido a sua capacidade de trabalhar com imagens pouco homogêneas. No entanto, as redes neurais acabam se tornando uma espécie de caixa-preta, onde, muitas vezes, não é possível que um ser humano interprete como o sistema chegou ao seu resultado. Neste trabalho é proposto um sistema que utiliza algoritmos genéticos para treinar o sequenciamento e a parametrização de técnicas de processamento digital de imagens. Dessa forma, espera-se demonstrar a possibilidade do sistema funcionar com imagens não homogêneas, permitindo a análise do sistema evoluído por um ser humano. Para tanto, foram realizados experimentos comparando o sistema proposto com outros semelhantes que utilizam redes neurais quanto a sua assertividade e tempo de processamento, além de validar com profissionais relacionados com a área de PDI se o sistema gerou uma saída que pode ser compreendida por seres humanos.
 
  \vspace{\onelineskip}
@@ -125,7 +125,7 @@ A segmentação automática de imagens vem se tornando cada vez mais utilizada e
 \chapter{Introdução}
 \label{chap:Introducao}
 % ------------------------------------------------------------------------------------------------------------------------
-% ## ***************|
+% ## **************|
 
 Os avanços em métodos de aquisição de imagens, no poder computacional de \textit{hardware} e na melhoria nas tecnologias, vêm tornando a análise automática de imagens uma técnica utilizada na resolução de diversos problemas. Destaca-se o uso da análise de imagens nas áreas da Medicina, Biologia, Sensoriamento Remoto, Meteorologia, Automação Industrial, Engenharia, Geologia e Agronomia.  
 
@@ -153,12 +153,12 @@ Este trabalho está dividido em \ref{chap:ultimo} capítulos. O Capítulo~\ref{c
 \chapter{Algoritmos Genéticos}
 \label{chap:AlgoritmosGeneticos}
 % ------------------------------------------------------------------------------------------------------------------------
-% ## *************|
+% ## ************|
 
 Este capítulo trata da técnica de algoritmos genéticos (do inglês \textit{genetic algorithms}, ou GA). São apresentados os conceitos de população, geração, cromossomos, genes, \textit{crossover} e mutação.
 
 \section{Algoritmos Evolucionários}
-% ## **************|
+% ## *************|
 
 Na área de inteligência artificial, algoritmos evolucionários usam modelos computacionais dos processos naturais de evolução como uma ferramenta para resolver problemas de otimização. Apesar de haver uma grande variedade de modelos computacionais propostos, todos eles têm em comum o conceito de simulação da evolução das espécies através de seleção, mutação e reprodução, processos estes que dependem do desempenho dos indivíduos desta espécie dentro do seu ambiente \cite{linden:2008}.
 
@@ -173,7 +173,7 @@ Seleciona-se então os indivíduos com a maior avaliação para reprodução. Um
 Este processo é executado até que uma condição de terminação seja atingida. Essa condição de terminação pode ser o alcance de uma avaliação mínima, número de gerações ou quantidade de recursos de processamento utilizados.
 
 \section{Algoritmos Genéticos}
-% ## ***************|
+% ## **************|
 
 Algoritmos genéticos são um ramo dos algoritmos evolucionários que traz conceitos da biologia genética como genes e cromossomos para os algoritmos evolucionários. Isso permite a melhor simulação de um sistema evolucionário próximo ao que existe na natureza, obtendo resultados de alta qualidade para problemas de otimização.
 
@@ -190,7 +190,7 @@ Para a criação das novas gerações, são utilizadas funções com base nos cr
 \end{figure}
 
 \subsection{Representação Cromossomial}
-% ## **************|
+% ## *************|
 
 Em algoritmos genéticos todos os indivíduos são representados por uma cadeia de valores chamada de cromossomo. Cada pedaço indivisível desta representação é chamado de gene, por analogia com as partes fundamentais que compõem um cromossomo biológico.
 
@@ -215,14 +215,14 @@ A representação cromossomial numérica assume que cada gene terá um valor int
 Ainda existe a possibilidade da criação de um cromossomo híbrido. Em um cromossomo de representação híbrida, cada gene pode ter a sua própria representação (binária, numérica ou categórica), e os operadores genéticos devem funcionar de acordo com o tipo do gene \cite{linden:2008}.
 
 \subsection{Inicialização}
-% ## **************|
+% ## *************|
 
 O primeiro passo de um algoritmo genético é a criação da geração inicial. Neste passo é criada uma população de indivíduos, sendo que cada indivíduo possui o seu cromossomo como uma cadeia completamente aleatória de genes. A lei das probabilidades sugere que existirá uma distribuição de soluções que cobre praticamente todo o espaço de soluções, mas isto não pode ser garantido, pois a população possui um tamanho finito \cite{linden:2008}.
 
 O desempenho do algoritmo genético é extremamente sensível ao tamanho da população, logo, este parâmetro deve ser definido com muito cuidado. Caso este número seja pequeno demais, não haverá espaço para uma variedade genética suficientemente grande dentro da população, o que fará com que o algoritmo seja incapaz de achar boas soluções. Caso este número seja grande demais, o algoritmo demorará demais e utilizará muitos recursos computacionais  \cite{linden:2008}. Normalmente populações variam entre centenas e milhares de indivíduos.
 
 \subsection{Função de Avaliação}
-% ## **********************|
+% ## *********************|
 \label{sec:Funcao_de_Avaliacao}
 
 Segundo \citet{linden:2008}, a função de avaliação é a maneira utilizada pelos GAs para determinar a qualidade de um indivíduo como solução do problema em questão. A FA pode ser considerada como uma nota numérica dada ao indivíduo na resolução do problema. Essa avaliação será utilizada para a escolha dos indivíduos pelo módulo de seleção dos pais, sendo a forma de diferenciar entre as boas e as más soluções para um problema.
@@ -248,9 +248,9 @@ Para solucionar este problema, é possível utilizar outras técnicas como a de 
 \end{table}
 
 \subsection{Seleção}
-% ## *|
+% ## *****************|
 
-O próximo passo é a criação de uma nova população para a próxima geração. A população da nova geração será criada com base nos indivíduos da população anterior e os operadores de \textit{crossover} e mutação. O mais comum é que a nova geração tenha um tamanho idêntico a geração anterior \cite{linden:2008}.
+O próximo passo é a criação de uma nova população para a próxima geração. Esta população será criada com base nos indivíduos da população anterior e os operadores de \textit{crossover} e mutação. O mais comum é que a nova geração tenha um tamanho idêntico a geração anterior \cite{linden:2008}.
 
 Para cada indivíduo a ser criado na nova população são selecionados dois ou mais indivíduos da geração anterior com base em sua função de avaliação. Esses dois indivíduos servirão como pais do novo cromossomo. Com base nos operadores de \textit{crossover} e mutação, o novo indivíduo tipicamente possuirá várias características de seus pais. Novos pares de pais são selecionados para cada novo indivíduo, de forma que quanto maior a avaliação de um indivíduo, maior é sua chance de ser selecionado como pai \cite{linden:2008}. Também é possível utilizar métodos que usam mais de dois indivíduos como pais, o que não é tão análogo com a reprodução natural, mas algumas pesquisas indicam que o resultado é superior \cite{ting:2005} \cite{eiben:1994}.
 
@@ -276,7 +276,7 @@ Ao final deste processo existirá uma nova população que é diferente da gera�
 Os indivíduos com uma avaliação menor ainda devem ter chance de serem selecionados para reprodução, embora menor, o que garante uma diversidade genética entre a população. Uma maior diversidade genética é importante para garantir que um espectro maior de soluções sejam exploradas pelo algoritmo.
 
 \subsection{Operadores Genéticos}
-% ## ********************|
+% ## *******************|
 
 Os operadores genéticos são funções aplicadas sobre um ou mais cromossomos para a geração de novos cromossomos. Os exemplos mais simples de operadores genéticos são o \textit{crossover} e a mutação. O operador de \textit{crossover} é o responsável por gerar um novo cromossomo baseado em dois cromossomos pais. O operador de mutação é aplicado em um cromossomo para que ele tenha uma pequena chance de sofrer uma mutação genética em algum gene. Existe mais de uma técnica de \textit{crossover} e mutação, ambas podem ser parametrizadas e podem ou não ser executadas.
 
@@ -319,7 +319,7 @@ Normalmente os operadores de \textit{crossover} e mutação não são executados
 Seria necessário então que a probabilidade do operador de \textit{crossover} fosse caindo com o decorrer do algoritmo e que a probabilidade do operador de mutação fosse concomitantemente aumentando. Para tal, são utilizadas diversas técnicas de interpolação, como a linear, quadrática e descontínua \cite{linden:2008}.
 
 \section{Espécies}
-% ## ****************************|
+% ## ***************************|
 
 Um algoritmo genético pode ainda utilizar o conceito de espécies. Conforme \citet{li:2002}, uma espécie é uma subdivisão da população do AG, definida por N indivíduos semente e um parâmetro de distância de espécie. Quando existem diversas espécies em uma simulação, o melhor indivíduo de cada espécie é mantido para a próxima geração. Os outros indivíduos são replicados utilizando os operadores de \textit{crossover} e mutação da mesma forma que um algoritmo genético padrão.
 
@@ -328,7 +328,7 @@ O principal motivo para utilizar segmentação por espécies em um algoritmo gen
 Para segmentar uma população em espécies, são agrupados indivíduos onde a distância euclidianda de seus parâmetros for menor do que o parâmetro de distância de espécie. Em cada espécie, é selecionado um indivíduo dominante, cuja função de avaliação é a maior da espécie. Estes indivíduos dominantes serão sempre mantidos para a próxima geração.
 
 \section{Considerações}
-% ## ****************************|
+% ## ***************************|
 
 Este capítulo apresentou a técnica de algoritmos genéticos como uma poderosa ferramenta para a otimização de problemas. Foram demonstrados os seus principais conceitos, como população, geração, \textit{fitness}, indivíduo, gene e cromossomo, tal como as técnicas utilizadas, entre elas a mutação, \textit{crossover} de um ponto e \textit{crossover} uniforme.
 
@@ -339,7 +339,7 @@ No próximo capítulo serão apresentadas técnicas de processamento digital de 
 \chapter{Análise e processamento de imagens digitais}
 \label{chap:PDI}
 % ------------------------------------------------------------------------------------------------------------------------
-% ## *******************|
+% ## ******************|
 
 Este capítulo aborda o tema sobre processamento digital de imagens. Serão explicados os conceitos de imagem digital, pré-processamento e segmentação, tal como diversas técnicas para análise e manipulação de imagens.
 
@@ -377,7 +377,7 @@ A última etapa envolve o reconhecimento e a interpretação dos componentes de 
 Nas próximas seções deste trabalho serão apresentados alguns conceitos de PDI, como histograma e convolução, que são utilizados por diversas técnicas de PDI. Ademais, serão demonstrados algoritmos de pré-processamento e segmentação de imagens que serão utilizados na proposta deste trabalho.
 
 \section{Histograma}
-% ## ****************|
+% ## ***************|
 
 Segundo \citet{pedrini:2008}, o histograma de uma imagem corresponde à distribuição dos níveis de cinza da imagem, o qual pode ser representado por um gráfico indicando o número de pixels na imagem para cada nível de cinza. Seja \(f(x,y)\) uma imagem representada por uma matriz bidimensional, com dimensões \(M\) por \(N\) pixels e contendo \(L\) níveis de cinza no intervalo \([0, L_max]\). O cálculo do histograma é apresentado no Algoritmo~\ref{alg:Histograma}. O histograma é representado por um vetor \(H\) com \(L\) elementos.
 
@@ -415,7 +415,7 @@ O histograma de uma imagem fornece uma indicação de sua qualidade quanto ao n�
 \end{figure}
 
 \section{Limiarização}
-% ## **|
+% ## *|
 
 Segundo \citet{pedrini:2008}, a limiarização ou \textit{thresholding} é uma das técnicas mais simples de segmentação e consiste na classificação dos pixels de uma imagem de acordo com a especificação de um ou mais limiares. Cada pixel da imagem será classificado com base nos limiares definidos, de forma que a limiarização pode ser definida como \[f(x,y)=\left\{\begin{matrix} l_1, se f(x,y) \leq T_1) \\ l_2, se T_1 < f(x,y) \leq T_2)\\ l_3, se T_2 < f(x,y) \leq T_3)\\ ...\\ l_n, se f(x,y) > T_{n-1}) \end{matrix}\right.\] tal que, para cada intervalo \(T_n\), é especificado um nível de cinza correspondente \(l_n\). O algoritmo para a limiarização pode ser visto no Algoritmo~\ref{alg:Threshold}.
 
@@ -454,7 +454,7 @@ A seleção correta do valor de limiar é crucial para que o processo de segment
 \end{figure}
 
 \section{Brilho e contraste}
-% ## *********************|
+% ## ********************|
 
 Conforme \citet{pedrini:2008}, o brilho está associado à sensação visual de intensidade luminosa ou luminância de uma fonte. Em imagens digitais o brilho é diretamente relacionado ao valor do pixel de uma imagem. Já o contraste pode ser definido como uma medida de variação relativa da luminância, ou seja, da intensidade luminosa por unidade de área.
 
@@ -487,7 +487,7 @@ Outra função linear comum é a transformação inversa, que produz o negativo 
 \end{figure}
 
 \section{Morfologia Matemática}
-% ## ************|
+% ## ***********|
 
 Segundo \citet{pedrini:2008} a morfologia matemática consiste em uma metodologia para análise de imagens que permite a construção de operadores úteis para a descrição de objetos em imagens. Ela foi originalmente desenvolvida para manipular imagens binárias, sendo posteriormente estendida para tratar imagens em níveis de cinza.
 
@@ -504,7 +504,7 @@ A morfologia matemática utiliza a teoria de conjuntos para representar a forma 
 Um operador morfológico é um mapeamento entre o conjunto A que define a imagem e um conjunto B, chamado de elemento estruturante. O elemento estruturante é expresso com respeito a uma origem local \cite{pedrini:2008}.
 
 \subsection{Dilatação e Erosão}
-% ## ************|
+% ## ***********|
 
 A operação de dilatação entre o conjunto A e um elemento estruturante B é definida como a adição de \citet{minkowski:1911}, ou seja: \[D(A,B)=A\oplus B=\bigcup_{b\in B}^{ } (A+b)\]
 
@@ -543,7 +543,7 @@ De acordo com esta equação, o resultado da erosão pode ser calculado como o c
 \end{figure}
 
 \subsection{Abertura e Fechamento}
-% ## *****************|
+% ## ****************|
 
 Duas outras operações morfológicas importantes em análise de imagens são a abertura e o fechamento. A abertura de A por B é definida como \(A \circ  B = (A \ominus B) \oplus A\) \cite{pedrini:2008}. Isso significa que a abertura é a erosão de A por B, seguida da dilatação da imagem resultante por A.
 
@@ -559,7 +559,7 @@ Na Figura~\ref{fig:PDI_Abertura_Fechamento_1} é possível visualizar o efeito d
 \end{figure}
 
 \section{Filtragem da Imagem}
-% ## *|
+% ## ***********************|
 
 Conforme \citet{conci:2003}, o uso de filtros em imagens objetiva melhorar a qualidade das imagens através da amplificação do seu contraste, eliminação de padrões periódicos ou aleatórios (como ruídos ou imperfeições das imagens), melhoria no seu foco e acentuação de características. Os filtros podem ser classificados como passa-baixa e passa-alta.
 	
@@ -576,12 +576,12 @@ Denotando os níveis de cinza da imagem sob a máscara por \(z_i=f(x,y)\), \(1\l
 \end{figure}
 
 \subsection{Filtros passa-baixas}
-% ## *****************|
+% ## ****************|
 
 São denominados filtros passa-baixas aqueles que atenuam ou eliminam os componentes de alta-frequência enquanto deixam as frequências baixas inalteradas. Os componentes de alta-frequência caracterizam bordas e outros detalhes finos de uma imagem, de forma que o efeito resultante da filtragem passa-baixas é o borramento ou desfoque da imagem \cite{gonzalez:2012}. Existem diversos filtros de classe passa-baixas, porém, neste trabalho, serão apresentados apenas os mais utilizados.
 
 \subsubsection{Filtro da Média e Mediana}
-% ## *************|
+% ## ************|
 
 Um dos filtros passa-baixa mais simples é o filtro da média, em que cada pixel é substituído pelo valor médio de seus vizinhos. O filtro da média é um filtro passa-baixa utilizado para fins de suavização de imagens \cite{pedrini:2008}. Na Figura~\ref{fig:PDI_Mascara_Media} estão representadas máscaras de filtro da média de tamanho 3x3 e 5x5, respectivamente.
 
@@ -608,7 +608,7 @@ Seus resultados são geralmente melhores que o filtro da média. Isso ocorre dev
 \end{figure}
 
 \subsubsection{Filtro Gaussiano}
-% ## ***********|
+% ## **********|
 
 Segundo \citet{conci:2003}, o filtro de Gauss ou Gaussiano é o filtro linear passa-baixa mais importante. Assim como outros filtros dessa classe, é utilizado para reduzir a quantidade de variação de intensidade entre um pixel e seus vizinhos, efetuando a redução de ruídos e outras trocas bruscas de frequência da imagem. Na Figura~\ref{fig:PDI_Gauss} é possível ver a aplicação do filtro Gaussiano em uma imagem (a) com máscaras de tamanho 3x3 (b) e 5x5 (c).
 
@@ -640,12 +640,12 @@ Z=\frac{1}{16}\begin{bmatrix}
 \]
 
 \subsection{Filtros passa-altas}
-% ## ***********|
+% ## **********|
 
 Os filtros passa-altas atenuam ou eliminam os componentes de baixa-frequência, mantendo frequências altas. Como as baixas frequências são responsáveis pelas características que variam lentamente em uma imagem, como o contraste total e a intensidade média, o efeito resultante da filtragem passa-altas é uma redução destas características, correspondente a uma aparente agudização de bordas, trocas repentinas de intensidade e também ruídos \cite{gonzalez:2012}. Existem inúmeros filtros do tipo passa-alta, alguns destes sendo apresentados neste trabalho.
 
 \subsubsection{Operador de Sobel}
-% ## ***************|
+% ## **************|
 
 O operador de Sobel foi proposto por \citet{sobel:1968}. Ele é composto por duas máscaras que aproximam a magnitude do gradiente com as diferenças dos níveis de cinza da imagem. Os dois gradientes representam, respectivamente, as variações de intensidade no eixo horizontal (\(G_x\)) e vertical (\(G_y\)). Ao efetuar operações de convolução dessas máscaras com a imagem, as variações de intensidade dos níveis de cinza em cada eixo são detectadas. O resultado final da convolução é dado por \(\sqrt[]{{G_x}^2 + {G_y}^2}\). Este valor resultante deve então ser aplicado a um limiar, identificando se o ponto é ou não a borda \cite{pedrini:2008}. Um exemplo da aplicação do filtro de Sobel pode ser visto na Figura~\ref{fig:PDI_Sobel} com um limiar de 40.
 
@@ -671,7 +671,7 @@ O operador de Sobel foi proposto por \citet{sobel:1968}. Ele é composto por dua
 \end{figure}
 
 \subsubsection{Operador de Canny}
-% ## ***|
+% ## **|
 
 O detector de bordas de Canny é mais complexo, mas geralmente superior aos demais métodos passa-alta \cite{gonzalez:2012}. Ele foi proposto por \citet{canny:1987} e é composto por 4 etapas básicas: suavização da imagem de entrada com a aplicação do filtro gaussiano; cálculo da magnitude do gradiente e ângulos das imagens; identificação dos pontos de máxima ou mínima intensidade de acordo com o gradiente; e, por fim, é definido o limiar e feita a análise de conectividade dos pixels classificados como borda \cite{gonzalez:2012}. Um exemplo do operador de Canny com limiar de 25 pode ser visto na Figura~\ref{fig:PDI_Canny}.
 
@@ -684,14 +684,14 @@ O detector de bordas de Canny é mais complexo, mas geralmente superior aos dema
 \end{figure}
 
 \section{Transformações Geométricas}
-% ## *************|
+% ## ************|
 
 Conforme \citet{conci:2003} as transformações geométricas são operações realizadas em imagens digitais que movem os pixels da imagem de origem entre uma posição \((x_o,y_o)\) para a posição \((x_d,y_d)\) da imagem de destino, ou seja, modificam a posição dos pixels no espaço de imagem. As principais transformações geométricas são: translação, mudança de escala, rotação e espelhamento.
 
 Para realizar a conversão de coordenadas é utilizado um sistema de coordenadas homogêneo, ou seja, de dimensão \(n+1\). No caso de imagens bidimensionais, é acrescentada a terceira coordenada \(w\) com o valor 1 aos pontos \((x, y)\). Com o sistema de coordenadas homogêneas, todas as transformações geométricas principais são tratadas através de multiplicação de matrizes.
 
 \subsection{Translação}
-% ## *****************|
+% ## ****************|
 
 Transladar um objeto significa deslocar, mover ou somar a cada um de seus pontos \((x_o,y_o)\) uma quantidade \((T_x,T_y)\). A translação 2D na forma matricial em coordenadas homogêneas é definida pela equação
 
@@ -715,7 +715,7 @@ y_o\\
 \]
 
 \subsection{Escala}
-% ## ********************|
+% ## *******************|
 
 A mudança de escala significa variar o seu tamanho, de forma semelhante a um \textit{zoom in} ou \textit{zoom out}. A operação básica consiste em multiplicar cada um de seus pontos \((x_o,y_o)\) por um fator escalar \((S_x,S_y)\). A escala 2D na forma matricial em coordenadas homogêneas é definida pela equação
 
@@ -741,7 +741,7 @@ y_o\\
 O fato de os valores de x e y serem inteiros (pois representam as coordenadas da imagem) pode gerar problemas. Considerando, por exemplo, um escalar de \((2,2)\). O pixel da posição \((1,1)\) irá virar \((2,2)\), enquanto o pixel da posição \((2,2)\) irá virar \((4,4)\). Isso deixará o pixel \((3,3)\) sem valor de origem. Isso pode ser corrigido realizando uma operação de interpolação linear ou bilinear entre os pontos existentes, dando assim o valor dos pontos intermediários.
 
 \subsection{Rotação}
-% ## *****************|
+% ## ****************|
 
 A rotação utilizando um ângulo  relativo à origem consiste em encontrar, para cada pixel \((x_o,y_o)\) um outro pixel \((x_d,y_d)\) sobre uma circunferência centrada na origem que passa pelos dois pontos com ângulo \(\theta=p \hat{o} q\). 
 
@@ -809,7 +809,7 @@ y_o\\
 
 
 \subsection{Espelhamento}
-% ## ***|
+% ## **|
 
 Conforme \citet{conci:2003}, a transformação de espelhamento (também chamada de reflexão ou \textit{flip}) em torno de um eixo é uma operação que combina a rotação por ângulos múltiplos de 90º com a inversão das coordenadas. Um espelhamento horizontal é uma rotação de 180º no sentido anti-horário com coordenadas \(y_o\) invertidas. Já o \textit{flip} vertical é uma rotação de 180º no sentido horário com os valores das coordenadas \(x_o\) invertidos. Em coordenadas homogêneas o \textit{flip} horizontal é obtido por
 \[
@@ -861,13 +861,13 @@ Na Figura~\ref{fig:PDI_Transformacoes_Geometricas} é possível visualizar o efe
 \end{figure}
 
 \section{Segmentação de Regiões}
-% ## ***************|
+% ## **************|
 Conforme \citet{pedrini:2008} os métodos de segmentação de regiões detectam as regiões diretamente na imagem, ao invés de encontrar as bordas que delimitam as regiões. Os pontos apresentando propriedades similares são agrupados para formar uma região. Diversas propriedades podem ser usadas para caracterizar uma região, tal como intensidade de cinza, cor, informação semântica ou textura.
 
 Os principais métodos de segmentação baseada em regiões podem ser classificados em crescimento de regiões, divisão de regiões, divisão e fusão de regiões e divisor de águas ou \textit{watersheds}.
 
 \subsection{Crescimento de Regiões}
-% ## **|
+% ## *|
 
 A segmentação baseada no crescimento de regiões se dá pela escolha de N pixels denominados sementes (ou \textit{seed}) onde, a partir deles, são crescidas as regiões anexando a cada ponto semente outros pixels que possuem propriedades similares. Os pixels semente podem ser escolhidos de forma aleatória, determinística ou empírica pelo usuário \cite{pedrini:2008}. O número de regiões segmentadas será sempre menor ou igual ao número de pontos sementes selecionados, mas nunca maior.
 
@@ -881,26 +881,26 @@ O predicado \(P\) a ser usado para agregar um pixel em uma das regiões verifica
 em que \(f(r,s)\) representa o pixel semente e \(f(x,y)\) representa os pixels conectados ao pixel semente por vizinhança-8 \cite{pedrini:2008}. Qualquer pixel que satisfaça essa propriedade simultaneamente para ambas é (arbitrariamente) atribuído a região \(R_1\). 
 
 \subsection{Divisão de Regiões}
-% ## ****************|
+% ## ***************|
 
 Segundo \citet{pedrini:2008}, a segmentação baseada em divisão de regiões inicia-se com regiões formadas por pixels da imagem e, recursivamente, subdivide as regiões não-homogêneas em áreas menores. Em muitos casos, a imagem inteira pode ser considerada como uma região inicial. O processo de subdivisão termina quando todas as regiões satisfizerem o critério de similaridade.
 
 Uma técnica comum de subdivisão da imagem em regiões homogêneas utiliza a representação \textit{quadtree}, que é uma estrutura hierárquica baseada na decomposição recursiva e regular da imagem em quadrantes, de maneira que, para qualquer região \(R_i\), \(P(R_i) = \textup{VERDADEIRO}\). Ou seja, se \(P(R) = \textup{FALSO}\) então a imagem deve ser dividida em quadrantes. Se o predicado \(P\) for \(\textup{FALSO}\) para qualquer quadrante, o quadrante deve ser subdividido em subquadrantes e assim por diante \cite{pedrini:2008}.
 
 \subsection{\textit{Watershed}}
-% ## **********|
+% ## *********|
 
 Segundo \citet{pedrini:2008} o algoritmo de \textit{watershed} ou divisor de águas trata a imagem como se fosse uma superfície topográfica, onde as intensidades dos pixels correspondem a valores de altitude ou elevação. É efetuado, então, um processo chamado imersão onde os pontos de menor altitude (intensidade) passam a ser preenchidos de água, formando bacias. Quando duas bacias se encontram, uma linha de contenção é criada entre as bacias, definindo assim uma borda da imagem. O processo é executado até que toda a superfície tenha sido inundada.
 
 \subsection{Afinamento de Bordas}
-% ## *|
+% ## ****************************|
 
 Conforme \citet{guilherme:2007} o processo de afinamento de bordas ou esqueletização consiste na remoção de pixels redundantes da imagem para a criação do seu esqueleto. O esqueleto de uma imagem é a representação básica das formas contidas na imagem, de forma que todos os pixels são necessários. Os algoritmos de esqueletização sempre recebem como entrada uma imagem binarizada.
 
 Uma das características mais importantes que define um bom algoritmo de esqueletização é a preservação das características das formas da imagem original. Estas características englobam posição, orientação, tamanho e conectividade \cite{guilherme:2007}.
 
 \subsubsection{Stentiford}
-% ## ***|
+% ## **|
 
 O algoritmo de Stentiford foi proposto por \citet{stentiford:1983}, e adota uma abordagem baseada na utilização de máscaras para o afinamento de objetos. São utilizadas quatro máscaras que são aplicadas de forma sucessiva e ordenada \cite{guilherme:2007}. As máscaras são utilizadas para encontrar pixels na imagem que coincidam com um determinado padrão, sendo então marcados para remoção.
 
@@ -917,7 +917,7 @@ Na Figura~\ref{fig:PDI_Stentiford_1} são demonstradas as máscaras utilizadas p
 Para a aplicação da máscara, são percorridos os pixels da imagem e é carregado a sua vizinhança. Caso a vizinhança seja compatível com a máscara em processamento, seu valor será alterado para zero (fundo). Caso contrário, o pixel continuará com seu valor original (1).
 
 \subsubsection{Zhang Suen}
-% ## ***************|
+% ## **************|
 
 O algoritmo de Zhang Suen \cite{zhang:1984} tem como base a comparação do pixel em processamento com seus 8 vizinhos. A exclusão de pixel por parte do algoritmo somente é realizada mediante a quatro regras. Estas regras têm como objetivo obter a exclusão segura dos pixels, garantindo, desta forma, que áreas interligadas não percam a conectividade e que a eliminação ocorrerá nas bordas do objeto \cite{guilherme:2007}.
 
@@ -972,7 +972,7 @@ Segundo \citet{guilherme:2007}, para que um pixel seja marcado para exclusão el
 \end{figure}
 
 \subsubsection{Holt}
-% ## **********|
+% ## *********|
 
 O algoritmo de Holt \cite{holt:1987} utiliza uma vizinhança 3 x 3 para a análise dos pixels a serem removidos. O formato da matriz permite que seja feita uma análise do pixel central e seus vizinhos. Segundo \citet{guilherme:2007}, o algoritmo de Holt é composto por duas expressões lógicas, onde uma é aplicada na primeira iteração do algoritmo e a outra na segunda iteração.
 
@@ -1003,7 +1003,7 @@ Para um ponto ser removido, o resultado das expressões lógicas devem ser verda
 \subsection{Snakes}
 
 \section{Considerações}
-% ## ************* |
+% ## ************ |
 
 Este capítulo apresentou o tema de processamento digital de imagens. Foi apresentado o conceito de imagem digital, tal como as etapas de análise, como pré-processamento e segmentação. Além disso, foram apresentadas diversas técnicas de pré-processamento e segmentação, como \textit{thresholding}, detecção de bordas e morfologia matemática.
 
@@ -1013,13 +1013,13 @@ No próximo capítulo serão apresentadas trabalhos que tentaram unir o uso de a
 \chapter{Trabalhos Correlatos}
 \label{chap:TrabalhosCorrelatos}
 % ------------------------------------------------------------------------------------------------------------------------
-% ## |
+% ## **********|
 
 Neste capítulo serão apresentados trabalhos relacionados a área de pesquisa deste projeto.
 
 
 \section{O Uso do Algoritmo Genético em Segmentação de Imagens Digitais}
-% ## *************|
+% ## ************|
 
 A tese desenvolvida por \citet{matias:2007} aplica algoritmos genéticos com diferentes funções de avaliação para evoluir a parametrização de três métodos de segmentação de imagens digitais, comparando seu resultado. Os algoritmos de segmentação analisados são \textit{quadtrees}, limiarização e crescimento de regiões.
 
@@ -1096,7 +1096,7 @@ Com GA                                     & 90,44\%                            
 Dessa maneira, \citet{matias:2007} verificou que o uso do GA com uma função objetivo adequada pode trabalhar muito bem em conjunto com algoritmos de segmentação, na busca de bons parâmetros de entrada iniciais. Isso foi comprovado nos três algoritmos testados: limiarização, \textit{quadtrees} e crescimento de regiões.
 
 \section{A multilevel automatic thresholding method based on a genetic algorithm for a fast image segmentation}
-% ## ****************|
+% ## ***************|
 
 Neste trabalho, \citet{hammouche:2008} propõem uma técnica de \textit{thresholding} multinível para a segmentação de imagens baseada no uso de algoritmos genéticos para determinar os limiares apropriados. Segundo os autores, o uso de GAs tem várias vantagens sobre métodos de otimização tradicionais, particularmente a capacidade de encontrar a solução ótima global, prevenindo que o algoritmo fique preso em soluções localmente ótimas. Ademais, algoritmos genéticos podem ter uma grande redução no tempo de processamento com implementações paralelas. A técnica de \textit{thresholding} genética proposta é baseada em um GA padrão. Ele permite a determinação do número de limiares assim como o valor de cada um. 
 
@@ -1143,10 +1143,12 @@ Neste capítulo foram apresentados alguns trabalhos relacionados ao assunto abor
 \chapter{Desenvolvimento da aplicação}
 \label{chap:Desenvolvimento}
 % ------------------------------------------------------------------------------------------------------------------------
-% ## ************|
+% ## ***********|
+
+Neste capítulo será apresentado o desenvolvimento do trabalho proposto. Este capítulo está dividido em quatro seções, cada uma apresentando um aspecto do trabalho. Primeiramente é detalhado o algoritmo genético, como ele foi implementado e parametrizado. Após, é apresentada a interface gráfica que foi desenvolvida para que o usuário possa visualizar o andamento e resultado da simulação, e interagir com a mesma. Na sequência são demonstrados os diversos experimentos realizados com diferentes parâmetros do algoritmo genético para obter o melhor resultado possível, e será apresentado este resultado. Por fim, é detalhada a metodologia utilizada para validação do trabalho.
 
 \section{Algoritmo Genético Proposto}
-% ## ****************|
+% ## ***************|
 
 Nesta seção serão apresentados detalhes sobre a implementação do algoritmo genético, técnicas utilizadas e como o mesmo foi parametrizado para a simulação. O algoritmo genético foi desenvolvido utilizando a linguagem de programação Java. A estrutura e lógica do algoritmo genético foi completamente desenvolvido neste trabalho, sem o uso de \textit{frameworks} ou bibliotecas prontas.
 
@@ -1177,7 +1179,7 @@ Pela natureza do problema, foram selecionadas algumas técnicas da literatura pa
 Além disso, foram implementadas outras heurísticas para tentar acelerar a convergência do GA para o resultado esperado. Uma destas heurísticas foi a sobrevivência garantida do melhor indivíduo, onde ele sempre será copiado para a próxima geração antes de realizar os outros operadores genéticos. Isso garante que o resultado final do algoritmo genético nunca retroceda para um resultado inferior a um resultado já obtido, e pode acelerar na convergência. Além disso, foram realizados testes com uma regra para não permitir um número elevado de indivíduos da mesma espécie, para aumentar a diversidade genética e o espectro de soluções que serão avaliadas.
 
 \subsection{Representação Cromossomial}
-% ## **********************|
+% ## *********************|
 
 Para a representação cromossomial dos indivíduos foi optada pela abordagem de representação híbrida. Genes categóricos são utilizados para representar os algoritmos a serem utilizados, e genes numéricos são utilizados para representar os seus parâmetros.
 
@@ -1186,7 +1188,7 @@ O cromossomo é composto por N grupos de 6 genes. Cada grupo representa um proce
 Esta estrutura pode se repetir quantas vezes for necessário. Foram testadas diferentes variações do número de processos para encontrar aquele que é o mais eficaz.
 
 \subsection{Parametrização do Algoritmo Genético}
-% ## ***********|
+% ## **********|
 
 O sistema desenvolvido permite que diversos parâmetros do algoritmo genético sejam alterados. Isso foi feito com o intuito de testar e comparar diversas combinações de parâmetros para encontrar a melhor solução possível.
 
@@ -1209,7 +1211,7 @@ Por fim, o percentual máximo de indivíduos por espécie limita quantos indiví
 Para todas operações que requerem a escolha de um ou mais cromossomos pais, como \textit{crossover} ou mutação, foi utilizada a técnica da roleta viciada normalizada. Foi utilizada a variação normalizada pois em protótipos iniciais do trabalho foi identificado que o problema do super-indivíduo era muito acentuado no contexto do problema.
 
 \subsection{Comparação de Imagens}
-% ## ********|
+% ## *******|
 
 Para o cálculo da \textit{fitness function} de um indivíduo é realizada a comparação da sua imagem de saída com um gabarito. A saída desta comparação deve ser um valor numérico entre 0 e 1, sendo o valor 1 a imagem perfeitamente correta. Quando existem diversas imagens que são testadas, a média de suas comparações é considerada sua avaliação.
 
@@ -1256,25 +1258,25 @@ Imagem preta             & 25,76\%                                & 0\%         
 Com base nesta comparação, foi utilizado o método de comparação proposto, pois ele mantém a mesma ordem de  assertividade dos itens, porém não dando uma vantagem tão grande a imagens totalmente brancas dentro do algoritmo genético, pois seu percentual não é tão alto. Esta decisão foi tomada levando em consideração o tipo de imagem foco deste trabalho: rostos. Não foi realizada comparação destes métodos para outros tipos de imagens, e os resultados poderão variar.
 
 \section{Interface de usuário}
-% ## *|
+% ## **********|
 
-Nesta seção são detalhadas as funcionalidades da interface de usuário desenvolvida. A interface foi desenvolvida com o objetivo de controlar a simulação e visualizar os resultados objetivos.
+Nesta seção serão detalhadas as funcionalidades da interface de usuário desenvolvida. A interface foi desenvolvida com o objetivo de controlar a simulação e visualizar os resultados objetivos. 
 
-A interface proporciona três controles principais ao usuário: ``Executar uma'', ``Executar'' e ``Interromper''. A opção ``Executar uma'' realiza a simulação da próxima geração do algoritmo genético, e interrompe a execução assim que ela for concluída. A opção de ``Executar'' irá executar gerações por tempo indeterminado. Por fim, a opção ``Interromper'' aborta a execução da geração atual.
+Ao iniciar o sistema de simulação, será exibida a tela principal, com os controles da simulação e visão geral dos resultados. Esta tela proporciona três controles principais ao usuário: ``Executar uma'', ``Executar'' e ``Interromper''. A opção ``Executar uma'' realiza a simulação da próxima geração do algoritmo genético, e interrompe a execução assim que ela for concluída. A opção de ``Executar'' irá executar gerações por tempo indeterminado. Por fim, a opção ``Interromper'' aborta a execução da geração atual.
 
-Também é possível iniciar uma nova simulação, salvar ou carregar uma simulação existente à partir do menu \"Simulação\". Para armazenar os dados da simulação estes são serializados utilizando a notação JSON \cite{bray:2017} e após compactadados utilizando a implementação padrão do ZLIB \cite{deutsch:1996} para Java. Além disso, a cada geração é realizada uma cópia de segurança da simulação para disco, para que caso ocorra algum problema com a aplicação ou com o ambiente seja possível retormar da última geração.
+Também é possível iniciar uma nova simulação, salvar ou carregar uma simulação existente à partir do menu ``Simulação''. Para armazenar os dados da simulação estes são serializados utilizando a notação JSON \cite{bray:2017} e após compactadados utilizando a implementação padrão do ZLIB \cite{deutsch:1996} para Java. Além disso, a cada geração é realizada uma cópia de segurança da simulação para disco, para que caso ocorra algum problema com a aplicação ou com o ambiente seja possível retormar da última geração.
 
-Como ferramental de análise, a interface proporciona uma tela inicial onde é possível visualizar dois gráficos e uma tabela. O primeiro gráfico demonstra a média da função de avaliação, tal como melhor e pior indivíduo, ao longo das gerações. Estes mesmos dados são exibidos na tabela. O segundo gráfico exibe a distribuição das espécies nas últimas gerações. Pela tabela é possível acessar a visualização da geração, clicando sobre seu número.
+Como ferramental de análise, a interface proporciona na tela inicial dois gráficos e uma tabela. O primeiro gráfico demonstra a média da função de avaliação, tal como melhor e pior indivíduo, ao longo das gerações. Estes mesmos dados são exibidos na visão tabular. O segundo gráfico exibe a distribuição das espécies nas últimas gerações. Pela tabela é possível acessar a visualização da geração, clicando sobre seu número.
 
-Na tela da geração, são exibidos todos os indivíduos ordenados de forma descrescente de sua função de avaliação. Para cada indivíduo é exibido o valor de sua função de avaliação, tal como a sua espécie. É possível ainda exibir a imagem resultante do processo, ao clicar no botão ``Exibir imagens''. Em cada indivíduo existe um botão para baixar o arquivo projeto do VISNode, que pode posteriormente ser aberto com a ferramenta para visualização.
+Na tela da geração, são exibidos todos os indivíduos ordenados de forma descrescente de sua função de avaliação. Para cada indivíduo é exibido o valor de sua função de avaliação, tal como a sua espécie. É possível ainda exibir a imagem resultante de todos indivíduos a partir do botão ``Exibir imagens'', ou individualmente no botão ``Carregar'' de cada indivíduo. Em cada indivíduo existe um botão para baixar o arquivo projeto do VISNode, que pode posteriormente ser aberto com a ferramenta para visualização.
 
 \section{Treinamento e Otimização do GA}
-% ## ************|
+% ## ***********|
 
 Ao longo do desenvolvimento do trabalho, foram relizados diversos experimentos com a parametrização do algoritmo genético e quais processos de PDI seriam utilizados, com o intuito de obter o melhor resultado no menor número possível de gerações. Neste capítulo serão demonstrados, em orgem cronológica, os experimentos realizados e os seus resultados.
 
 \subsection{Experimento A - Experimento de controle do GA}
-% ## *********|
+% ## ********|
 
 O primeiro experimento realizado no trabalho foi com o intuito de construir um controle para os próximos experimentos. Foram utilizados algoritmos comuns de PDI, detalhados na Tabela~\ref{tab:AlgoritmosExperimento1}. O Algoritmo Genético também foi parametrizado da forma mais simples possível. 
 
@@ -1304,7 +1306,7 @@ Sobel                       &                                                   
 A simulação foi executada três vezes até 100 gerações, e foi selecionada aquela de assertividade mediana para utilizar como controle. A assertividade final foi de 70,75\%. Este resultado foi obtido na geração 88, mas o resultado de 70\% já havia sido obtido na geração 4. Isso demonstra que houve uma convergência muito rápida do resultado. Além disso, a melhor simulação teve resultado de 84,56\%, o que indica que esta convergência foi para uma máxima local. Uma forma de solucionar o problema da convergência para máxima local é mudar o parâmetro de \textit{crossover} para reduzir ao longo da simulação, enquanto o parâmetro de mutação aumenta. Este experimento está descrito na seção seguinte.
 
 \subsection{Experimento B - Variação no \textit{crossover} e mutação}
-% ## *********|
+% ## ********|
 
 Este experimento foi realizado para tentar resolver o problema da convergência para uma máxima local identificado no Experimento A. Para este experimento, o percentual de \textit{crossover} inicia como 40\% na geração 1, e decai linearmente até 5\% na geração 60. Da mesma forma, a chance de mutação inicia em 0,5\% na geração 0 até 7\% na geração 60.
 
@@ -1314,7 +1316,7 @@ Isso indica que a convergência à uma máxima local continua ocorrendo, mesmo c
 
 
 \subsection{Experimento C - Simulação por muitas gerações}
-% ## *********|
+% ## ********|
 
 Neste experimento a simulação do algoritmo genético foi executada com a mesma parametrização do experimento anterior, mas por muito mais tempo. Ao final deste experimento, 2132 gerações foram simuladas, totalizando 106 mil indivíduos avaliados (contra 5.000 dos experimentos anteriores). O objetivo deste experimento era identificar se o GA conseguiria obter um resultado melhor do que o anterior, saindo de uma possível máxima local.
 
@@ -1332,28 +1334,28 @@ Ao final da simulação, o melhor resultado foi de 85,47\%, 14,72\% melhor que a
 Com base no resultado deste experimento, foi identificada a possibilidade de que esta seria uma possível solução ótima global para esta parametrização. Portanto, no experimento realizado na sequência, foi aumentado o número máximo de processos por indivíduo. Para compensar o aumento de possibilidades, também foi aumentado o tamanho da possibilidades.
 
 \subsection{Experimento D - Maior quantidade de processos possíveis}
-% ## ********|
+% ## *******|
 
 O próximo experimento realizado foi para verificar se com uma quantidade maior de processos disponíveis para execução o GA conseguiria resultados superiores. O número de processos possíveis foi incrementado de 10 para 25 processos por indivíduo, de forma que agora cada indivíduo possui 150 genes. Por causa do grande aumento na quantidade de possíveis soluções, o tamanho da população também foi aumentado, de 50 para 300 indivíduos. Além disso, foi adicionado o algoritmo Snakes.
 
 Neste experimento, a assertividade média final obtida foi de 87,42\%, proporcionando um aumento de 1,95\% em relação ao experimento anterior. Ao final da simulação, 337 gerações foram simuladas, totalizando em 101 mil indivíduos avaliados, valor muito próximo ao experimento anterior. Nós próximos experimentos foram realizados testes para tentar aumentar a velocidade de conversão do Algoritmo Genético.
 
 \subsection{Experimento E - Indivíduos aleatórios}
-% ## *********|
+% ## ********|
 
 Neste experimento foi adicionado um novo parâmetro ao algoritmo genético: percentual de indivíduos aleatórios por geração. Se este parâmetro for maior que zero, um número de indivíduos de cada geração será criado de forma totalmente aleatória, como se fosse a primeira geração. Isto foi feito com o objetivo de continuar explorando possibilidades muito diferentes das existentes na população, de forma a facilitar que o GA saia de soluções localmente ótimas. Neste experimento foi utilizado 10\% de indivíduos aleatórios por geração.
 
 Ao final da simulação, 448 gerações foram avaliadas, obtendo um resultado final de 85,71\% de assertividade, 1,71\% menor do que o experimento anterior. Como o resultado foi inferior e a convergência do GA não ocorreu de forma significativamente mais rápida que o experimento anterior, o parâmetro de aleatoriedade foi removido para os próximos experimentos.
 
 \subsection{Experimento F - \textit{Crossover} de 1 ponto e 2 pontos}
-% ## **********|
+% ## *********|
 
 O próximo experimento fora o comparativo entre os diferentes métodos de \textit{crossover} para tentar identificar o mais adequado para o problema em questão. Os testes realizados até o momento foram realizados com o \textit{crossover} uniforme. A taxa de \textit{crossover} foi mantida em 40\% para todos os testes.
 
 O melhor percentual de assertividade obtido até o momento utilizando o \textit{crossover} uniforme foi de 87,42\% em 448 gerações. A simulação utilizando o \textit{crossover} de dois pontos obteve um percentual de 85,99\%, 1,45\% menor do que o Experimento D. Já o resultado com \textit{crossover} de um ponto foi 89,80\% em 156 gerações, garantindo uma melhora de 2,38\% em quase 300 gerações a menos processadas. Por este motivo, o crossover de 1 ponto foi mantido para os próximos testes.
 
 \subsection{Experimento G}
-% ## ************|
+% ## ***********|
 
 Neste experimento foi adicionado um novo algoritmo de PDI à biblioteca de algoritmos que o GA pode utilizar. Este algoritmo é o \textit{threshold} modificado para permitir dois limiares diferentes. Ele recebe por parâmetro o valor dois dois limiares, e mais três parâmetros que indicam o valor que deve ser utilizado para os pixels que estiverem abaixo do primeiro \textit{threshold}, entre os dois \textit{thresholds} e acima do segundo, respectivamente. Além disso, alguns algoritmos baseados em convolução receberam um novo parâmetro para indicar o tamanho da máscara utilizada, que pode ser alterado pelos genes do algoritmo genético. Estes algoritmos foram: Abertura, fechamento, dilatação, erosão, desfoque de média e desfoque de mediana.
 
@@ -1362,17 +1364,49 @@ Também foi adicionada uma nova heurística ao algoritmo genético: um limite de
 Ao final da simulação, foram avaliadas 177 gerações. O percentual médio de assertividade foi de 91,32\%, garantindo uma melhora de 1,52\% com um número semelhante de gerações. A heurística de limite de indivíduos por espécie garantiu uma maior diversidade genética durante a simulação, o que pode ter influenciado a melhoria do percentual de assertividade.
 
 \section{Validação dos resultados}
-% ## *****************|
+% ## ****************|
 
 Para este trabalho, existem duas teorias que precisam ser provadas. Primeiro, é necessário provar de forma qualitativa se o resultado deste trabalho pode ser analisado e compreendido por seres humanos, de forma que eles possam extrair informações e possivelmente aprender novas técnicas. Também é necessário comprovar de forma quantitativa se o resultado da segmentação possui uma qualidade semelhante ou superior a outras técnicas de segmentação, como redes neurais.
 
-Para realizar a validação quantitativa deste trabalho, foi utilizada a técnica de Avaliação por Juízes, onde três especialistas foram entrevistados para validar a hipótese deste trabalho. Para realizar a validação quantitativa foram selecionados outros trabalhos de segmentação de faces utilizando diferentes técnicas de segmentação e onde o percentual de assertividade estava explícito. Então, é apresentado um comparativo entre os trabalhos e a solução proposta. Os dois métodos de validação estão descritos nas seções abaixo.
+Para realizar a validação quantitativa deste trabalho, foi realizada uma avaliação por juízes, onde três especialistas foram entrevistados para validar a hipótese deste trabalho. Para realizar a validação quantitativa foram selecionados outros trabalhos de segmentação de faces utilizando diferentes técnicas de segmentação e onde o percentual de assertividade estava explícito. Então, é apresentado um comparativo entre os trabalhos e a solução proposta. Os dois métodos de validação estão descritos nas seções abaixo.
 
 \subsection{Avaliação por Juízes}
-% ## *****************|
+% ## **********|
+
+Este trabalho possui uma etapa de validação qualitativa que visa comprovar a hipótese de que o resultado do sistema proposto pode ser analisado e compreendido por um ser humano, de forma que ele possa extrair alguma informação ou conhecimento do mesmo. Considerando a natureza subjetiva do problema, foi escolhida a metodologia de avaliação por juízes para realizar a validação qualitativa.
+
+Para a avaliação, foram selecionados três juízes especialistas na área de Processamento Digital de Imagens. Foram apresentados alguns projetos de saída do sistema proposto para os juízes, para que eles realizem a análise crítica dos processos, tentando identificar técnicas utilizadas e como elas geram o resultado esperado. Com base nesta análise, cada um respondeu um questionário para avaliar a qualidade da segmentação, e principalmente a capacidade de compreensão e aprendizado com o resultado gerado.
+
+O questionário é composto por 12 questões, sendo cinco delas para identificação dos juízes. As outras 8 questões são relacionadas ao projeto analisado e seu resultado. Na Tabela~\ref{tab:Questionario} estão detalhadas todas as questões que constituem o questionário aplicado. Para todas as questões que envolviam a avaliação de um aspecto do sistema, foi utilizada a Escala de Likert \cite{likert:1932}. Para \citet{collis:2005}, a Escala de Likert permite traduzir uma opinião ou percepção em um valor numérico, sendo simples para o respondente e para o pesquisador, sendo fácil de codificar e analisar.
+
+\begin{table}
+\centering
+\caption{Questionário}
+\label{tab:Questionario}
+\begin{tabular}{lll}
+\hline
+\textit{\textbf{Seção}} & \textit{\textbf{Tipo}} & \textit{\textbf{Questão}}                                                                                                                                                  \\ \hline
+Identificação           & Texto                  & Nome                                                                                                                                                                       \\
+Identificação           & Texto                  & Formação                                                                                                                                                                   \\
+Identificação           & Lickert                & \begin{tabular}[c]{@{}l@{}}Conhecimento sobre Processamento Digital de \\ Imagens\end{tabular}                                                                             \\
+Identificação           & Lickert                & Conhecimento sobre Algoritmos Genéticos                                                                                                                                    \\
+Qualidade               & Lickert p/imagem       & \begin{tabular}[c]{@{}l@{}}A área segmentada condiz com a área do rosto\\ da imagem original\end{tabular}                                                                  \\
+Qualidade               & Lickert p/imagem       & \begin{tabular}[c]{@{}l@{}}O contorno da área segmentada está bem deline-\\ ado e sem ruídos\end{tabular}                                                                  \\
+Qualidade               & Lickert                & \begin{tabular}[c]{@{}l@{}}A qualidade geral da segmentação é consistente\\ entre todas as imagens de entrada\end{tabular}                                                 \\
+Clareza                 & Lickert                & \begin{tabular}[c]{@{}l@{}}Existe clareza sobre quais algoritmos de PDI\\ estão sendo utilizados\end{tabular}                                                              \\
+Clareza                 & Lickert                & \begin{tabular}[c]{@{}l@{}}Existe clareza sobre quais parâmetros são utili-\\ zados para cada algoritmo\end{tabular}                                                       \\
+Clareza                 & Lickert                & \begin{tabular}[c]{@{}l@{}}Está clara a sequência que estes algoritmos \\ serão executados\end{tabular}                                                                    \\
+Aprendizado             & Lickert                & \begin{tabular}[c]{@{}l@{}}Pode-se compreender como a escolha dos algo-\\ ritmos, seu sequenciamento e sua parametrização\\  geram a segmentação do rosto\end{tabular}     \\
+Aprendizado             & Lickert                & \begin{tabular}[c]{@{}l@{}}Pode-se extrair algum conhecimento ou aprendi-\\ zado quanto a como realizar segmentações a \\ partir da análise destes resultados\end{tabular} \\ \hline
+\end{tabular}
+\end{table}
 
 \subsection{Comparativo com Outras Soluções}
-% ## ***********|
+% ## **********|
+
+Para validar a viabilidade da solução proposta para segmentação facial da pele, esta passou por uma etapa de validação quantitativa, comparando o seu percentual de assertividade com outras soluções para o problema da segmentação facial da pele. Para realizar a comparação, foi utilizado o estudo de \citet{kakumanu:2007}. Neste estudo foi realizada a comparação de 27 diferentes estratégias para realizar a segmentação facial da pele, sendo que destas, 20 possuem no trabalho o seu percentual de assertividade pixel-a-pixel, sendo este contabilizado em pixels com o caso verdadeiro-positivo. Ou seja, o percentual representa quantos pixels da face realmente foram segmentados como face.
+
+É importante ressaltar que ao longo do desenvolvimento do trabalho, os percentuais de assertividade do trabalho estavam representados utilizando o método de comparação proposto, não sendo diretamente comparáveis com os percentuais apresentados no trabalho de \citet{kakumanu:2007}. Por esta razão, os percentuais foram recalculados para a melhor solução selecionada.
 
 % ------------------------------------------------------------------------------------------------------------------------
 
@@ -1389,7 +1423,7 @@ Para realizar a validação quantitativa deste trabalho, foi utilizada a técnic
 \addcontentsline{toc}{chapter}{Conclusão}
 \label{chap:Conclusao}
 \label{chap:ultimo}
-% ## *************|
+% ## ************|
 
 A segmentação de imagens digitais é uma das etapas mais importante do processo de análise e extração de características, e vem cada vez mais sendo automatizada para suas diversas aplicações. Existe um grande leque de possíveis soluções, algoritmos e técnicas para realizar a segmentação de imagens, cada uma com seus pontos fortes e fracos. Geralmente, estas técnicas são orquestradas pelo próprio criador do sistema automatizado, o que depende formente do seu conhecimento sobre estes algoritmos e quais foram considerados para a solução.
 
