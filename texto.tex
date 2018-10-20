@@ -68,15 +68,15 @@
 \imprimircapa
 \imprimirfolhaderosto
 
-\imprimiragradecimento{Os agradecimentos principais são direcionados a todo mundo...}
+\imprimiragradecimento{Gostaria de agradecer a todos que, direta ou indiretamente, contribuíram para a realização deste trabalho de conclusão, em especial: Aos meus pais, Luis e Katharina, pelos ensinamentos e suporte incondicional. À Marina, que me apoiou durante todo o desenvolvimento deste trabalho. À professora Marta, que, além de me orientar durante o ano inteiro, sempre se mostrou uma grande amiga. E aos juízes deste trabalho, Anderson, Gabriel e Rodrigo, pela disponibilidade e interesse com o trabalho. Muito obrigado!}
 % ---
 
 % resumo em português
 \begin{resumo}
 % ## ***********|
-A segmentação automática de imagens vem se tornando cada vez mais utilizada em diversas áreas como Medicina e Agronomia. Cada vez mais o método tradicional de segmentação automática, que se baseia no uso de técnicas de processamento digital de imagens, vem perdendo lugar para o uso de algoritmos baseados em redes neurais. Isso devido a sua capacidade de trabalhar com imagens pouco homogêneas. No entanto, as redes neurais acabam se tornando uma espécie de caixa-preta, onde, muitas vezes, não é possível que um ser humano interprete como o sistema chegou ao seu resultado. Neste trabalho é proposto um sistema que utiliza algoritmos genéticos para treinar o sequenciamento e a parametrização de técnicas de processamento digital de imagens. Dessa forma, espera-se demonstrar a possibilidade do sistema funcionar com imagens não homogêneas, permitindo a análise do sistema evoluído por um ser humano. Para tanto, foram realizados experimentos comparando o sistema proposto com outros semelhantes que utilizam redes neurais quanto a sua assertividade e tempo de processamento, além de validar com profissionais relacionados com a área de PDI se o sistema gerou uma saída que pode ser compreendida por seres humanos.
+A segmentação automática de imagens vem se tornando cada vez mais utilizada em diversas áreas como Medicina e Agronomia. Cada vez mais o método tradicional de segmentação automática, que se baseia no uso de técnicas de processamento digital de imagens, vem perdendo lugar para o uso de algoritmos baseados em redes neurais. Isso devido a sua capacidade de trabalhar com imagens pouco homogêneas. No entanto, as redes neurais acabam se tornando uma espécie de caixa-preta, onde, muitas vezes, não é possível que um ser humano interprete como o sistema chegou ao seu resultado. Neste trabalho é proposto um sistema que utiliza algoritmos genéticos para treinar o sequenciamento e a parametrização de técnicas de processamento digital de imagens. Dessa forma, é demonstrada a possibilidade do sistema funcionar com imagens não homogêneas, permitindo ainda a análise do sistema evoluído por um ser humano. O método proposto obteve uma assertividade de 91,32\% na sua base de treinamento, o que está de acordo com outros métodos de segmentação. Também foi realizado um questionário com três juízes, comprovando assim a capacidade de análise e entendimento dos modelos gerados.
 
- \vspace{\onelineskip}
+\vspace{\onelineskip}
     
  \noindent
  \textbf{Palavras-chaves}: Segmentação de imagens; Processamento digital de imagens; Algoritmo Genético.
@@ -85,12 +85,13 @@ A segmentação automática de imagens vem se tornando cada vez mais utilizada e
 % resumo em inglês
 \begin{resumo}[Abstract]
  \begin{otherlanguage*}{english}
-   This is the english abstract.
+
+Automatic image segmentation is being used increasingly in several fields such as medicine and agronomy. The traditional method for automatic segmentation, which is based on digital image processing techniques, is losing space for algorithms based on neural networks. This is because of their ability to work with non-homogeneous images. However, neural networks are a kind of black box, where, frequently, it is not possible for a human being to analyze how the system achieved its result. This study proposes a system that uses genetic algorithms to train the sequencing and parametrization of digital image processing techniques. In that manner, the system's capability of working with non-homogeneous images is demonstrated, still allowing the analysis of the evolved model by a human being. The proposed method obtained an assertivity rate of 91,32\% using the training dataset, which is in accordance with other segmentation methods. A questionary was also used with three judges, in order to prove the capability of analysis and understanding of the generated models.
 
    \vspace{\onelineskip}
  
    \noindent 
-   \textbf{Key-words}: latex. abntex. text editoration.
+   \textbf{Key-words}: Image segmentation; Digital image processing; Genetic Algorithm.
  \end{otherlanguage*}
 \end{resumo}
 
@@ -111,10 +112,6 @@ A segmentação automática de imagens vem se tornando cada vez mais utilizada e
   \item[PDI] Processamento digital de imagens
   \item[RGB] \textit{Red, Green, Blue}
 \end{siglas}
-% ---
-\begin{simbolos}
-  \item[$ \Gamma $] Letra grega Gama
-\end{simbolos}
 % ---
 % ---
 \pdfbookmark[0]{\contentsname}{toc}
@@ -141,9 +138,7 @@ Embora existam tentativas anteriores de analisar e compreender a saída de uma R
 
 Em outras soluções desenvolvidas para problemas específicos são utilizadas técnicas de PDI pré-selecionadas e algoritmos genéticos \cite{holland:1992} para o treinamento dos seus parâmetros. Pode-se citar o software que segmenta elementos em fotos de satélite \cite{costa:2010} ou a comparação da evolução dos parâmetros em métodos de segmentação baseados em \textit{quadtrees}, \textit{thresholding} e crescimento de regiões \cite{matias:2007}. Entretanto, todos os trabalhos utilizam o AG apenas para ajustar os parâmetros dos algoritmos de PDI, sem utilizar o AG para mudar o algoritmo a ser utilizado ou a sequência de passos para obter o resultado.
 
-% TODO: Marta: Neste parágrafo não precisa ser "acredita-se". Colocar o resultado.
-
-Propõe-se, neste trabalho, um sistema que seja capaz de utilizar algoritmos genéticos tanto para parametrizar quanto para sequenciar técnicas de PDI de acordo com a imagem. Acredita-se que isso permitirá a obtenção de resultados de qualidade semelhante a de redes neurais, porém, com um tempo de processamento inferior. Esta abordagem também permitirá o estudo, por parte de um ser humano, para interpretar a sequência de passos utilizada, de forma a aprender e refinar o processamento.
+Propõe-se, neste trabalho, um sistema que seja capaz de utilizar algoritmos genéticos tanto para parametrizar quanto para sequenciar técnicas de PDI de acordo com a imagem. Isso permitie a obtenção de resultados de qualidade semelhante a de redes neurais, porém, com um tempo de processamento inferior. Esta abordagem também permite o estudo, por parte de um ser humano, para interpretar a sequência de passos utilizada, de forma a aprender e refinar o processamento.
 
 Prévio a escrita deste projeto, foi desenvolvido um ambiente de manipulação de técnicas de PDI denominado VISNode \cite{visnode:2018}. Este permite a utilização e parametrização de processos de PDI em formato de grafo, onde os processos não são executados necessariamente em sequência, e parâmetros podem ser transferidos entre processos, ou nodos. A ferramenta permite a execução dos grafos de processos, denominados projetos, via uma \textit{application programming interface} (API) utilizando como entrada um conjunto de imagens, assim como a visualização destes projetos em uma interface gráfica.
 
@@ -878,6 +873,36 @@ Na Figura~\ref{fig:PDI_Transformacoes_Geometricas} é possível visualizar o efe
 \label{fig:PDI_Transformacoes_Geometricas}
 \end{figure}
 
+\subsection{\textit{Active Countour Model}}
+% ## ***************************|
+
+O modelo de contornos ativos, também chamado de \textit{active countour model} ou ainda Snakes, é um framework em visão computacional proposto por \citet{kass:1988} para delinear o contorno de um objeto em uma imagem possivelmente ruidosa. O algoritmo consiste em uma linha deformável (\textit{snake}) onde a curva sofre deformações com base em energias que empurram a linha contra o centro da imagem, enquanto as forças internas do objeto mantém a linha se deformando ao redor dos contornos do objeto. 
+
+Uma linha deformável simples pode ser definida como um conjunto de \(n\) pontos \({v} _{i}\) onde \(i=0\ldots n-1\), a energia elástica interna \(E_{interna}\), e a energia externa do contorno \(E_{externa}\). O propósito da energia interna é controlar as doformações feitas a linha, e o propósito da energia externa é controlar o encaixe do contorno sobre o objeto. 
+
+A função de energia da curva é a soma da sua energia externa e energia interna, ou
+
+\[E_{snake}^{*}=\int \limits _{0}^{1}E_{snake}(\mathbf {v} (s))\,ds=\int \limits _{0}^{1}(E_{internal}(\mathbf {v} (s))+E_{image}(\mathbf {v} (s))+E_{con}(\mathbf {v} (s)))\,ds\]
+
+A energia interna da curva é composta pela continuidade do contorno \(E_{cont}\) e a suavidade do contorno \(E_{curv}\).
+\[E_{internal}=E_{cont}+E_{curv}\]
+ 
+Isto pode ser expandido para 
+\[ E_{internal}={\frac {1}{2}}(\alpha \,\!(s)\left|\mathbf {v} _{s}(s)\right\vert ^{2})+{\frac {1}{2}}(\beta \,\!(s)\left|\mathbf {v} _{ss}(s)\right\vert ^{2})={\frac {1}{2}}{\bigg (}\alpha \,\!(s)\left\|{\frac {d{\bar {v}}}{ds}}(s)\right\Vert ^{2}+\beta \,\!(s)\left\|{\frac {d^{2}{\bar {v}}}{ds^{2}}}(s)\right\Vert ^{2}{\bigg )}\]
+
+onde \(\alpha (s)\) e \(\beta (s)\) são pesos definidos de forma empírica. Estes parâmetros controlam a sensibilidade da função de energia interna a quantidade de elasticidade e a quantidade de curvatura do \textit{snake} respectivamente, e portanto controlam o número de limites do formato da curva. Na prática, um peso elevado para \(\alpha (s)\) penaliza mudanças nas distâncias entre pontos no contorno. Já um peso elevado para \(\beta (s)\) penaliza ocilações no contorno.
+
+A energia na imagem é uma função sobre suas características. Esse é o ponto de modificação mais comum para métodos derivados. As características da imagem podem ser processadas de várias formas. Para uma imagem \(I(x,y)\), linhas, bordas e terminações presentes na imagem, a formulação generalizada para a energia em relação a imagem é 
+\[E_{image}=w_{line}E_{line}+w_{edge}E_{edge}+w_{term}E_{term}\]
+onde \(w_{line}\), \(w_{edge}\) e \(w_{term}\) são os pesos desdas características. Pesos maiores indicam que esta característica tera uma contribuição maior para a energia da imagem.
+
+A função para a linha é a intensidade da imagem, que pode ser representada como \(E_{{line}}=I(x,y)\). O sinal desta função irá determinar se a linha será atraída para linhas escuras ou claras. A função para as bordas é baseada no gradiente da imagem, e pode ser representada como \(E_{edge}=-\left|\nabla I(x,y)\right\vert ^{2}\). Por fim, a função da terminação pode ser definida como 
+
+\[E_{term}=\frac{C_{yy}C_{x}^{2}-2C_{xy}C_{x}C_{y}+C_{xx}C_{y}^{2}}{(C_{x}^{2}+C_{y}^{2})^{3/2}}\] 
+onde \(C(x,y)\) é a imagem de entrada suavizada por um coefiente.
+
+% -------------------------------------------
+
 \subsection{Afinamento de Bordas}
 % ## ***************************|
 
@@ -1183,11 +1208,10 @@ O primeiro método testado era a comparação pixel a pixel da imagem, retornand
 
 O segundo método testado foi o índice de Sørensen–Dice \cite{sorensen:1948}\cite{dice:1945}. Este índice representa a similaridade entre dois conjuntos, podendo ser facilmente aplicado a imagens binárias. Para tal, é necessário considerar que a imagem binária é um conjunto dos pixels que fazem parte do objeto (valor 1). O índice de Sørensen–Dice pode ser dado pela equação \[DSC = \frac{2TP}{2TP + FP + FN}\], onde \(TP\) representa o número de verdadeiro-positivos (pixels corretos), \(FP\) representa o número de falso-positivos (pixels que não deveriam fazer parte do objeto) e \(FN\) a quantidade de falso-negativos (pixels que deveriam estar no objeto). O mesmo problema das imagens brancas foi identificado com este método.
 
-Após os testes comparativos com estes métodos, foi identificado que nenhum dos dois apresentava o resultado desejado para comparação das imagens binárias. Com base nesta premissa, foi proposto um método próprio para comparação de imagens, que leva em consideração a assertividade média de pixels, a assertividade de pixels de borda, e a semelhança entre o perímetro dos objetos encontrados.
+Após os testes comparativos com estes métodos, foi identificado que nenhum dos dois apresentava o resultado desejado para comparação das imagens binárias. Por esta razão, foi proposto um método próprio para comparação de imagens, derivado do método de Sørensen–Dice. O valor para o método de comparação proposto é obtido calculando o índice de Sørensen–Dice de verdadeiros-positivos, ou seja, \(I_T = \frac{2TP}{2TP + FP + FN}\), além de calcular o índice considerando os verdadeiros-negativos, ou seja, \(I_F = \frac{2TN}{2TN + FP + FN}\). Então, é selecionado o índice com menor valor. Desta forma, ele pode ser generalizado como
+\[I = \frac{2 \times min(TP, TN)}{2 \times min(TP, TN) + FP + FN}\]
 
-O valor para o método de comparação proposto é obtido pela equação \(C=\frac{2a+e+p}{4}\), onde \(a\) corresponde a assertividade de pixels, \(e\) corresponde a assertividade de bordas e \(p\) corresponde ao erro do perímetro. A assertividade de pixels \(p\) é calculada dividindo os pixels corretos pelo total de pixels da imagem.  A assertividade de bordas é dada pelo número de pixels de borda vizinhança-4 corretamente identificados sobre o número total de pixels de borda. Por fim, o erro do perímetro \(p\) é dado pela equação \(p=1-\frac{|p_{e} - p_{r}|}{p_{r}}\), onde \(p_{e}\) é o perímetro esperado e \(p_{r}\) é o perímetro obtido.
-
-A comparação entre os métodos pode ser vista na Tabela~\ref{tab:ComparacaoImagens}. Na tabela, as ocorrências marcadas com um asterisco indicam percentuais que são menores do que o de ocorrências posteriores. É possível ver que utilizando os métodos de comparação de pixels ou o método de Sørensen–Dice, imagens totalmente brancas possuem um percentual muito maior (43\% e 67\% respectivamente) do que a imagem com Sobel. Ao utilizar Sørensen–Dice a imagem branca também teve um percentual melhor do que a imagem limiarizada, embora por um valor menor (5\%). No método proposto, o percentual de assertividade da imagem totalmente branca ainda é maior do que o da imagem segmentada com Sobel, mas por uma diferença de apenas 8\%.
+A comparação entre os métodos pode ser vista na Tabela~\ref{tab:ComparacaoImagens}. Na tabela, as ocorrências marcadas com um asterisco indicam percentuais que são menores do que o de ocorrências posteriores. É possível ver que utilizando os métodos de comparação de pixels ou o método de Sørensen–Dice, imagens totalmente brancas possuem um percentual muito maior (43\% e 67\% respectivamente) do que a imagem com Sobel. Ao utilizar Sørensen–Dice a imagem branca também teve um percentual melhor do que a imagem limiarizada, embora por um valor menor (5\%). No método proposto, o percentual de assertividade das imagens totalmente branca e totalmente preta é 0\%, sem gerar uma alteração muito significativa para as outras imagens.
 
 \begin{table}
 \centering
@@ -1197,13 +1221,13 @@ A comparação entre os métodos pode ser vista na Tabela~\ref{tab:ComparacaoIma
 \hline
 \textit{\textbf{Imagem}} & \textit{\textbf{Comparação de pixels}} & \textit{\textbf{Sørensen–Dice}} & \textit{\textbf{Método proposto}} \\ \hline
 Gabarito perfeito        & 100\%                                  & 100\%                           & 100\%                             \\
-Gabarito com ruído       & 97,52\%                                & 98,31\%                         & 53,93\%                           \\
-Gabarito reduzido        & 96,82\%                                & 97,90\%                         & 53,89\%                           \\
-Gabarito aumentado       & 96,79\%                                & 97,79\%                         & 53,87\%                           \\
-Entrada limiarizada      & 80,86\%                                & 80,86\% *                       & 24,67\%                            \\
-Sobel                    & 31,86\% *                              & 18,13\% *                       & 5,69\% *                          \\
-Imagem branca            & 74,23\%                                & 85,21\%                         & 13,77\%                           \\
-Imagem preta             & 25,76\%                                & 0\%                             & 1,65\% \\ \hline
+Gabarito com ruído       & 97,52\%                                & 98,31\%                         & 97,33\%                           \\
+Gabarito reduzido        & 96,82\%                                & 97,90\%                         & 96,63\%                           \\
+Gabarito aumentado       & 96,79\%                                & 97,79\%                         & 96,66\%                           \\
+Entrada limiarizada      & 80,86\%                                & 80,86\% *                       & 63,73\%                            \\
+Sobel                    & 31,86\% *                              & 18,13\% *                       & 13,18\% *                          \\
+Imagem branca            & 74,23\%                                & 85,21\%                         & 0\%                           \\
+Imagem preta             & 25,76\%                                & 0\%                             & 0\% \\ \hline
 \end{tabular}
 \end{table}
 
@@ -1214,13 +1238,37 @@ Com base nesta comparação, foi utilizado o método de comparação proposto, p
 
 Nesta seção serão detalhadas as funcionalidades da interface de usuário desenvolvida. A interface foi desenvolvida com o objetivo de controlar a simulação e visualizar os resultados objetivos. 
 
-Ao iniciar o sistema de simulação, será exibida a tela principal, com os controles da simulação e visão geral dos resultados. Esta tela proporciona três controles principais ao usuário: ``Executar uma'', ``Executar'' e ``Interromper''. A opção ``Executar uma'' realiza a simulação da próxima geração do algoritmo genético, e interrompe a execução assim que ela for concluída. A opção de ``Executar'' irá executar gerações por tempo indeterminado. Por fim, a opção ``Interromper'' aborta a execução da geração atual.
+Ao iniciar o sistema de simulação, será exibida a tela principal, com os controles da simulação e visão geral dos resultados. Esta tela proporciona três controles principais ao usuário: ``Executar uma'', ``Executar'' e ``Interromper''. A opção ``Executar uma'' realiza a simulação da próxima geração do algoritmo genético, e interrompe a execução assim que ela for concluída. A opção de ``Executar'' irá executar gerações por tempo indeterminado. Por fim, a opção ``Interromper'' aborta a execução da geração atual. O painel principal pode ser visto na Figura~\ref{fig:Print_1}.
+
+\begin{figure}[ht]
+\centering
+\caption{Painel principal da aplicação}
+\includegraphics[width=0.9\textwidth]{imagens/Print_1.png}
+\sourceAuthor{}
+\label{fig:Print_1}
+\end{figure}
 
 Também é possível iniciar uma nova simulação, salvar ou carregar uma simulação existente à partir do menu ``Simulação''. Para armazenar os dados da simulação estes são serializados utilizando a notação JSON \cite{bray:2017} e após compactadados utilizando a implementação padrão do ZLIB \cite{deutsch:1996} para Java. Além disso, a cada geração é realizada uma cópia de segurança da simulação para disco, para que caso ocorra algum problema com a aplicação ou com o ambiente seja possível retormar da última geração.
 
-Como ferramental de análise, a interface proporciona na tela inicial dois gráficos e uma tabela. O primeiro gráfico demonstra a média da função de avaliação, tal como melhor e pior indivíduo, ao longo das gerações. Estes mesmos dados são exibidos na visão tabular. O segundo gráfico exibe a distribuição das espécies nas últimas gerações. Pela tabela é possível acessar a visualização da geração, clicando sobre seu número.
+Como ferramental de análise, a interface proporciona na tela inicial um gráfico e uma tabela. O primeiro gráfico demonstra a média da função de avaliação, tal como melhor e pior indivíduo, ao longo das gerações. Estes mesmos dados são exibidos na visão tabular. O segundo gráfico exibe a distribuição das espécies nas últimas gerações. Pela tabela é possível acessar a visualização da geração, clicando sobre seu número. A tabela pode ser visto na Figura~\ref{fig:Print_2}.
 
-Na tela da geração, são exibidos todos os indivíduos ordenados de forma descrescente de sua função de avaliação. Para cada indivíduo é exibido o valor de sua função de avaliação, tal como a sua espécie. É possível ainda exibir a imagem resultante de todos os indivíduos a partir do botão ``Exibir imagens'', ou individualmente no botão ``Carregar'' de cada indivíduo. Em cada indivíduo existe um botão para baixar o arquivo projeto do VISNode, que pode, posteriormente, ser aberto com a ferramenta para visualização.
+\begin{figure}[ht]
+\centering
+\caption{Tabela de gerações}
+\includegraphics[width=0.9\textwidth]{imagens/Print_2.png}
+\sourceAuthor{}
+\label{fig:Print_2}
+\end{figure}
+
+Na tela da geração, são exibidos todos os indivíduos ordenados de forma descrescente de sua função de avaliação. Para cada indivíduo é exibido o valor de sua função de avaliação, tal como a sua espécie. É possível ainda exibir a imagem resultante de todos os indivíduos a partir do botão ``Exibir imagens'', ou individualmente no botão ``Carregar'' de cada indivíduo. Em cada indivíduo existe um botão para baixar o arquivo projeto do VISNode, que pode, posteriormente, ser aberto com a ferramenta para visualização. A tela de indivíduos pode ser vista na Figura~\ref{fig:Print_3}.
+
+\begin{figure}[ht]
+\centering
+\caption{Tela de indivíduos}
+\includegraphics[width=0.9\textwidth]{imagens/Print_3.png}
+\sourceAuthor{}
+\label{fig:Print_3}
+\end{figure}
 
 \section{Treinamento e Otimização do GA}
 % ## **********|
@@ -1313,26 +1361,65 @@ Neste experimento foi adicionado um novo algoritmo de PDI à biblioteca de algor
 
 Também foi adicionada uma nova heurística ao algoritmo genético: um limite de indivíduos por espécie. Para definir a espécie de um indivíduo, são utilizados os genes categóricos que representam os seus processos. Desta forma, todos os indivíduos que utilizam os mesmos processos na mesma ordem serão da mesma espécie, por mais que seus parâmetros sejam largamente diferentes. Foi adicionado um novo parâmetro a simulação para indicar um percentual da população que pode ser ocupada por uma única espécie. Este parâmetro foi iniciado com o valor de 20\% da população. Isso foi feito para aumentar a diversidade genética as populações, evitando que o GA avalie apenas indivíduos de uma única espécie.
 
-Ao final da simulação, foram avaliadas 177 gerações. O percentual médio de assertividade foi de 91,32\%, garantindo uma melhora de 1,52\% com um número semelhante de gerações. A heurística de limite de indivíduos por espécie garantiu uma maior diversidade genética durante a simulação, o que pode ter influenciado a melhoria do percentual de assertividade.
+Ao final da simulação, foram avaliadas 177 gerações. O percentual médio de assertividade foi de 91,32\%, garantindo uma melhora de 1,52\% com um número semelhante de gerações. A heurística de limite de indivíduos por espécie garantiu uma maior diversidade genética durante a simulação, o que pode ter influenciado a melhoria do percentual de assertividade. Após mais algumas simulações, este modelo foi utilizado como resultado final da aplicação.
 
 \section{Resultados obtidos}
 % ## ***************|
 
-% TODO: Um modelo na real é o experimento G
+Após os testes realizados para tentar otimizar o algoritmo genético, foram realizadas novas simulações para obter os resultados finais do trabalho. Cada simulação era executada até que não houvesse melhoria no seu resultado por uma quantidade elevada de tempo, onde então era iniciada a próxima simulação. Ao final, três simulações foram executadas, cada uma tomando entre 40 e 50 horas de tempo de processamento. Para o treinamento e cálculo da assertividade dos modelos foram utilizadas as 5 primeiras imagens da base FASSEG. As imagens e seus gabaritos podem ser vistos na Figura~\ref{fig:DES_Imagens}.
 
-Após os testes realizados para tentar otimizar o algoritmo genético, foram realizadas novas simulações para obter os resultados finais do trabalho. Cada simulação era executada até que não houvesse melhoria no seu resultado por uma quantidade elevada de tempo, onde então era iniciada a próxima simulação. Ao final, três simulações foram executadas, cada uma tomando entre 40 e 50 horas de tempo de processamento.
+\begin{figure}[ht]
+\centering
+\caption{Imagens e gabaritos utilizadas para treinamento}
+\includegraphics[width=0.7\textwidth]{imagens/DES_Imagens.pdf}
+\source{\citet{fasseg:2018}}
+\label{fig:DES_Imagens}
+\end{figure}
 
-% TODO: Adicionar percentuais abaixo
-Os três modelos gerados pelas simulações apresentaram resultados bastante distintos. O modelo com maior assertividade apresentou 91,32\% de pixels corretos, enquanto o segundo e o terceiro apresentaram xx e xx respectivamente. O melhor modelo foi simulado por 177 gerações, embora a convergência tenha ocorrido na geração 125. Na Tabela X estão detalhadas as informações sobre os modelos gerados, enquanto na Figura X estão demonstrados os resultados das segmentações.
+Os três modelos gerados pelas simulações apresentaram resultados bastante distintos. O modelo com maior assertividade apresentou 91,32\% de pixels corretos, enquanto o segundo e o terceiro apresentaram 85,51\% e 83,24\% respectivamente. O melhor modelo foi simulado por 177 gerações, embora a convergência tenha ocorrido na geração 125. Na Tabela~\ref{tab:ModelosGerados} estão detalhadas as informações sobre os modelos gerados.
 
-% TODO:
+\begin{table}[]
+\centering
+\caption{Resultado dos três modelos gerados}
+\label{tab:ModelosGerados}
+\begin{tabular}{llll}
+\hline
+\textbf{Modelo} & \textbf{Assertividade} & \textbf{Total de gerações} & \textbf{Geração de convergência} \\ \hline
+1               & 91,32\%                & 177                        & 125                              \\
+2               & 85,81\%                  & 85                         & 84                               \\
+3               & 83,24\%                  & 118                        & 93                               \\ \hline
+\end{tabular}
+\end{table}
 
-Tabela comparativa dos três modelos
-   assertividade
-   gerações
-   convergência
-   
-Imagens dos três modelos
+O primeiro modelo, que obteve uma assertividade de 91,32\%, utilizou uma combinação de algoritmos de pré-processamento, detecção de bordas e snakes para realizar a segmentação. O seu resultado final pode ser visto na Figura~\ref{fig:DES_Resultado_1}. Sua sequência completa de algoritmos foi: Brilho (\(202\)); Brilho (\(-237\)); Conversão para tons de cinza ponderada (\(vermelho = 0,79\); \(verde = 0,69\); \(azul = 0,63\)); \textit{Flood Fill}; Inversão de cores; Detecção de bordas de Robinson; Erosão; Detecção de bordas de Roberts; \textit{Snakes} (\(\alpha = 0,895\); \(\beta = 0,209\); \(\gamma = 0,145\)).
+
+\begin{figure}[ht]
+\centering
+\caption{Resultado da segmentação para o modelo 1}
+\includegraphics[width=0.6\textwidth]{imagens/DES_Resultado_1.pdf}
+\sourceAuthor{}
+\label{fig:DES_Resultado_1}
+\end{figure}
+
+O segundo modelo obteve uma assertividade de 85,81\% e utilizou apenas algoritmos de pré-processamento e limiarização para realizar a segmentação. O seu resultado final pode ser visto na Figura~\ref{fig:DES_Resultado_2}. Sua sequência completa de algoritmos foi: Conversão para tons de cinza ponderada (\(vermelho = 0,90\); \(verde = 0,34\); \(azul = 0,57\)); Desfoque de média (\(mascara=3\)); Dilatação (\(mascara=3\)); Fechamento (\(mascara=3\)); Contraste (\(2,96\)); Contraste (\(2,78\)); Erosão (\(mascara=3\)); Brilho (-182); Desfoque de mediana (\(mascara=3\)); \textit{Flood Fill}; Limiarização (\(125\)).
+
+\begin{figure}[ht]
+\centering
+\caption{Resultado da segmentação para o modelo 2}
+\includegraphics[width=0.6\textwidth]{imagens/DES_Resultado_2.pdf}
+\sourceAuthor{}
+\label{fig:DES_Resultado_2}
+\end{figure}
+
+Por fim, o terceiro modelo obteve uma assertividade de 83,24\% e também utilizou uma combinação de algoritmos de pré-processamento, detecção de bordas e snakes para realizar a segmentação, mas de forma menos eficaz. O seu resultado final pode ser visto na Figura~\ref{fig:DES_Resultado_3}. Sua sequência completa de algoritmos foi: Abertura (\(mascara=3\)); Inversão de cores; Dilatação  (\(mascara=7\)); Dilatação (\(mascara=3\)); Detecção de bordas de Sobel; Erosão (\(mascara=3\)); Detecção de boras de Sobel; Abertura (\(mascara=7\)); Desfoque de média (\(mascara=3\)); Inversão de cores; Threshold múltiplo (\(limiar_1=143\); \(limiar_2=81\); \(valor_1=90\)); \(valor_2=81\); \(valor_3=62\)); \textit{Flood Fill}; \textit{Snakes} (\(\alpha = 0,284\); \(\beta = 0,536\); \(\gamma = 0,720\))
+
+\begin{figure}[ht]
+\centering
+\caption{Resultado da segmentação para o modelo 3}
+\includegraphics[width=0.6\textwidth]{imagens/DES_Resultado_3.pdf}
+\sourceAuthor{}
+\label{fig:DES_Resultado_3}
+\end{figure}
 
 O próximo passo realizado foi a validação dos resultados obtidos, e se estes estavam de acordo com as hipóteses deste trabalho.
 
@@ -1391,11 +1478,17 @@ A avaliação foi realizada de forma presencial, com os três juízes simultâne
 
 \subsubsection{Identificação}
 
-Nesta primeira seção do questionário, o objetivo foi identificar o perfil auto-avaliativo dos juízes com relações aos temas abordados por este trabalho: Algoritmos genético e processamento digital de imagens. A seção era composta por quatro perguntas. A primeira pergunta identifica o juíz pelo nome, e foi utilizada apenas para organização dos resultados, sendo que este será omitido. A próxima pergunta solicitava que cada juíz identificasse sua formação acadêmica. Dos três juízes, dois são Mestres em Ciências da Computação enquanto o terceiro é Mestre em Computação Aplicada. As duas próximas perguntas solicitavam que os juízes auto-avaliassem seu nível de conhecimento nas áreas de PDI e GA, respectivamente. As respostas podem ser vistas na Figura X.
+Nesta primeira seção do questionário, o objetivo foi identificar o perfil auto-avaliativo dos juízes com relação aos temas abordados por este trabalho: Algoritmos genético e processamento digital de imagens. A seção era composta por quatro perguntas. A primeira pergunta identifica o juíz pelo nome, e foi utilizada apenas para organização dos resultados, sendo que este será omitido. A próxima pergunta solicitava que cada juíz identificasse sua formação acadêmica. Dos três juízes, dois são Mestres em Ciências da Computação enquanto o terceiro é Mestre em Computação Aplicada. As duas próximas perguntas solicitavam que os juízes auto-avaliassem seu nível de conhecimento nas áreas de PDI e GA, respectivamente. As respostas podem ser vistas na Figura~\ref{fig:AJ_Perfil}.
 
-% TODO: Colocar aqui os gráficos
+\begin{figure}[ht]
+\centering
+\caption{Gráfico de respostas para as questões de identificação}
+\includegraphics[width=1.0\textwidth]{imagens/Avaliacao_Juizes/Grafico_Perfil.png}
+\sourceAuthor{}
+\label{fig:AJ_Perfil}
+\end{figure}
 
-É importante ressaltar que no moment de selecionar os avaliadores, foi levado em consideração principalmente seu conhecimento na área de processamento de imagens, pois este seria o tema mais relevante durante a etapa de avaliação. Isso pode ser identificado nas respostas, de forma que todos avaliadores identificam que possuem um conhecimento médio ou superior de PDI, mas apenas um juíz indicou que possui conhecimento também em algoritmos genéticos.
+É importante ressaltar que no momento de selecionar os avaliadores, foi levado em consideração principalmente seu conhecimento na área de processamento de imagens, pois este seria o tema mais relevante durante a etapa de avaliação. Isso pode ser identificado nas respostas, de forma que todos avaliadores identificam que possuem um conhecimento médio ou superior de PDI, mas apenas um juíz indicou que possui conhecimento também em algoritmos genéticos.
 
 \subsubsection{Qualidade da segmentação}
 
@@ -1413,7 +1506,7 @@ Analisando os resultados é possível identificar claramente a relação do perc
 \label{fig:AJ_Qualidade_1}
 \end{figure}
 
-A segunda pergunta desta seção relativa a qualidade da segmentação questionava sobre a delineação do contorno dos rostos, e se está estava clara e sem ruídos. O gráfico das respostas pode ser visto na Figura~\ref{fig:AJ_Qualidade_2}, e segue o mesmo formato do gráfico anterior. Os resultados desta questão foram bem positivos, principalmente para o modelo 1. O modelo 3 teve resultados bem inferiores aos outros modelos, devido ao fato do contorno ser muito inconsistente com relação aos outros modelos. É possível identificar, ainda, que as respostas variam muito mais entre os juízes, sendo que em 5 casos (Modelo 1, imagem 4 e Modelo 2, imagens 1, 2, 4 e 5) houve uma resposta com avaliação máxima e uma com avaliação mínima. Isso pode indicar uma deficiência na clareza da questão ou no que deveria ter sido avaliado.
+A segunda pergunta desta seção relativa a qualidade da segmentação questionava sobre a delineação do contorno dos rostos, e se estava clara e sem ruídos. O gráfico das respostas pode ser visto na Figura~\ref{fig:AJ_Qualidade_2}, e segue o mesmo formato do gráfico anterior. Os resultados desta questão foram positivos, principalmente para o modelo 1. O modelo 3 teve resultados bem inferiores aos outros modelos, devido ao fato do contorno ser muito inconsistente com relação aos outros modelos. É possível identificar, ainda, que as respostas variam muito mais entre os juízes, sendo que em 5 casos (Modelo 1, imagem 4 e Modelo 2, imagens 1, 2, 4 e 5) houve uma resposta com avaliação máxima e uma com avaliação mínima. Isso pode indicar uma deficiência na clareza da questão ou no que deveria ter sido avaliado.
 
 \begin{figure}[ht]
 \centering
@@ -1443,9 +1536,9 @@ Os comentários dos juízes com relação as questões desta seção foram de ac
 
 \subsubsection{Clareza da solução}
 
-A segunda seção do questionário foi relacionada a clareza a solução. O principal objetivo destas questões era identificar se a ferramenta VISNode possuia os recursos suficientes para realizar a análise do resultado e compreendê-lo. Desta forma, isolando a possibilidade de baixas avaliações relacionadas a análise e aprendizado serem por causa da ferramenta, e não do modelo de segmentação em si.
+A segunda seção do questionário foi relacionada a clareza da solução. O principal objetivo destas questões era identificar se a ferramenta VISNode possuia os recursos suficientes para realizar a análise do resultado e compreendê-lo. Desta forma, isolando a possibilidade de baixas avaliações relacionadas a análise e aprendizado serem por causa da ferramenta, e não do modelo de segmentação em si.
 
-A primeira questão desta seção foi relacionada a clareza sobre quais algoritmos de PDI estavam sendo utilizados. O gráfico de respostas pode ser visualizado na Figura~\ref{fig:AJ_Qualidade_8}, onde o eixo vertical representa a nota, a série representa o modelo avaliado, e o tamanho da bolha representa o número de votos. Conforme esperado, a avaliação dos três modelos quanto a esta questão foi idêntica, pois a ferramenta utilizada foi a mesma, independente do modelo. A avaliação média dos juízes foi muito positiva neste quesito.
+A primeira questão desta seção foi relacionada a clareza sobre quais algoritmos de PDI estavam sendo utilizados. O gráfico de respostas pode ser visualizado na Figura~\ref{fig:AJ_Qualidade_8}, onde o eixo vertical representa a nota, a série representa o modelo avaliado, e o tamanho da bolha representa o número de votos. Conforme esperado, a avaliação dos três modelos quanto a esta questão foi idêntica, pois a ferramenta utilizada foi a mesma, independente do modelo. A avaliação média dos juízes foi positiva neste quesito.
 
 \begin{figure}[ht]
 \centering
@@ -1465,26 +1558,43 @@ A segunda pergunta desta seção questionava sobre a clareza dos parâmetros uti
 \label{fig:AJ_Qualidade_9}
 \end{figure}
 
-A última questão da seção de segmentação perguntava sobre a clareza da sequência que os algoritmos foram executados
+A última questão da seção de segmentação perguntava sobre a clareza da sequência que os algoritmos foram executados. O gráfico das respostas pode ser visualizado na Figura~\ref{fig:AJ_Qualidade_10}. As respostas desta questão foram extremamente positivas, sendo que a avaliação máxima foi escolhida de forma unânime entre os juízes e para todos modelos.
 
 \begin{figure}[ht]
 \centering
 \caption{Gráfico de respostas para a questão: Está clara a sequência que estes algoritmos serão executados}
-\includegraphics[width=0.45\textwidth]{imagens/Avaliacao_Juizes/Grafico_10.png}
+\includegraphics[width=0.45\textwidth]{imagens/Avaliacao_Juizes/Grafico_11.png}
 \sourceAuthor{}
 \label{fig:AJ_Qualidade_10}
 \end{figure}
 
+Os comentários obtidos para a seção de clareza apresentaram uma opinião positiva sobre a clareza da ferramenta VISNode para entendimento e análise dos modelos, e estavam de acordo com as respostas obtidas. Os comentários foram:
+\begin{itemize}
+    \item Modelo 1: ``A ferramenta deixa clara todas as etapas, bem como seus valores de entrada''
+    \item Modelo 1: ``A ferramenta é uma excelente opção para a experimentação e aprendizado das técnicas e de algoritmos de processamento de imagens''
+    \item Modelo 1: ``Achei claro e facilmente interpretável''
+    \item Modelo 2: ``Novamente, a ferramenta torna a sequência muito clara''
+    \item Modelo 2: ``A ferramenta é uma excelente opção para a experimentação e aprendizado das técnicas e de algoritmos de processamento de imagens''
+    \item Modelo 3: ``Novamente, a ferramenta mantém tudo muito claro com relação a sequência de etapas''
+    \item Modelo 3: ``A ferramenta é uma excelente opção para a experimentação e aprendizado das técnicas e de algoritmos de processamento de imagens''
+    \item Modelo 3: ``Novamente, bem claro, como comentamos na avaliação, este bloco poderia ser único, e não por modelo''
+\end{itemize}
+
 \subsubsection{Análise e aprendizado}
 
+A última seção do questionário consiste de questões relacionadas a capacidade de análise dos modelos e aprendizado a partir desta análise. O objetivo desta seção era validar se os modelos de segmentação gerados podem ser considerados "caixa-branca", permitindo a fácil compreensão por um ser humano.
+
+A primeira questão desta seção tinha como objetivo identificar se foi possível compreender como o modelo gerado obtém uma segmentação do rosto. O gráfico das respostas pode ser visto na Figura~\ref{fig:AJ_Qualidade_11}, e segue o mesmo formato dos últimos gráficos. As respostas obtidas para o modelo 1 foram no valor médio da escala, enquanto para os outros modelos foi abaixo da média. Desta forma, a qualidade da segmentação e a capacidade de compreensão aparentam estar proporcionalmente relacionados.
 
 \begin{figure}[ht]
 \centering
 \caption{Gráfico de respostas para a questão: Pode-se compreender como a escolha dos algoritmos, seu sequenciamento e sua parametrização geram a segmentação do rosto}
-\includegraphics[width=0.45\textwidth]{imagens/Avaliacao_Juizes/Grafico_11.png}
+\includegraphics[width=0.45\textwidth]{imagens/Avaliacao_Juizes/Grafico_10.png}
 \sourceAuthor{}
 \label{fig:AJ_Qualidade_11}
 \end{figure}
+
+A segunda e última pergunta da seção questionava sobre a possibilidade de extrair algum conhecimento ou aprendizado quanto a como realizar a segmentação de rostos a partir da análise realizada. O gráfico das respostas pode ser visto na Figura~\ref{fig:AJ_Qualidade_12}. É possível ver que o modelo 1, cuja assertividade foi a maior obtida, também apresenta a melhor possibilidade de aprendizado, obtendo a nota média 3. Os outros dois modelos não obtiveram um resultado tão bom, o que pode ser devido a sua segmentação não ter obtido um resultado tão bom.
 
 \begin{figure}[ht]
 \centering
@@ -1494,12 +1604,35 @@ A última questão da seção de segmentação perguntava sobre a clareza da seq
 \label{fig:AJ_Qualidade_12}
 \end{figure}
 
+Além da questão quantitativa, foi solicitado que os juízes destacassem qual tipo de informação eles conseguiram extrair do modelo, caso sua avaliação tenha sido positiva na questão quantitativa. Os comentários podem ser vistos na sequência:
+\begin{itemize}
+    \item Modelo 1 - ''Sim, no entanto, algumas etapas parecem nulas entre si. Exemplo das etapas 1 e 2, onde o brilho é adicionado e logo removido``
+    \item Modelo 1 - ''É possível, através da ferramenta, identificar técnicas que podem ser empregadas no processo de segmentação, já que estão disponíveis para uso mais de 50 métodos diferentes. O pesquisador pode desconhecer alguns dos métodos sugeridos, e pela solução gerada pelo algoritmo pode adquirir conhecimento``
+    \item Modelo 1 - ''Algumas escolhas mostram uma grande alteração na imagem e parecem ser bem efetivas``
+    \item Modelo 2 - ''Igual ao que foi descrito para o modelo anterior``
+    \item Modelo 2 - ''Novamente, algumas escolhas ficam claras e mostram bom resultado, entretanto, outras parecem pouco efetivas e sem justificativa de uso``
+    \item Modelo 3 - ''Igual ao que foi descrito para o modelo anterior``
+    \item Modelo 3 - ''Este foi os que teve mais etapas sem compreensão``
+\end{itemize}
+	
+Ao final da seção também foi permitido uma seção para comentários gerais sobre a seção de análise e aprendizado. Os comentários podem ser vistos na sequência:
+\begin{itemize}
+    \item ''Como não são apresentadas justificativas para as escolhas dos métodos (e seus respectivos parâmetros) é bastante complicado o entendimento do motivo de determinada técnica ter sido executada``
+    \item ''Acredito ser clara a saída e qual o 'passo a passo' realizado, entretanto, algumas escolhas não parecem ser efetivas, não colaborando para o processo``
+\end{itemize}
+
+Por fim, ao final do questionário, foi disponibilizada uma questão para comentários gerais que não se encaixavam nas outras seções. Os comentários gerais estão descritos na sequência:
+\begin{itemize}
+    \item ''A natureza aleatória das decisões fica clara ao avaliar a sequência, os métodos e os parâmetros utilizados no modelo 1``
+    \item ''Como comentário final, o trabalha apresenta um problema interessante, apresenta uma solução inovadora e com possibilidades de continuidade e melhoria``
+\end{itemize}
+
 \subsection{Comparativo com Outras Soluções}
 % ## *********|
 
 Para validar a viabilidade da solução proposta para segmentação facial da pele, esta passou por uma etapa de validação quantitativa, comparando o seu percentual de assertividade com outras soluções para o problema da segmentação facial da pele. Para realizar a comparação, foi utilizado o estudo de \citet{kakumanu:2007}. Neste estudo foi realizada a comparação de 27 diferentes estratégias para realizar a segmentação facial da pele, sendo que destas, 20 possuem no trabalho o seu percentual de assertividade pixel-a-pixel, sendo este contabilizado em pixels com o caso verdadeiro-positivo. Ou seja, o percentual representa quantos pixels da face realmente foram segmentados como face.
 
-É importante ressaltar que ao longo do desenvolvimento do trabalho, os percentuais de assertividade do trabalho estavam representados utilizando o método de comparação proposto, não sendo diretamente comparáveis com os percentuais apresentados no trabalho de \citet{kakumanu:2007}. Por esta razão, o percentual foi recalculado para a melhor solução selecionada, sendo demonstrado aqui como percentual de pixels verdadeiro-positivos. A Tabela~\ref{tab:ComparativoResultados} representa a comparação entre os trabalhos. Os trabalhos que não demonstravam seu percentual de verdadeiros-positivos foram omitidos, pois não seriam relevantes para comparação.
+É importante ressaltar que ao longo do desenvolvimento do trabalho, os percentuais de assertividade estavam representados utilizando o método de comparação proposto, não sendo diretamente comparáveis com os percentuais apresentados no trabalho de \citet{kakumanu:2007}. Por esta razão, o percentual foi recalculado para a melhor solução selecionada, sendo demonstrado aqui como percentual de pixels verdadeiro-positivos. A Tabela~\ref{tab:ComparativoResultados} representa a comparação entre os trabalhos. Os trabalhos que não demonstravam seu percentual de verdadeiros-positivos foram omitidos, pois não seriam relevantes para comparação.
 
 \begin{table}
 \centering
@@ -1508,27 +1641,27 @@ Para validar a viabilidade da solução proposta para segmentação facial da pe
 \begin{tabular}{llll}
 \hline
 \textbf{Autor(es)}           & \textbf{Método} & \textbf{Base (Imagens)}         & \textbf{Percentual} \\ \hline
-Jones and Rehg, 2002         & Bayes                          & Compaq (4675) & 90.0\%              \\
+\citet{jones:2002}           & Bayes                          & Compaq (4675) & 90.0\%              \\
                              & GMM (16)                       & Compaq                & 90.0\%              \\
-Brown et al., 2001           & SOM                            & Compaq                & 78.0\%              \\
-Jedynak et al., 2003         & MaxEnt. model                  & Compaq                & 82.9\%              \\
-Lee and Yoo, 2002            & Ellip. model                   & Compaq                & 90.0\%              \\
+\citet{brown:2001}           & SOM                            & Compaq                & 78.0\%              \\
+\citet{jedynak:2003}         & MaxEnt. model                  & Compaq                & 82.9\%              \\
+\citet{lee:2002}             & Ellip. model                   & Compaq                & 90.0\%              \\
                              & SGM                            & Compaq                & 90.0\%              \\
                              & GMM(6)                         & Compaq                & 90.0\%              \\
-Brand et al., 2000           & Bayes                          & Compaq                & 93.4\%              \\
+\citet{brand:2000}           & Bayes                          & Compaq                & 93.4\%              \\
                              & I-axis Thresh.                 & Compaq                & 94.7\%              \\
                              & Thresh. ratios                 & Compaq                & 94.7\%              \\
-Sebe and Huang, 2004         & BN                             & Compaq                & 99.4\%              \\
-Phung et al., 2005           & Thresholding                   & ECU (4000)    & 82.0\%              \\
+\citet{sebe:2004}            & BN                             & Compaq                & 99.4\%              \\
+\citet{phung:2001}           & Thresholding                   & ECU (4000)    & 82.0\%              \\
                              & Bayes                          & ECU                   & 88.9\%              \\
                              & MLP                            & ECU                   & 88.5\%              \\
                              & SGM                            & ECU                   & 88.0\%              \\
                              & GMM (2)                        & ECU                   & 85.2\%              \\
-Anagnostopoulos et al., 2003 & Fuzzy rules + PNN               & Própria (317) & 82.4\%              \\
-Caetano et al., 2002         & GMM (2)                        & Própria (800) & 87.0\%              \\
-Jayaram et al., 2004         & Bayes                          & Própria (815) & 98.2\%              \\
-                             & SGM                            & Própria (815) & 94.4\%              \\
-Trabalho Proposto            & GA + PDI                       & FASSEG (5)    & 91.3\% \\ \hline           
+\citet{anagnostopoulos:2003} & Fuzzy rules + PNN               & Própria (317) & 82.4\%              \\
+\citet{caetano:2002}         & GMM (2)                        & Própria (800) & 87.0\%              \\
+\citet{jayaram:2004}         & Bayes                          & Própria (815) & 98.2\%              \\
+                             & SGM                            & Própria (815) & 94.4\%              \\ \hline
+\textbf{Trabalho Proposto} & \textbf{GA + PDI} & \textbf{FASSEG (5)} & \textbf{91,3\%} \\ \hline
 \end{tabular}
 \source{Adaptado de \citet{kakumanu:2007}}
 \end{table}
@@ -1560,7 +1693,10 @@ Uma forma de tirar esta responsabilidade do criador do sistema é utilizando red
 
 Dessa forma, o objetivo deste trabalho foi propor um sistema capaz de utilizar algoritmos genéticos em conjunto com técnicas de PDI, visando a criação de sistemas de segmentação automáticos baseados em treinamento, mas ainda permitindo a análise do seu resultado. Dessa forma, a pesquisa iniciou no Capítulo~\ref{chap:AlgoritmosGeneticos} abordando os conceitos e técnicas utilizados para desenvolver um algoritmo genético. No Capítulo~\ref{chap:PDI}, as técnicas de PDI utilizadas foram apresentadas.
 
-O detalhamento do sistema proposto e como ele foi desenvolvido está descrito no Capítulo~\ref{chap:Desenvolvimento}. Ao final do desenvolvimento, o método proposto realiza o treinamneto utilizando cinco diferentes imagens da base de dados FASSEG, e a taxa de assertividade média após o treinamento é de 91,32\%.
+O detalhamento do sistema proposto e como ele foi desenvolvido está descrito no Capítulo~\ref{chap:Desenvolvimento}. Neste capítulo ainda é demonstrado os resultados obtidos com o trabalho, onde foi obtida uma taxa de assertividade de até 91,32\% na base de treinamento. Além disso, foi demonstrado um comparativo com outros trabalhos de segmentação facial. Também foi realizado um questionário com três juízes, demonstrando a possibilidade de análise e aprendizado com base nos modelos de segmentação gerados.
+
+Como trabalhos futuros, pode-se tentar realizar testes com o método proposto com bases de imagens maiores e mais comuns no meio acadêmico, de forma a poder compará-lo de forma mais precisa com outros métodos de segmentação.  Além disso, é necessário ainda evolução com relação a sua taxa de assertividade para que possa se tornar uma solução viável. Alguns experimentos que podem ser citados são: a implementação de novos algoritmos de processamento digital de imagens; a execução de modelos como grafos, ou seja, conexões paralelas ao invés de apenas sequenciais; modelo de segmentação que utiliza informações da imagem para parametrizar os algoritmos.
+
 
 % ----------------------------------------------------------
 % ELEMENTOS PÓS-TEXTUAIS
